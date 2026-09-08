@@ -1,0 +1,24 @@
+{
+  "originHash" : "b97aa906db7e0be3bd284a31fe2a2a452426e1a69d5dc45c823de80cca67aa13",
+  "pins" : [
+    {
+      "identity" : "motley",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wells-consulting/Motley",
+      "state" : {
+        "branch" : "main",
+        "revision" : "36809a9e332061dba25c5341f4f1dd423a68c380"
+      }
+    },
+    {
+      "identity" : "swiftlintplugins",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SimplyDanny/SwiftLintPlugins",
+      "state" : {
+        "revision" : "ef7d692fc6706e8f5628e26bcafaefa445c58a97",
+        "version" : "0.65.1"
+      }
+    }
+  ],
+  "version" : 3
+}
