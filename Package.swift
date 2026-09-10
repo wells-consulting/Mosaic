@@ -15,7 +15,7 @@ let package = Package(
         .library(name: "Mosaic", targets: ["Mosaic"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/wells-consulting/Motley", branch: "main"),
+        .package(url: "https://github.com/wells-consulting/Motley", from: "0.9.0"),
         .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.63.0"),
     ],
     targets: [
