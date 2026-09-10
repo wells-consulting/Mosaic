@@ -52,10 +52,14 @@ public extension View {
         #endif
     }
 
-    // MARK: - Number Pad Keyboard
+    #if os(iOS)
 
-    /// Applies `.keyboardType(.numberPad)` on platforms with software keyboards.
-    func numberPad() -> some View {
-        keyboardType(.numberPad)
-    }
+        // MARK: - Number Pad Keyboard
+
+        /// Applies `.keyboardType(.numberPad)` on platforms with software keyboards.
+        func numberPad() -> some View {
+            keyboardType(.numberPad)
+        }
+
+    #endif
 }

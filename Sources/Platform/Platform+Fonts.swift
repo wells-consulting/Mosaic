@@ -26,36 +26,36 @@ public extension View {
     func platformFont(_ name: PlatformFont) -> some View {
         switch name {
         case .badge:
-            #if os(tvOS)
-                font(.caption2)
-            #else
+            #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .caption, regularFont: .subheadline))
+            #else
+                font(.caption2)
             #endif
         case .body:
             font(.body)
         case .callout:
-            #if os(tvOS)
-                font(.callout)
-            #else
+            #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .callout, regularFont: .body))
+            #else
+                font(.callout)
             #endif
         case .caption:
-            #if os(tvOS)
-                font(.caption)
-            #else
+            #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .caption, regularFont: .subheadline))
+            #else
+                font(.caption)
             #endif
         case .caption2:
-            #if os(tvOS)
-                font(.caption2)
-            #else
+            #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .caption2, regularFont: .caption))
+            #else
+                font(.caption2)
             #endif
         case .footnote:
-            #if os(tvOS)
-                font(.footnote)
-            #else
+            #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .footnote, regularFont: .subheadline))
+            #else
+                font(.footnote)
             #endif
         case .headline:
             font(.headline)
@@ -66,10 +66,10 @@ public extension View {
                 font(.largeTitle)
             #endif
         case .subheadline:
-            #if os(tvOS)
-                font(.subheadline)
-            #else
+            #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .subheadline, regularFont: .callout))
+            #else
+                font(.subheadline)
             #endif
         case .title:
             font(.title)

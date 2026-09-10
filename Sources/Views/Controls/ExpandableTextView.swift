@@ -59,9 +59,12 @@ public struct ExpandableTextView: View {
             .onPreferenceChange(ClampedHeightKey.self) { clampedHeight = $0 }
             .onChange(of: fullHeight) { _, _ in updateTruncation() }
             .onChange(of: clampedHeight) { _, _ in updateTruncation() }
-            .fullScreenCover(isPresented: $showFullText) {
-                ScrollableTextView(text: text, navigationBackground: navigationBackground)
-            }
+            // TODO: Fix for macOS
+            #if !os(macOS)
+                .fullScreenCover(isPresented: $showFullText) {
+                    ScrollableTextView(text: text, navigationBackground: navigationBackground)
+                }
+            #endif
     }
 
     @ViewBuilder
