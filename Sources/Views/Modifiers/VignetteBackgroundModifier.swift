@@ -16,6 +16,15 @@ public extension View {
     func vignetteBackground(_ colors: [Color]) -> some View {
         modifier(VignetteBackgroundModifier(colors: colors))
     }
+
+    func vignetteBackground(
+        for placement: ContainerBackgroundPlacement,
+        colors: [Color]
+    ) -> some View {
+        modifier(
+            VignetteContainerBackgroundModifier(placement: placement, colors: colors)
+        )
+    }
 }
 
 /// Radial vignette that adapts to light and dark mode via asset catalog colors.
@@ -36,5 +45,23 @@ private struct VignetteBackgroundModifier: ViewModifier {
             }
             .ignoresSafeArea(),
         )
+    }
+}
+
+private struct VignetteContainerBackgroundModifier: ViewModifier {
+
+    let placement: ContainerBackgroundPlacement
+    let colors: [Color]
+
+    func body(content: Content) -> some View {
+        content.containerBackground(for: placement) {
+            EllipticalGradient(
+                colors: colors,
+                center: UnitPoint(x: 0.50, y: 0.45),
+                startRadiusFraction: 0.10,
+                endRadiusFraction: 0.75,
+            )
+            .transaction { $0.animation = nil }
+        }
     }
 }
