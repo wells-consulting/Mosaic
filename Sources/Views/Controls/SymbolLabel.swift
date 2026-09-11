@@ -7,31 +7,31 @@ import Motley
 import SwiftUI
 
 /// This standard view ensures the icon in a menu item label occupies a consistent width
-public struct MenuIconLabel: View {
+public struct SymbolLabel: View {
 
     private let textView: Text
     let symbol: SFSymbol?
     let symbolPalette: (Color, Color)
     let imageScale: Image.Scale
-    let detail: String?
+    let details: String?
     let badgeText: String?
-    let withChevron: Bool
+    let includeChevron: Bool
 
     public init(
         _ text: LocalizedStringKey,
         symbol: SFSymbol? = nil,
         symbolPalette: (Color, Color)? = nil,
-        detail: String? = nil,
+        details: String? = nil,
         badge: String? = nil,
-        withChevron: Bool = false,
+        addChevron: Bool = false,
         imageScale: Image.Scale = .medium,
     ) {
         self.textView = Text(text)
         self.symbol = symbol
         self.symbolPalette = symbolPalette ?? (.primary, .secondary)
-        self.detail = detail
+        self.details = details
         self.badgeText = badge
-        self.withChevron = withChevron
+        self.includeChevron = addChevron
         self.imageScale = imageScale
     }
 
@@ -40,18 +40,37 @@ public struct MenuIconLabel: View {
         verbatim: String,
         symbol: SFSymbol? = nil,
         symbolPalette: (Color, Color)? = nil,
-        detail: String? = nil,
+        details: String? = nil,
         badge: String? = nil,
-        withChevron: Bool = false,
+        addChevron: Bool = false,
         imageScale: Image.Scale = .medium,
     ) {
         self.init(
             LocalizedStringKey(verbatim),
             symbol: symbol,
             symbolPalette: symbolPalette,
-            detail: detail,
+            details: details,
             badge: badge,
-            withChevron: withChevron,
+            addChevron: addChevron,
+            imageScale: imageScale,
+        )
+    }
+
+    /// Creates a menu label with verbatim (non-localizable) text.
+    public init(
+        _ message: Message,
+        symbolPalette: (Color, Color)? = nil,
+        badge: String? = nil,
+        addChevron: Bool = false,
+        imageScale: Image.Scale = .medium,
+    ) {
+        self.init(
+            LocalizedStringKey(message.summary),
+            symbol: message.kind.symbol,
+            symbolPalette: symbolPalette,
+            details: message.details,
+            badge: badge,
+            addChevron: addChevron,
             imageScale: imageScale,
         )
     }
@@ -73,7 +92,7 @@ public struct MenuIconLabel: View {
             symbolImage
             textView
             badge
-            if detail != nil || withChevron {
+            if details != nil || includeChevron {
                 Spacer(minLength: 0)
                 detailText
                 chevron
@@ -104,8 +123,8 @@ public struct MenuIconLabel: View {
 
     @ViewBuilder
     private var detailText: some View {
-        if let detail {
-            Text(detail)
+        if let details {
+            Text(details)
                 .foregroundStyle(.secondary)
         }
     }
@@ -127,7 +146,7 @@ public struct MenuIconLabel: View {
 
     @ViewBuilder
     private var chevron: some View {
-        if withChevron {
+        if includeChevron {
             Chevron()
         }
     }
@@ -139,12 +158,12 @@ public struct MenuIconLabel: View {
     #Preview {
         Button {
         } label: {
-            MenuIconLabel(
+            SymbolLabel(
                 "Title for the button",
                 symbol: .gear,
-                detail: "Details",
+                details: "Details",
                 badge: "TEST",
-                withChevron: true,
+                addChevron: true,
             )
         }
         .frame(width: 800)

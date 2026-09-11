@@ -9,8 +9,8 @@ import SwiftUI
 ///
 /// Renders `text` at the given `font` size. If the natural height exceeds `clampedHeight`,
 /// a "Show More" button appears below. Tapping it reveals the full text via a
-/// full-screen ``ScrollableTextView``; a "Show Less" button collapses it again.
-/// On tvOS the expansion is toggled via a focusable button.
+/// full-screen ``ScrollableTextView`` (a sheet on macOS); a "Show Less" button collapses it
+/// again. On tvOS the expansion is toggled via a focusable button.
 public struct ExpandableTextView: View {
 
     let text: String
@@ -59,8 +59,12 @@ public struct ExpandableTextView: View {
             .onPreferenceChange(ClampedHeightKey.self) { clampedHeight = $0 }
             .onChange(of: fullHeight) { _, _ in updateTruncation() }
             .onChange(of: clampedHeight) { _, _ in updateTruncation() }
-            // TODO: Fix for macOS
-            #if !os(macOS)
+            #if os(macOS)
+                .sheet(isPresented: $showFullText) {
+                    ScrollableTextView(text: text, navigationBackground: navigationBackground)
+                        .frame(minWidth: 400, idealWidth: 480, minHeight: 300, idealHeight: 420)
+                }
+            #else
                 .fullScreenCover(isPresented: $showFullText) {
                     ScrollableTextView(text: text, navigationBackground: navigationBackground)
                 }

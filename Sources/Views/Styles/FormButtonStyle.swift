@@ -220,7 +220,7 @@ private struct FormButtonStyle: ButtonStyle {
         .padding(.horizontal, 40)
         .colorScheme(.dark)
         .frame(width: 500, height: 450)
-        .vignetteBackground(PaletteStore.shared.palette.vignette)
+        .vignetteBackground()
     }
 
 #endif
