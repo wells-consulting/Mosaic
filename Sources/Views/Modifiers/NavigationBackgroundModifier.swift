@@ -13,7 +13,7 @@ public extension View {
     /// the entire navigation container — including behind the floating
     /// sidebarAdaptable TabView chrome on iPadOS. No-op on other platforms.
     func navigationBackground() -> some View {
-        #if os(iOS)
+        #if !os(tvOS)
             modifier(NavigationBackgroundModifier())
         #else
             self
@@ -21,12 +21,20 @@ public extension View {
     }
 }
 
-#if os(iOS)
+#if !os(tvOS)
     /// Navigation container vignette that adapts to light and dark mode via the active `Palette`.
     private struct NavigationBackgroundModifier: ViewModifier {
 
+        var placement: ContainerBackgroundPlacement {
+            #if os(macOS)
+                .window
+            #else
+                .navigation
+            #endif
+        }
+
         func body(content: Content) -> some View {
-            content.containerBackground(for: .navigation) {
+            content.containerBackground(for: placement) {
                 EllipticalGradient(
                     colors: PaletteStore.shared.palette.vignette,
                     center: UnitPoint(x: 0.50, y: 0.45),
