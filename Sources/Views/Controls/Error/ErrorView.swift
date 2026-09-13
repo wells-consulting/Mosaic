@@ -136,12 +136,12 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
                 .foregroundStyle(.primary)
             Spacer()
         }
-        .platformPadding(.medium)
+        .padding(.medium)
         .glassEffect(
             .regular.tint(PaletteStore.shared.palette.errorTint.opacity(0.25)),
             in: .rect(cornerRadius: Platform.cornerRadius(.large))
         )
-        .platformPadding(.bottom, .small)
+        .padding(.bottom, .small)
     }
 
     private var descriptionView: some View {

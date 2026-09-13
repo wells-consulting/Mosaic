@@ -18,8 +18,8 @@ private struct GlassBackgroundModifer: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .platformPadding(.horizontal, .large)
-            .platformPadding(.vertical, .small)
+            .padding(.horizontal, .large)
+            .padding(.vertical, .small)
             .glassEffect(
                 .regular.tint(tint.opacity(0.25)),
                 in: .rect(cornerRadius: cornerRadius)

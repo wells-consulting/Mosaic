@@ -52,7 +52,7 @@ public struct RevealableSecureField: View {
                             .foregroundStyle(.secondary)
                     }
                     .buttonStyle(.plain)
-                    .platformPadding(.trailing, .medium)
+                    .padding(.trailing, .medium)
                     .accessibilityLabel(isRevealed ? "Hide password" : "Show password")
                 }
         #endif
@@ -79,7 +79,7 @@ public struct RevealableSecureField: View {
             RevealableSecureField("Password", text: $password)
         }
         .frame(width: 800)
-        .platformPadding(.xlarge)
+        .padding(.xlarge)
         .background(.white.opacity(0.25))
     }
 #endif

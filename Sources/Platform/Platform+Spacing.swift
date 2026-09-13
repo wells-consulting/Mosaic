@@ -53,4 +53,55 @@ extension Platform {
     public static func spacing(_ size: SpacingSize) -> CGFloat {
         size.value
     }
+
+    // MARK: Context
+
+    public enum SpacingContext {
+
+        /// Spacing for rows in header bar
+        case headerBarVertical
+        /// Spacing between the "< Settings" dismiss button and the page content below it.
+        /// tvOS needs extra room so the button's focus highlight doesn't overlap the
+        /// first content row's section label.
+        case settingsDismissButton
+        /// Vertical spacing between menu items.
+        case settingsMenu
+        /// Horizontal spacing between cards in a featured swimlane row.
+        /// tvOS needs wider gaps for the focus scale effect.
+        case swimlaneCard
+        /// Minimal spacing between stacked text lines in compact layouts
+        /// (title + subtitle pairs, badge stacks). 2pt.
+        case tightLine
+
+        fileprivate var value: CGFloat {
+            switch self {
+            case .headerBarVertical:
+                12
+            case .settingsDismissButton:
+                #if os(tvOS)
+                    52
+                #else
+                    16
+                #endif
+            case .settingsMenu:
+                #if os(tvOS)
+                    16
+                #else
+                    12
+                #endif
+            case .swimlaneCard:
+                #if os(tvOS)
+                    40
+                #else
+                    20
+                #endif
+            case .tightLine:
+                2
+            }
+        }
+    }
+
+    public static func spacing(_ context: SpacingContext) -> CGFloat {
+        context.value
+    }
 }

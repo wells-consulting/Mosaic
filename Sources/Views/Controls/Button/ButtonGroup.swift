@@ -100,7 +100,7 @@ public struct ButtonGroup<Content: View>: View {
             // button chrome so a grouped pill is the same height as a standalone
             // `appGlassButton()` button (~44pt total). Standalone menus use the same
             // 14pt vertical via `AdaptiveMenuStyleModifier` for visual parity.
-            .platformPadding(.horizontal, .large)
+            .padding(.horizontal, .large)
             .padding(.vertical, 12)
             // `.regular` glass alone disappears on the app's flat dark gradient,
             // so apply a faint white tint for visibility. A lower opacity than the

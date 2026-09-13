@@ -81,7 +81,7 @@ public struct SelectionIndicator: View {
                     .background(
                         Circle()
                             .fill(PaletteStore.shared.palette.accentTint)
-                            .platformPadding(.xsmall),
+                            .padding(.xsmall),
                     )
             } else {
                 if let unselectedSymbol {
@@ -89,7 +89,7 @@ public struct SelectionIndicator: View {
                         .background(
                             Circle()
                                 .fill(.secondary)
-                                .platformPadding(.xsmall),
+                                .padding(.xsmall),
                         )
                 } else {
                     Circle()
@@ -100,6 +100,6 @@ public struct SelectionIndicator: View {
         }
         .font(.system(size: indicatorSize))
         .frame(width: indicatorSize, height: indicatorSize)
-        .platformPadding(.small)
+        .padding(.small)
     }
 }

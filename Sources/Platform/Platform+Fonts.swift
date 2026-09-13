@@ -22,12 +22,21 @@ public enum PlatformFont {
 
 public extension View {
 
+    /// Platform-aware type scale.
+    ///
+    /// iOS adapts per size class (iPhone compact / iPad regular). macOS and
+    /// tvOS use native system text styles — Apple tunes `TextStyle` metrics
+    /// per platform (body 13pt on macOS, 40pt on tvOS), so the system scale is
+    /// the natural best guess. tvOS stays a separate branch so it can be tuned
+    /// up without leaking onto macOS.
     @ViewBuilder
     func platformFont(_ name: PlatformFont) -> some View {
         switch name {
         case .badge:
             #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .caption, regularFont: .subheadline))
+            #elseif os(macOS)
+                font(.caption2)
             #else
                 font(.caption2)
             #endif
@@ -36,24 +45,32 @@ public extension View {
         case .callout:
             #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .callout, regularFont: .body))
+            #elseif os(macOS)
+                font(.callout)
             #else
                 font(.callout)
             #endif
         case .caption:
             #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .caption, regularFont: .subheadline))
+            #elseif os(macOS)
+                font(.caption)
             #else
                 font(.caption)
             #endif
         case .caption2:
             #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .caption2, regularFont: .caption))
+            #elseif os(macOS)
+                font(.caption2)
             #else
                 font(.caption2)
             #endif
         case .footnote:
             #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .footnote, regularFont: .subheadline))
+            #elseif os(macOS)
+                font(.footnote)
             #else
                 font(.footnote)
             #endif
@@ -62,12 +79,16 @@ public extension View {
         case .largeTitle:
             #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .title, regularFont: .largeTitle))
+            #elseif os(macOS)
+                font(.largeTitle)
             #else
                 font(.largeTitle)
             #endif
         case .subheadline:
             #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .subheadline, regularFont: .callout))
+            #elseif os(macOS)
+                font(.subheadline)
             #else
                 font(.subheadline)
             #endif

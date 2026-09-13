@@ -28,7 +28,8 @@ public struct MetadataPill: View {
         }
         .platformFont(.badge).bold()
         .foregroundStyle(.primary.opacity(0.85))
-        .padding(.horizontal, 20).platformPadding(.vertical, .xsmall)
+        .padding(.horizontal, 20)
+        .padding(.vertical, .xsmall)
         .background(.primary.opacity(0.15), in: Capsule())
         .accessibilityElement(children: .combine)
     }
