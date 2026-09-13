@@ -12,16 +12,27 @@ public extension View {
     ///
     /// - **tvOS / iOS**: A subtle radial vignette gradient with a
     ///   purple-tinted center that fades outward. Adapts to light/dark mode.
+    /// - **macOS**: Routed through `.containerBackground(for: .window)`
+    ///   rather than a plain `.background()`. The title bar area is drawn by
+    ///   AppKit and isn't part of the content view's safe-area-extendable
+    ///   frame, so a regular background can never paint underneath it — the
+    ///   `.window` placement is the API that actually reaches that region,
+    ///   which is what makes the vignette visible behind the whole window
+    ///   (including sheets) instead of stopping at a flat, opaque edge.
     /// Reference: `Documents/Platform-View-Modifiers.md` for ordering rules and per-view usage.
     func vignetteBackground() -> some View {
-        modifier(VignetteBackgroundModifier())
+        #if os(macOS)
+            vignetteContainerBackground(for: .window)
+        #else
+            modifier(VignetteBackgroundModifier())
+        #endif
     }
 
     func vignetteNavigationBackground() -> some View {
         #if os(iOS)
-            vignetteBackground(for: .navigation)
+            vignetteContainerBackground(for: .navigation)
         #elseif os(macOS)
-            vignetteBackground()
+            vignetteContainerBackground(for: .window)
         #else
             self
         #endif

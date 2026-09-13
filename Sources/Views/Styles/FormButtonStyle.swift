@@ -144,9 +144,14 @@ private struct FormButtonStyle: ButtonStyle {
             .padding(.horizontal, 20)
             // HIG minimum tappable area is 44x44pt; this is a floor,
             // not a fixed height, so a Dynamic Type-scaled label can
-            // still grow the button taller.
+            // still grow the button taller. macOS uses a much shorter
+            // floor — pointer-driven controls don't need a touch-sized
+            // target, and a 66pt (tvOS-tuned) capsule reads as oversized
+            // next to native mac controls.
             #if os(iOS)
                 .frame(minHeight: 44)
+            #elseif os(macOS)
+                .frame(minHeight: 28)
             #else
                 .frame(minHeight: 66)
             #endif
