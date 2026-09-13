@@ -132,10 +132,10 @@ public extension View {
     /// would inset the tab bar. Individual tvOS views add their own horizontal
     /// padding where needed.
     func contentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
-        #if os(tvOS)
-            self
-        #else
+        #if os(iOS)
             modifier(ContentInsetPaddingModifier(edges: edges))
+        #else
+            self
         #endif
     }
 
