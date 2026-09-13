@@ -17,6 +17,16 @@ public extension View {
         modifier(VignetteBackgroundModifier())
     }
 
+    func vignetteNavigationBackground() -> some View {
+        #if os(iOS)
+            vignetteBackground(for: .navigation)
+        #elseif os(macOS)
+            vignetteBackground()
+        #else
+            self
+        #endif
+    }
+
     /// Sets container background to an `EllipticalGradient` as a
     /// `ShapeStyle` so that `containerBackground` can automatically fill
     /// the entire navigation container.

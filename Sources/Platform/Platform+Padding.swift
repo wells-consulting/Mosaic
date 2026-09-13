@@ -132,7 +132,7 @@ public extension View {
     /// would inset the tab bar. Individual tvOS views add their own horizontal
     /// padding where needed.
     func contentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
-        #if os(iOS)
+        #if os(iOS) || os(macOS)
             modifier(ContentInsetPaddingModifier(edges: edges))
         #else
             self
@@ -172,7 +172,7 @@ public extension View {
 
 // MARK: - Private modifiers
 
-#if os(iOS)
+#if os(iOS) || os(macOS)
     /// Applies `Theme.contentInsetPadding` (32pt) on iPad and a narrower 16pt on iPhone,
     /// so the same call site reads correctly on both form factors.
     private struct ContentInsetPaddingModifier: ViewModifier {
@@ -185,7 +185,9 @@ public extension View {
             content.padding(edges, layout.widthConstrained ? 16 : 32)
         }
     }
+#endif
 
+#if os(iOS)
     /// On iPhone (compact) adds 16pt horizontal inset so sub-pages don't bleed to the
     /// screen edge. On iPad constrains content to 600pt and centers it.
     private struct SettingsContentInsetPaddingModifier: ViewModifier {
