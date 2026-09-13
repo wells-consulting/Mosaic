@@ -14,7 +14,11 @@ public final class SettingsTableBuilder {
         case text(String)
     }
 
-    private var rows: [Row] = []
+    private var rows: [Row]
+
+    public init() {
+        self.rows = []
+    }
 
     public func addRow(_ text: String) {
         rows.append(.text(text))
