@@ -14,7 +14,7 @@ public struct FormSection<Content: View>: View {
 
     // MARK: - Initializer
 
-    init(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) {
+    public init(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) {
         self.title = title
         self.content = content()
     }
