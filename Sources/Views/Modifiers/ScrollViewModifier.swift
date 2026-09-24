@@ -12,12 +12,12 @@ public enum ScrollContentDisposition {
 
 public extension View {
 
-    func scrollView(
+    func mosaicScrollView(
         _ axis: Axis.Set,
         source disposition: ScrollContentDisposition
     ) -> some View {
         modifier(
-            ScrollIndicatorsModifer(
+            MosaicScrollIndicatorsModifer(
                 axis: axis,
                 disposition: disposition
             )
@@ -25,7 +25,7 @@ public extension View {
     }
 }
 
-private struct ScrollIndicatorsModifer: ViewModifier {
+private struct MosaicScrollIndicatorsModifer: ViewModifier {
 
     let visibility: ScrollIndicatorVisibility
 

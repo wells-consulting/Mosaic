@@ -1,13 +1,13 @@
 {
-  "originHash" : "43bd163466538fdcf6b4de8d914ea066d60c9b0923752de3b56275511ed12882",
+  "originHash" : "224ab8ebc7d6e52936b1dbf0b3a4f6b749065d4c7514d085fd0de462f58c8f28",
   "pins" : [
     {
       "identity" : "motley",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wells-consulting/Motley",
       "state" : {
-        "revision" : "66eb0853692295c4100278990bf02186d805783b",
-        "version" : "0.9.0"
+        "revision" : "41c3dc4eeb1569059f55998445658f38b36f21c2",
+        "version" : "0.9.2"
       }
     },
     {

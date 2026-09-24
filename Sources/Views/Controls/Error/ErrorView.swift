@@ -129,19 +129,19 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
         HStack(spacing: Platform.spacing(.medium)) {
             Image(.exclamationmark_triangle_fill)
                 .font(.title2)
-                .foregroundStyle(PaletteStore.shared.palette.errorLabel)
+                .foregroundStyle(PaletteStore.shared.current.errorLabel)
                 .accessibilityHidden(true)
             Text(title)
                 .font(.headline)
                 .foregroundStyle(.primary)
             Spacer()
         }
-        .padding(.medium)
+        .mosaicPadding(.medium)
         .glassEffect(
-            .regular.tint(PaletteStore.shared.palette.errorTint.opacity(0.25)),
+            .regular.tint(PaletteStore.shared.current.errorTint.opacity(0.25)),
             in: .rect(cornerRadius: Platform.cornerRadius(.large))
         )
-        .padding(.bottom, .small)
+        .mosaicPadding(.bottom, .small)
     }
 
     private var descriptionView: some View {
@@ -151,7 +151,7 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
             if let details {
                 Text(details)
                     .multilineTextAlignment(.leading)
-                    .platformFont(.caption)
+                    .mosaicFont(.caption)
                     .foregroundStyle(.secondary)
             }
         }
@@ -162,7 +162,7 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
         if let diagnostics {
             VStack(alignment: .leading) {
                 Text("Diagnostics")
-                    .platformFont(.headline)
+                    .mosaicFont(.headline)
                     #if os(tvOS)
                         .foregroundStyle(.tertiary)  // audit: tvOS
                     #else
@@ -170,7 +170,7 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
                     #endif
                     .padding(.bottom, 4)
                 Text(diagnostics)
-                    .platformFont(.caption)
+                    .mosaicFont(.caption)
                     #if os(tvOS)
                         .foregroundStyle(.secondary)
                     #else
@@ -199,7 +199,7 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
                     #else
                         .foregroundStyle(.secondary)
                     #endif
-                    .platformFont(.caption)
+                    .mosaicFont(.caption)
             }
         }
         // pad-audit: keep — uses Theme.spacing scale (different from Theme.padding)
@@ -212,7 +212,7 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
                 Button(action.rawValue) {
                     onAction(action)
                 }
-                .formButtonStyle()
+                .mosaicButtonStyle()
             }
         }
     }

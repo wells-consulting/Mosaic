@@ -54,10 +54,10 @@ public struct SettingsSection<Content: View>: View {
         VStack(alignment: .leading, spacing: Platform.spacing(.settingsMenu)) {
             if let title {
                 SettingsSectionLabel(title)
-                    .padding(.bottom, .settingsSectionBottom)
+                    .mosaicPadding(.bottom, .settingsSectionBottom)
             } else if let verbatimTitle {
                 SettingsSectionLabel(verbatim: verbatimTitle)
-                    .padding(.bottom, .settingsSectionBottom)
+                    .mosaicPadding(.bottom, .settingsSectionBottom)
             }
             content
         }

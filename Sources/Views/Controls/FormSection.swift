@@ -26,7 +26,7 @@ public struct FormSection<Content: View>: View {
             HStack(spacing: Platform.spacing(.small)) {
                 VStack { Divider() }
                 Text(title)
-                    .platformFont(.callout)
+                    .mosaicFont(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize()
                 VStack { Divider() }

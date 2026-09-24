@@ -49,7 +49,7 @@ public struct OverlayButton: View {
                     .font(.system(size: iconSize, weight: .semibold))
                     .foregroundStyle(iconTint)
                 Text(label)
-                    .platformFont(.caption2)
+                    .mosaicFont(.caption2)
                     .foregroundStyle(labelTint)
             }
             .frame(minWidth: minWidth)
@@ -58,13 +58,13 @@ public struct OverlayButton: View {
             #if os(tvOS)
                 .background(
                     RoundedRectangle(cornerRadius: Platform.cornerRadius(.medium))
-                        .fill(focused ? PaletteStore.shared.palette.overlayNormal : .clear),
+                        .fill(focused ? PaletteStore.shared.current.overlayNormal : .clear),
                 )
                 .scaleEffect(focused ? 1.08 : 1.0)
                 .animation(.easeOut(duration: 0.15), value: focused)
             #endif
         }
-        .buttonStyle(.gridButtonStyle)
+        .buttonStyle(.mosaicGridButton)
         .accessibilityLabel(label)
         #if os(tvOS)
             .focused($focused)

@@ -10,7 +10,7 @@ public enum Platform {}
 public extension View {
 
     #if os(iOS)
-    func focusSection() -> some View {
+    func mosaicFocusSection() -> some View {
         self
     }
     #endif

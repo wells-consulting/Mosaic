@@ -16,12 +16,12 @@ public extension View {
     ///   - isSelected: Whether this card is currently selected.
     ///   - isActive: Whether multi-select mode is active. When `false`, the
     ///     modifier is a no-op.
-    func selectionOverlay(isSelected: Bool, isActive: Bool) -> some View {
-        modifier(SelectionOverlayModifier(isSelected: isSelected, isActive: isActive))
+    func mosaicSelectionOverlay(isSelected: Bool, isActive: Bool) -> some View {
+        modifier(MosaicSelectionOverlayModifier(isSelected: isSelected, isActive: isActive))
     }
 }
 
-private struct SelectionOverlayModifier: ViewModifier {
+private struct MosaicSelectionOverlayModifier: ViewModifier {
 
     let isSelected: Bool
     let isActive: Bool
@@ -30,7 +30,7 @@ private struct SelectionOverlayModifier: ViewModifier {
         if isActive {
             content
                 .overlay(alignment: .topLeading) {
-                    SelectionIndicator(isSelected: isSelected)
+                    MosaicSelectionIndicator(isSelected: isSelected)
                 }
                 .opacity(isSelected ? 1.0 : 0.6)
                 .animation(.easeInOut(duration: 0.15), value: isSelected)
@@ -49,7 +49,7 @@ private struct SelectionOverlayModifier: ViewModifier {
 ///
 /// Positioned at top-leading to avoid collisions with sort badges and
 /// download badges at top-trailing.
-public struct SelectionIndicator: View {
+public struct MosaicSelectionIndicator: View {
 
     let isSelected: Bool
     var selectedSymbol: SFSymbol = .checkmark_circle_fill
@@ -80,8 +80,8 @@ public struct SelectionIndicator: View {
                     .foregroundStyle(.primary)
                     .background(
                         Circle()
-                            .fill(PaletteStore.shared.palette.accentTint)
-                            .padding(.xsmall),
+                            .fill(PaletteStore.shared.current.accentTint)
+                            .mosaicPadding(.xsmall),
                     )
             } else {
                 if let unselectedSymbol {
@@ -89,7 +89,7 @@ public struct SelectionIndicator: View {
                         .background(
                             Circle()
                                 .fill(.secondary)
-                                .padding(.xsmall),
+                                .mosaicPadding(.xsmall),
                         )
                 } else {
                     Circle()
@@ -100,6 +100,6 @@ public struct SelectionIndicator: View {
         }
         .font(.system(size: indicatorSize))
         .frame(width: indicatorSize, height: indicatorSize)
-        .padding(.small)
+        .mosaicPadding(.small)
     }
 }

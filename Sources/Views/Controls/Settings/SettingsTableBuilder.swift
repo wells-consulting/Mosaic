@@ -8,13 +8,13 @@ import SwiftUI
 
 public final class SettingsTableBuilder {
 
-    public enum Row: Hashable {
+    public enum TableRow: Hashable {
         case textLabel(String, String)
         case symbolLabel(String, String, SFSymbol)
         case text(String)
     }
 
-    private var rows: [Row]
+    private var rows: [TableRow]
 
     public init() {
         self.rows = []
@@ -43,7 +43,7 @@ public final class SettingsTableBuilder {
                     switch row {
                     case let .text(text):
                         Text(text)
-                            .platformFont(.caption)
+                            .mosaicFont(.caption)
                             .foregroundStyle(.secondary)
                     case let .textLabel(text, value):
                         HStack {

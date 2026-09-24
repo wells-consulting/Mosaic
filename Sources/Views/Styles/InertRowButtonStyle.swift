@@ -8,9 +8,9 @@ import SwiftUI
 public extension View {
     /// Applies `InertRowButtonStyle` on tvOS for informational rows that need
     /// focus for scrolling but are not actionable. No-op on other platforms.
-    func inertRowButtonStyle() -> some View {
+    func mosaicInertRowButtonStyle() -> some View {
         #if os(tvOS)
-            buttonStyle(InertRowButtonStyle())
+            buttonStyle(MosaicInertRowButtonStyle())
         #else
             self
         #endif
@@ -22,7 +22,7 @@ public extension View {
     /// but are not actionable. Shows a subtle border on focus instead of the
     /// system's raised-pill effect, visually distinguishing read-only content
     /// from interactive buttons.
-    private struct InertRowButtonStyle: ButtonStyle {
+    private struct MosaicInertRowButtonStyle: ButtonStyle {
 
         @Environment(\.isFocused) private var isFocused
 

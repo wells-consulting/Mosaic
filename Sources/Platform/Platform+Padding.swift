@@ -69,6 +69,9 @@ extension Platform {
         case sectionHeadingTopGap
         /// Bottom padding below a section label, before the first row in that section.
         case settingsSectionBottom
+        /// Trailing clearance a scrolling settings page reserves so the overlay
+        /// scroll indicator can't sit on top of content. 4pt.
+        case settingsScrollClearance
         /// Vertical padding inside settings row buttons and text fields.
         case settingsVerticalRow
         /// Tight gap between closely-related siblings (label + sublabel,
@@ -86,6 +89,7 @@ extension Platform {
             case .sectionHeadingBottomGap: 8
             case .sectionHeadingTopGap: 32
             case .settingsSectionBottom: 4
+            case .settingsScrollClearance: 4
             case .settingsVerticalRow: 29
             case .tightGap: 4
             case .verticalRow: 16
@@ -103,14 +107,14 @@ extension Platform {
 
 public extension View {
 
-    func padding(
+    func mosaicPadding(
         _ edges: Edge.Set = .all,
         _ size: Platform.PaddingSize,
     ) -> some View {
         padding(edges, Platform.padding(size))
     }
 
-    func padding(
+    func mosaicPadding(
         _ size: Platform.PaddingSize,
     ) -> some View {
         padding(Platform.padding(size))
@@ -121,7 +125,7 @@ public extension View {
 
 public extension View {
 
-    func padding(
+    func mosaicPadding(
         _ edges: Edge.Set = .all,
         _ context: Platform.PaddingContext,
     ) -> some View {
@@ -131,7 +135,7 @@ public extension View {
     /// TabView for its outer chrome — applying padding to the TabView itself
     /// would inset the tab bar. Individual tvOS views add their own horizontal
     /// padding where needed.
-    func contentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
+    func mosaicContentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
         #if os(iOS) || os(macOS)
             modifier(ContentInsetPaddingModifier(edges: edges))
         #else
@@ -139,7 +143,7 @@ public extension View {
         #endif
     }
 
-    func modalContentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
+    func mosaicModalContentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
         #if os(tvOS)
             padding(edges, 60)
         #else
@@ -147,7 +151,7 @@ public extension View {
         #endif
     }
 
-    func settingsContentInsetPadding() -> some View {
+    func mosaicSettingsContentInsetPadding() -> some View {
         #if os(iOS)
             modifier(SettingsContentInsetPaddingModifier())
         #else
@@ -159,7 +163,7 @@ public extension View {
 
     /// On tvOS, provides necessary padding for the focus scale effect not to clip in
     /// a grid view. Place this on the grid itself inside the scroll view.
-    func focusPadding(
+    func mosaicFocusPadding(
         _ edges: Edge.Set = .top
     ) -> some View {
         #if os(tvOS)
@@ -197,7 +201,7 @@ public extension View {
         func body(content: Content) -> some View {
             if layout.widthConstrained {
                 content
-                    .padding(.horizontal, .large)
+                    .mosaicPadding(.horizontal, .large)
             } else {
                 content
                     .frame(maxWidth: 600)

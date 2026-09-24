@@ -40,6 +40,6 @@ public struct SymbolButton: View {
                 .symbolRenderingMode(.hierarchical)
         }
         .accessibilityLabel(accessibilityLabel)
-        .glassButtonStyle()
+        .mosaicSurfaceButtonStyle()
     }
 }

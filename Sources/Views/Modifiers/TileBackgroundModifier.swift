@@ -8,7 +8,7 @@ import SwiftUI
 public extension View {
 
     /// Applies a subtle filled tile background — use for stat cards, info tiles, and similar.
-    func tileBackground(
+    func mosaicTileBackground(
         cornerRadius: CGFloat = 12
     ) -> some View {
         background(

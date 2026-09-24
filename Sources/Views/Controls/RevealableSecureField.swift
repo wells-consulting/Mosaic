@@ -52,7 +52,7 @@ public struct RevealableSecureField: View {
                             .foregroundStyle(.secondary)
                     }
                     .buttonStyle(.plain)
-                    .padding(.trailing, .medium)
+                    .mosaicPadding(.trailing, .medium)
                     .accessibilityLabel(isRevealed ? "Hide password" : "Show password")
                 }
         #endif
@@ -65,7 +65,7 @@ public struct RevealableSecureField: View {
         if isRevealed {
             TextField(label, text: $text)
                 .autocorrectionDisabled()
-                .noAutocapitalization()
+                .mosaicNoAutocapitalization()
         } else {
             SecureField(label, text: $text)
         }
@@ -79,7 +79,7 @@ public struct RevealableSecureField: View {
             RevealableSecureField("Password", text: $password)
         }
         .frame(width: 800)
-        .padding(.xlarge)
+        .mosaicPadding(.xlarge)
         .background(.white.opacity(0.25))
     }
 #endif

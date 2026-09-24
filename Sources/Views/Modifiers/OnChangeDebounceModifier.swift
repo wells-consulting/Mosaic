@@ -8,16 +8,16 @@ import SwiftUI
 
 public extension View {
 
-    func onChangeDebounced<Value: Equatable>(
+    func mosaicOnChangeDebounced<Value: Equatable>(
         of value: Value,
         delay: Double = 0.5,
         perform action: @escaping (Value) -> Void,
     ) -> some View {
-        modifier(DebouncedChangeModifier(value: value, delay: delay, action: action))
+        modifier(MosaicDebouncedChangeModifier(value: value, delay: delay, action: action))
     }
 }
 
-public struct DebouncedChangeModifier<Value: Equatable>: ViewModifier {
+public struct MosaicDebouncedChangeModifier<Value: Equatable>: ViewModifier {
 
     let value: Value
     let delay: Double

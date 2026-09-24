@@ -15,12 +15,12 @@ public extension View {
     ///   - `.spotlight` — spotlight scale + shadow (same as iOS) + `.hoverEffectDisabled()`.
     ///
     /// Use this instead of scattering `#if os(tvOS)` focus conditionals across card views.
-    func cardFocus(
+    func mosaicCardFocus(
         hasFocus: Bool,
         tvOS: TVOSFocusEffect = .hover,
         scale: CGFloat = 1.03,
     ) -> some View {
-        modifier(CardFocusModifier(hasFocus: hasFocus, tvOSEffect: tvOS, scale: scale))
+        modifier(MosaicCardFocusModifier(hasFocus: hasFocus, tvOSEffect: tvOS, scale: scale))
     }
 }
 
@@ -38,7 +38,7 @@ public enum TVOSFocusEffect {
 
 // MARK: - CardFocusModifier
 
-public struct CardFocusModifier: ViewModifier {
+public struct MosaicCardFocusModifier: ViewModifier {
 
     let hasFocus: Bool
     let tvOSEffect: TVOSFocusEffect

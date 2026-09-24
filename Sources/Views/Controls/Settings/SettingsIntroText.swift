@@ -19,7 +19,7 @@ public struct SettingsIntroText: View {
 
     public var body: some View {
         Text(text)
-            .platformFont(.callout)
+            .mosaicFont(.settingsIntro)
             .foregroundStyle(.secondary)
             .lineLimit(nil)
     }

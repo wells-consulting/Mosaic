@@ -13,9 +13,9 @@ public extension View {
     /// On tvOS, intercepts the Siri Remote Menu button to pop the NavigationStack when
     /// the system navigation bar is hidden. No-op on other platforms where the system
     /// back button handles navigation.
-    func backNavigation() -> some View {
+    func mosaicBackNavigation() -> some View {
         #if os(tvOS)
-            modifier(BackNavigationModifier())
+            modifier(MosaicBackNavigationModifier())
         #else
             self
         #endif
@@ -27,7 +27,7 @@ public extension View {
     /// Shows a visible back button on all platforms.
     /// On tvOS the Menu button also triggers the action via `onExitCommand`.
     /// Pass `subtitle` to show a breadcrumb-style heading beside the back button.
-    func dismissAction(
+    func mosaicDismissAction(
         _ title: String = "Back",
         subtitle: String? = nil,
         perform action: @escaping () -> Void,
@@ -37,10 +37,10 @@ public extension View {
                 Button(action: action) {
                     Label(title, symbol: .chevron_left)
                 }
-                .formButtonStyle()
+                .mosaicButtonStyle()
                 if let subtitle {
                     Text(subtitle)
-                        .platformFont(.body)
+                        .mosaicFont(.body)
                         .fontWeight(.bold)
                 }
             }
@@ -70,7 +70,7 @@ private var dismissButtonSpacing: CGFloat {
     /// Needed for views that hide the system navigation bar — without it,
     /// `.toolbarVisibility(.hidden, for: .navigationBar)` disables automatic back navigation.
     /// Views that show the system nav bar let the system handle Menu.
-    private struct BackNavigationModifier: ViewModifier {
+    private struct MosaicBackNavigationModifier: ViewModifier {
 
         @Environment(\.dismiss) private var dismiss
 

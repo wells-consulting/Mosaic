@@ -11,7 +11,7 @@ public extension View {
 
     /// Configures a text field for URL/hostname entry: disables autocorrection
     /// and (on iOS) disables autocapitalisation and sets the keyboard to `.URL`.
-    func urlField() -> some View {
+    func mosaicURLField() -> some View {
         autocorrectionDisabled()
             #if os(iOS)
                 .textInputAutocapitalization(.never)
@@ -24,7 +24,7 @@ public extension View {
     /// Configures a text field for username entry: disables autocorrection
     /// and (on iOS) disables autocapitalisation and sets the content type
     /// to `.username`.
-    func usernameField() -> some View {
+    func mosaicUsernameField() -> some View {
         autocorrectionDisabled()
             #if os(iOS)
                 .textInputAutocapitalization(.never)
@@ -36,15 +36,15 @@ public extension View {
 
     /// Configures a text field for server display-name entry: disables
     /// autocorrection and autocapitalisation.
-    func serverNameField() -> some View {
+    func mosaicServerNameField() -> some View {
         autocorrectionDisabled()
-            .noAutocapitalization()
+            .mosaicNoAutocapitalization()
     }
 
     // MARK: - No Autocapitalisation
 
     /// Disables text input autocapitalisation on iOS. No-op on tvOS.
-    func noAutocapitalization() -> some View {
+    func mosaicNoAutocapitalization() -> some View {
         #if os(iOS)
             textInputAutocapitalization(.never)
         #else
@@ -55,7 +55,7 @@ public extension View {
     // MARK: - Number Pad Keyboard
 
     /// Applies `.keyboardType(.numberPad)` on platforms with software keyboards.
-    func numberPad() -> some View {
+    func mosaicNumberPad() -> some View {
         #if os(iOS)
             keyboardType(.numberPad)
         #else

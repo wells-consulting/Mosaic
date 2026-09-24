@@ -8,7 +8,7 @@ import SwiftUI
 public extension View {
 
     @ViewBuilder
-    func applyIf(_ condition: Bool, apply: (Self) -> some View) -> some View {
+    func mosaicApplyIf(_ condition: Bool, apply: (Self) -> some View) -> some View {
         if condition {
             apply(self)
         } else {

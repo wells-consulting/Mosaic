@@ -42,13 +42,23 @@ public struct SettingsCard<Content: View>: View {
     // MARK: - Body
 
     public var body: some View {
+        // A card is a card on every platform: the pane fill carries the visual
+        // grouping. Native chrome keeps its identity through row height and
+        // button style, not by erasing the card — content that isn't a padded
+        // collection of rows (free-form text, progress bars, buttons) would
+        // otherwise float with no separation on macOS.
         #if os(tvOS)
             let cornerRadius = Platform.cornerRadius(.large)
+            let cardPadding = Platform.padding(.large)
+        #elseif os(macOS)
+            let cornerRadius = Platform.cornerRadius(.medium)
+            let cardPadding = Platform.padding(.medium)
         #else
             let cornerRadius = Platform.cornerRadius(.medium)
+            let cardPadding = Platform.padding(.large)
         #endif
         content
-            .padding(.large)
+            .padding(cardPadding)
             .modifier(SettingsCardBackground(cornerRadius: cornerRadius, interactive: interactive))
     }
 }
@@ -72,11 +82,11 @@ private struct SettingsCardBackground: ViewModifier {
                 content
                     .background(
                         RoundedRectangle(cornerRadius: cornerRadius)
-                            .fill(PaletteStore.shared.palette.cardFill)
+                            .fill(PaletteStore.shared.current.cardFill)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: cornerRadius).strokeBorder(
-                            PaletteStore.shared.palette.cardBorder,
+                            PaletteStore.shared.current.cardBorder,
                             lineWidth: 0.5
                         )
                     )
@@ -85,11 +95,11 @@ private struct SettingsCardBackground: ViewModifier {
             content
                 .background(
                     RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(PaletteStore.shared.palette.cardFill)
+                        .fill(PaletteStore.shared.current.cardFill)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius).strokeBorder(
-                        PaletteStore.shared.palette.cardBorder,
+                        PaletteStore.shared.current.cardBorder,
                         lineWidth: 0.5
                     )
                 )

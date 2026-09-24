@@ -10,7 +10,7 @@ extension View {
     /// Applies a pill-shaped capsule background to a display row,
     /// matching the shape, height, and fill of `.appTextField()`.
     /// No-op on tvOS.
-    public func formRowBackground(
+    public func mosaicFormRowBackground(
         _ neutralColor: Color,
         interactive: Bool,
         nonInteractiveColor: Color = .init(light: Color.primary.opacity(0.05),
@@ -18,7 +18,7 @@ extension View {
     ) -> some View {
         #if os(iOS)
             modifier(
-                FormRowBackgroundModifier(
+                MosaicFormRowBackgroundModifier(
                     neutralColor: neutralColor,
                     interactive: interactive,
                     nonInteractiveColor: nonInteractiveColor
@@ -32,7 +32,7 @@ extension View {
 
 #if os(iOS)
     @MainActor
-    private struct FormRowBackgroundModifier: ViewModifier {
+    private struct MosaicFormRowBackgroundModifier: ViewModifier {
 
         @Environment(\.layout) private var layout
 

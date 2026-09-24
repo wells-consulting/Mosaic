@@ -20,7 +20,7 @@ public struct SettingsSectionLabel: View {
     public var body: some View {
         HStack(spacing: 0) {
             label
-                .platformFont(.caption)
+                .mosaicFont(.settingsFootnote)
                 .textCase(.uppercase)
                 .kerning(1.0)
                 #if os(tvOS)

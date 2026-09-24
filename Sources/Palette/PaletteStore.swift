@@ -23,7 +23,7 @@ public final class PaletteStore {
 
     /// The palette currently in effect. Defaults to a neutral placeholder so
     /// token reads never hit an empty store; apps replace it at launch.
-    public var palette: any Palette = NeutralPalette()
+    public var current: any Palette = NeutralPalette()
 
     /// The id of the pristine placeholder shipped by this store, before the
     /// hosting app installs its own palette.
@@ -32,7 +32,7 @@ public final class PaletteStore {
     /// True while `palette` is still the store's placeholder, i.e. the hosting
     /// app hasn't installed its own palette yet.
     private var isUsingPlaceholderPalette: Bool {
-        palette.id == Self.placeholderPaletteID
+        current.id == Self.placeholderPaletteID
     }
 
     /// Installs `defaultPalette` in place of the placeholder when the hosting
@@ -41,7 +41,7 @@ public final class PaletteStore {
     /// color-scheme setting) is never overridden.
     public func setDefaultIfUnset(_ defaultPalette: any Palette) {
         guard isUsingPlaceholderPalette else { return }
-        palette = defaultPalette
+        current = defaultPalette
     }
 
     private init() {}

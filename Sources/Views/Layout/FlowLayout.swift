@@ -139,7 +139,7 @@ public extension View {
     /// Marks this view as flexible within a ``FlowLayout``, allowing it
     /// to expand and fill remaining row space. Higher priority values
     /// receive a proportionally larger share of the extra width.
-    func appFlowFlexible(priority: CGFloat = 1) -> some View {
+    func mosaicFlowFlexible(priority: CGFloat = 1) -> some View {
         layoutValue(key: FlowFlexibility.self, value: priority)
     }
 }

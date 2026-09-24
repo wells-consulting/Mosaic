@@ -39,7 +39,7 @@ public struct ProgressBar: View {
                         .padding(.horizontal, 4)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .padding(.bottom, .small)
+                .mosaicPadding(.bottom, .small)
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Progress")

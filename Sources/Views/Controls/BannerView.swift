@@ -40,7 +40,7 @@ public struct BannerView<Content: View>: View {
 
     public var body: some View {
         rowContent
-            .glassBackground(tint)
+            .mosaicGlassBackground(tint)
     }
 
     // MARK: - Subviews
@@ -65,7 +65,7 @@ public struct BannerView<Content: View>: View {
                 Image(symbol)
                     .fontWeight(.thin)
                     .symbolRenderingMode(.hierarchical)
-                    .platformFont(.largeTitle)
+                    .mosaicFont(.largeTitle)
                     .foregroundStyle(.primary)
             }
             VStack(alignment: .leading, spacing: 2) {
@@ -88,7 +88,7 @@ public struct BannerView<Content: View>: View {
                     Image(symbol)
                         .fontWeight(.thin)
                         .symbolRenderingMode(.hierarchical)
-                        .platformFont(.largeTitle)
+                        .mosaicFont(.largeTitle)
                         .foregroundStyle(.primary)
                 }
                 Spacer()

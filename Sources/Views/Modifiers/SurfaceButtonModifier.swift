@@ -13,9 +13,9 @@ public extension View {
     ///
     /// Uses `.large` control size (~50pt) on all iOS form factors so standalone
     /// button pills carry the same internal padding as `appGlassMenuContent()` menus.
-    func glassButtonStyle() -> some View {
+    func mosaicSurfaceButtonStyle() -> some View {
         #if os(iOS)
-            modifier(AdaptiveButtonStyleModifier())
+            modifier(MosaicAdaptiveButtonStyleModifier())
         #else
             self
         #endif
@@ -23,7 +23,7 @@ public extension View {
 }
 
 #if os(iOS)
-    private struct AdaptiveButtonStyleModifier: ViewModifier {
+    private struct MosaicAdaptiveButtonStyleModifier: ViewModifier {
 
         @Environment(\.insideButtonGroup) private var insideButtonGroup
 
@@ -42,12 +42,12 @@ public extension View {
                 // adds more horizontal padding than the 16pt used by `appGlassMenuContent()`,
                 // so we apply the glass effect directly with the same insets as the menu path.
                 content
-                    .buttonStyle(StandaloneGlassButtonStyle())
+                    .buttonStyle(MosaicStandaloneSurfaceButtonStyle())
             }
         }
     }
 
-    private struct StandaloneGlassButtonStyle: ButtonStyle {
+    private struct MosaicStandaloneSurfaceButtonStyle: ButtonStyle {
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .padding(.vertical, 16)

@@ -6,20 +6,20 @@
 import SwiftUI
 
 public extension View {
-    func glassBackground(_ tint: Color, cornerRadius: CGFloat = 16) -> some View {
-        modifier(GlassBackgroundModifer(tint: tint, cornerRadius: cornerRadius))
+    func mosaicGlassBackground(_ tint: Color, cornerRadius: CGFloat = 16) -> some View {
+        modifier(MosaicGlassBackgroundModifer(tint: tint, cornerRadius: cornerRadius))
     }
 }
 
-private struct GlassBackgroundModifer: ViewModifier {
+private struct MosaicGlassBackgroundModifer: ViewModifier {
 
     let tint: Color
     let cornerRadius: CGFloat
 
     func body(content: Content) -> some View {
         content
-            .padding(.horizontal, .large)
-            .padding(.vertical, .small)
+            .mosaicPadding(.horizontal, .large)
+            .mosaicPadding(.vertical, .small)
             .glassEffect(
                 .regular.tint(tint.opacity(0.25)),
                 in: .rect(cornerRadius: cornerRadius)

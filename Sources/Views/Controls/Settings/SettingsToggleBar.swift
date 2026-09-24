@@ -42,7 +42,7 @@ public struct SettingsToggleBar: View {
                         }
                         if let details {
                             Text(details)
-                                .platformFont(.caption)
+                                .mosaicFont(.settingsFootnote)
                                 .foregroundStyle(.secondary)
                         }
                     }
@@ -51,7 +51,7 @@ public struct SettingsToggleBar: View {
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(
                             .primary,
-                            selected ? PaletteStore.shared.palette.accentTint : .primary
+                            selected ? PaletteStore.shared.current.accentTint : .primary
                         )
                         .imageScale(.medium)
                         .padding(.trailing, 12)

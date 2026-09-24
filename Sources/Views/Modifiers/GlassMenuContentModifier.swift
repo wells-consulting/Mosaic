@@ -13,9 +13,9 @@ public extension View {
     /// `Menu`'s internal trigger button. Use this on the `content`, not the
     /// menu itself. Otherwise the content tap area does not receive the
     /// correct padding and tap-area adjustments.
-    func glassMenuContent() -> some View {
+    func mosaicGlassMenuContent() -> some View {
         #if os(iOS)
-            modifier(GlassMenuStyleModifier())
+            modifier(MosaicGlassMenuStyleModifier())
         #else
             self
         #endif
@@ -23,7 +23,7 @@ public extension View {
 }
 
 #if os(iOS)
-    private struct GlassMenuStyleModifier: ViewModifier {
+    private struct MosaicGlassMenuStyleModifier: ViewModifier {
 
         @Environment(\.insideButtonGroup) private var insideButtonGroup
 

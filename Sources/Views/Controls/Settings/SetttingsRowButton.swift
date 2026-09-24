@@ -12,7 +12,8 @@ public struct SettingsRowButton: View {
         @Environment(\.verticalSizeClass) private var vSizeClass
     #endif
 
-    public enum Text {
+    /// Row detail text that adapts to the horizontal size class on iOS.
+    public enum AdaptiveText {
         case fixed(String?)
         case adjustable(full: String?, abbreviated: String?)
         var text: String? {
@@ -34,17 +35,17 @@ public struct SettingsRowButton: View {
 
     private let symbol: SFSymbol
     private let text: LocalizedStringKey
-    private let badge: Text?
+    private let badge: AdaptiveText?
     private let chevron: Bool
-    private let value: Text?
+    private let value: AdaptiveText?
     private let alignment: Alignment
     private let action: () -> Void
 
     public init(
         _ text: LocalizedStringKey,
         symbol: SFSymbol,
-        badge: Text? = nil,
-        value: Text? = nil,
+        badge: AdaptiveText? = nil,
+        value: AdaptiveText? = nil,
         chevron: Bool = true,
         alignment: Alignment = .center,
         action: @escaping () -> Void
@@ -61,8 +62,8 @@ public struct SettingsRowButton: View {
     public init(
         verbatim label: String,
         symbol: SFSymbol,
-        badge: Text? = nil,
-        value: Text? = nil,
+        badge: AdaptiveText? = nil,
+        value: AdaptiveText? = nil,
         chevron: Bool = true,
         action: @escaping () -> Void
     ) {
@@ -106,5 +107,30 @@ public struct SettingsRowButton: View {
             )
             .frame(maxWidth: .infinity, alignment: alignment)
         }
+        // A settings row is flat content inside its card on iOS/macOS — the iOS
+        // InsetGrouped look. tvOS alone keeps the prominent capsule (and its
+        // white-on-focus inversion) as the focus-engine navigation chrome.
+        #if os(tvOS)
+            .mosaicButtonStyle(.neutral(.prominent))
+        #else
+            .buttonStyle(.plain)
+        #endif
+        .frame(minHeight: Self.minRowHeight)
+    }
+
+    // HIG floors: a touch-sized 44pt on iOS, 66pt under the tvOS focus
+    // engine, and macOS's pointer-driven floor — the same heights the capsule
+    // button style already enforces, so flat rows and raised buttons stay
+    // consistent. Native chrome packs macOS rows to System Settings' ~32pt
+    // density; custom chrome keeps the taller capsule floor.
+    @MainActor
+    private static var minRowHeight: CGFloat {
+        #if os(iOS)
+            44
+        #elseif os(macOS)
+            ChromeStore.shared.current == .native ? 32 : 44
+        #else
+            66
+        #endif
     }
 }

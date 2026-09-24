@@ -14,6 +14,8 @@ public enum PlatformFont {
     case footnote
     case headline
     case largeTitle
+    case settingsFootnote
+    case settingsIntro
     case subheadline
     case title
     case title2
@@ -30,7 +32,7 @@ public extension View {
     /// the natural best guess. tvOS stays a separate branch so it can be tuned
     /// up without leaking onto macOS.
     @ViewBuilder
-    func platformFont(_ name: PlatformFont) -> some View {
+    func mosaicFont(_ name: PlatformFont) -> some View {
         switch name {
         case .badge:
             #if os(iOS)
@@ -84,6 +86,28 @@ public extension View {
             #else
                 font(.largeTitle)
             #endif
+        case .settingsIntro:
+            // Intro paragraphs on settings pages. macOS System Settings reads
+            // body text, and SwiftUI's native .subheadline/.caption on macOS
+            // bottom out at 10-11pt -- smaller than the HIG's 13pt default
+            // ("Default size | macOS | 13 pt").
+            #if os(macOS)
+                font(.body)
+            #elseif os(iOS)
+                modifier(IOSAdaptiveFont(compactFont: .callout, regularFont: .body))
+            #else
+                font(.callout)
+            #endif
+        case .settingsFootnote:
+            // Helper / footnote lines on settings pages. iOS keeps caption;
+            // macOS bumps to callout so helper text stays readable.
+            #if os(macOS)
+                font(.callout)
+            #elseif os(iOS)
+                font(.caption)
+            #else
+                font(.caption)
+            #endif
         case .subheadline:
             #if os(iOS)
                 modifier(IOSAdaptiveFont(compactFont: .subheadline, regularFont: .callout))
@@ -105,8 +129,8 @@ public extension View {
 
     /// Field label style: smaller caps, slightly tighter spacing, tertiary color.
     /// Used for field group headings inside detail views (e.g. Timestamp, Source).
-    func fieldLabelStyle() -> some View {
-        platformFont(.caption2)
+    func mosaicFieldLabelStyle() -> some View {
+        mosaicFont(.caption2)
             .textCase(.uppercase)
             .kerning(0.8)
             #if os(tvOS)

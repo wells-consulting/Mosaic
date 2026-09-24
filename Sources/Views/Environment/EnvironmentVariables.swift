@@ -16,7 +16,7 @@ public extension EnvironmentValues {
 
     #if os(iOS)
         /// Used with appScrollsToTop modifer
-        @Entry var scrollToTopCoordinator: ScrollToTopCoordinator?
+        @Entry var scrollToTopCoordinator: MosaicScrollToTopCoordinator?
 
         /// True when the view is being rendered inside a `ButtonGroup`'s shared pill.
         /// Read by `appGlassButton()` and `appGlassMenuStyle()` to skip their own per-control

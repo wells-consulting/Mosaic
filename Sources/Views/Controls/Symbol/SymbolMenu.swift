@@ -42,7 +42,7 @@ public struct SymbolMenu<Content: View>: View {
                     Image(symbol)
                 }
             }
-            .glassMenuContent()
+            .mosaicGlassMenuContent()
         }
         .accessibilityLabel(label)
     }

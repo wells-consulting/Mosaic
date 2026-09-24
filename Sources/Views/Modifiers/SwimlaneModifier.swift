@@ -7,12 +7,12 @@ import SwiftUI
 
 public extension View {
 
-    func swimlane() -> some View {
-        modifier(SwimlaneModifier())
+    func mosaicSwimlane() -> some View {
+        modifier(MosaicSwimlaneModifier())
     }
 }
 
-private struct SwimlaneModifier: ViewModifier {
+private struct MosaicSwimlaneModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content

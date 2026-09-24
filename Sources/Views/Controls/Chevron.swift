@@ -22,6 +22,6 @@ public struct Chevron: View {
         Image(.chevron_right)
             .imageScale(.small)
             .foregroundStyle(style)
-            .padding(.leading, .small)
+            .mosaicPadding(.leading, .small)
     }
 }

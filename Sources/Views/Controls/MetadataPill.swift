@@ -26,10 +26,10 @@ public struct MetadataPill: View {
                 .accessibilityHidden(true)
             Text(text)
         }
-        .platformFont(.badge).bold()
+        .mosaicFont(.badge).bold()
         .foregroundStyle(.primary.opacity(0.85))
         .padding(.horizontal, 20)
-        .padding(.vertical, .xsmall)
+        .mosaicPadding(.vertical, .xsmall)
         .background(.primary.opacity(0.15), in: Capsule())
         .accessibilityElement(children: .combine)
     }

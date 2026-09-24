@@ -10,26 +10,33 @@ import SwiftUI
 public struct MessageLabel: View {
 
     private let text: String
-    private let symbol: SFSymbol
-    private let symbolTint: Color
+    private let symbol: SFSymbol?
+    private let symbolTint: Color?
 
-    init(_ message: Message) {
+    public init(_ message: Message) {
         self.text = message.summary
-        self.symbol = message.kind.symbol
         switch message.kind {
+        case .text:
+            self.symbol = nil
+            self.symbolTint = nil
         case .info:
+            self.symbol = message.kind.symbol
             self.symbolTint = Color.secondary
-        case .warning:
-            self.symbolTint = PaletteStore.shared.palette.warningLabel
+        case .notice:
+            self.symbol = message.kind.symbol
+            self.symbolTint = PaletteStore.shared.current.warningLabel
         case .error:
-            self.symbolTint = PaletteStore.shared.palette.errorLabel
+            self.symbol = message.kind.symbol
+            self.symbolTint = PaletteStore.shared.current.errorLabel
         }
     }
 
     public var body: some View {
         HStack {
-            Image(symbol)
-                .foregroundStyle(symbolTint)
+            if let symbol, let symbolTint {
+                Image(symbol)
+                    .foregroundStyle(symbolTint)
+            }
             Text(text)
         }
         .imageScale(.medium)

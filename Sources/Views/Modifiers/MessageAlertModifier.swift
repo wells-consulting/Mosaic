@@ -7,12 +7,12 @@ import Motley
 import SwiftUI
 
 public extension View {
-    func messageAlert(_ message: Binding<Message?>) -> some View {
-        modifier(MessageAlertModifier(message: message))
+    func mosaicMessageAlert(_ message: Binding<Message?>) -> some View {
+        modifier(MosaicMessageAlertModifier(message: message))
     }
 }
 
-private struct MessageAlertModifier: ViewModifier {
+private struct MosaicMessageAlertModifier: ViewModifier {
 
     @Binding var message: Message?
 
@@ -31,7 +31,11 @@ private struct MessageAlertModifier: ViewModifier {
                     case .info:
                         Text(message.summary)
                     default:
-                        Label(message.summary, symbol: message.kind.symbol)
+                        if let symbol = message.kind.symbol {
+                            Label(message.summary, symbol: symbol)
+                        } else {
+                            Text(message.summary)
+                        }
                     }
                 } else {
                     Label("No message found", symbol: .questionmark_bubble)

@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-/// Semantic role for `formButtonStyle(_:)`.
+/// Semantic role for `prominenceButtonStyle(_:)`.
 public enum ButtonAppearance {
 
     public enum Prominence { case regular, prominent }
@@ -31,7 +31,7 @@ public enum ButtonAppearance {
 
     @MainActor
     var fillColor: Color {
-        let palette = PaletteStore.shared.palette
+        let palette = PaletteStore.shared.current
         return switch self {
         case .cancel:
             palette.warningTint
@@ -52,7 +52,7 @@ public enum ButtonAppearance {
     func labelColor(disabled: Bool) -> Color {
         switch self {
         case .neutral:
-            return disabled ? .secondary.opacity(0.5) : PaletteStore.shared.palette.neutralLabel
+            return disabled ? .secondary.opacity(0.5) : PaletteStore.shared.current.neutralLabel
         default:
             return disabled ? .secondary.opacity(0.5) : .primary
         }

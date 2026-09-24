@@ -7,12 +7,65 @@ import SwiftUI
 
 public extension View {
 
-    func formButtonStyle(
+    /// Bridges the semantic button roles onto a button style.
+    ///
+    /// Under `AppChrome.custom` (the default) macOS stays native for the quiet
+    /// roles: `.neutral(.regular)`, `.cancel`, and `.close` map to the bordered
+    /// style. The emphasis roles (`.neutral(.prominent)`, `.confirm`,
+    /// `.destructive`, `.tinted`) render through the shared glass capsule
+    /// instead of `.borderedProminent`'s solid fill — System Settings' filled
+    /// buttons read as a translucent glass surface, and the shared path gives
+    /// that dark-modable look on macOS too. iOS/tvOS always use the custom
+    /// capsule shape.
+    ///
+    /// Under `AppChrome.native` every role collapses onto the platform's own
+    /// styles — quiet roles to `.bordered`, emphasis roles to
+    /// `.borderedProminent` with the tint applied for `.tinted`. System
+    /// Settings' filled buttons are exactly that, so native chrome reads more
+    /// native than the custom analog. the app selects `.native` for macOS; see
+    /// ``AppChromeStore``.
+    @ViewBuilder
+    @MainActor
+    func mosaicButtonStyle(
         _ appearance: ButtonAppearance = .neutral(.regular),
     ) -> some View {
-        buttonStyle(
-            FormButtonStyle(appearance: appearance)
-        )
+        switch ChromeStore.shared.current {
+        case .native:
+            nativeButtonStyle(appearance)
+        case .mosaic:
+            customButtonStyle(appearance)
+        }
+    }
+
+    @ViewBuilder
+    @MainActor
+    private func customButtonStyle(_ appearance: ButtonAppearance) -> some View {
+        #if os(macOS)
+            switch appearance {
+            case .neutral(.regular), .cancel, .close:
+                buttonStyle(.bordered)
+            case .neutral(.prominent), .confirm, .destructive, .tinted:
+                buttonStyle(MosaicProminenceButtonStyle(appearance: appearance))
+            }
+        #else
+            buttonStyle(
+                MosaicProminenceButtonStyle(appearance: appearance)
+            )
+        #endif
+    }
+
+    @ViewBuilder
+    @MainActor
+    private func nativeButtonStyle(_ appearance: ButtonAppearance) -> some View {
+        switch appearance {
+        case .neutral(.regular), .cancel, .close:
+            buttonStyle(.bordered)
+        case .neutral(.prominent), .confirm, .destructive:
+            buttonStyle(.borderedProminent)
+        case let .tinted(color):
+            buttonStyle(.borderedProminent)
+                .tint(color)
+        }
     }
 }
 
@@ -74,7 +127,7 @@ private struct NeutralCapsuleBackground: View {
 
     @ViewBuilder
     private var darkGradient: some View {
-        let palette = PaletteStore.shared.palette
+        let palette = PaletteStore.shared.current
         let (top, bottom): (Color, Color) =
             prominence == .prominent
             ? (palette.neutralProminentTop, palette.neutralProminentBottom)
@@ -129,7 +182,7 @@ private struct NeutralCapsuleBackground: View {
 /// visible texture and depth independent of what's behind them — on a
 /// flat dark background, a glass material has nothing to blur and reads
 /// as a flat opaque fill.
-private struct FormButtonStyle: ButtonStyle {
+private struct MosaicProminenceButtonStyle: ButtonStyle {
 
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.isFocused) private var isFocused
@@ -151,7 +204,9 @@ private struct FormButtonStyle: ButtonStyle {
             #if os(iOS)
                 .frame(minHeight: 44)
             #elseif os(macOS)
-                .frame(minHeight: 28)
+                // System Settings' filled buttons are generous; a 36pt floor
+                // keeps ours from shrinking to the ~22pt native bordered height.
+                .frame(minHeight: 36)
             #else
                 .frame(minHeight: 66)
             #endif
@@ -199,7 +254,7 @@ private struct FormButtonStyle: ButtonStyle {
                 .foregroundStyle(appearance.labelColor(disabled: !isEnabled))
                 .glassEffect(Glass.regular.tint(color).interactive(), in: Capsule())
                 #if os(tvOS)
-                    .cardFocus(hasFocus: isFocused, tvOS: .spotlight)
+                    .mosaicCardFocus(hasFocus: isFocused, tvOS: .spotlight)
                 #endif
         }
     }
@@ -212,20 +267,20 @@ private struct FormButtonStyle: ButtonStyle {
     #Preview {
         VStack(spacing: 12) {
             Button("Neutral (Regular)") {}
-                .formButtonStyle()
+                .mosaicButtonStyle()
             Button("Neutral (Prominent)") {}
-                .formButtonStyle(.neutral(.prominent))
+                .mosaicButtonStyle(.neutral(.prominent))
             Button("Confirm") {}
-                .formButtonStyle(.confirm)
+                .mosaicButtonStyle(.confirm)
             Button("Destructive") {}
-                .formButtonStyle(.destructive)
+                .mosaicButtonStyle(.destructive)
             Button("Attention") {}
-                .formButtonStyle(.tinted(PaletteStore.shared.palette.accentTint))
+                .mosaicButtonStyle(.tinted(PaletteStore.shared.current.accentTint))
         }
         .padding(.horizontal, 40)
         .colorScheme(.dark)
         .frame(width: 500, height: 450)
-        .vignetteBackground()
+        .mosaicVignetteBackground()
     }
 
 #endif

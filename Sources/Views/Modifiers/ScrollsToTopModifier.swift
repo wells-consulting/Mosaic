@@ -6,9 +6,9 @@
 import SwiftUI
 
 public extension View {
-    func scrollsToTop() -> some View {
+    func mosaicScrollsToTop() -> some View {
         #if os(iOS)
-            modifier(ScrollsToTopModifier())
+            modifier(MosaicScrollsToTopModifier())
         #else
             self
         #endif
@@ -18,17 +18,17 @@ public extension View {
 #if os(iOS)
 
     @MainActor @Observable
-    public final class ScrollToTopCoordinator {
+    public final class MosaicScrollToTopCoordinator {
         public var trigger: Int
         public init(trigger: Int = 0) { self.trigger = trigger }
         public func fire() { trigger += 1 }
     }
 
-    public struct ScrollToTopCoordinatorKey: EnvironmentKey {
-        public static let defaultValue: ScrollToTopCoordinator? = nil
+    public struct MosaicScrollToTopCoordinatorKey: EnvironmentKey {
+        public static let defaultValue: MosaicScrollToTopCoordinator? = nil
     }
 
-    public struct ScrollsToTopModifier: ViewModifier {
+    public struct MosaicScrollsToTopModifier: ViewModifier {
         @Environment(\.scrollToTopCoordinator) private var coordinator
         @State private var scrollPosition = ScrollPosition()
         public func body(content: Content) -> some View {

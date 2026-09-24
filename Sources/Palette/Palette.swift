@@ -65,6 +65,12 @@ public protocol Palette: Sendable {
 
     var accentTint: Color { get }
 
+    /// Tint for bar chrome that sits under system-drawn labels — the tab-bar
+    /// selection fill. Defaults to `accentTint`; schemes may deepen it so the
+    /// system's white-on-pill highlight stays legible where a bright accent
+    /// would shout.
+    var tabBarTint: Color { get }
+
     var errorTint: Color { get }
 
     var warningTint: Color { get }
@@ -86,4 +92,8 @@ public protocol Palette: Sendable {
 
     /// Start → end colors of linear progress bars.
     var progress: [Color] { get }
+}
+
+extension Palette {
+    var tabBarTint: Color { accentTint }
 }

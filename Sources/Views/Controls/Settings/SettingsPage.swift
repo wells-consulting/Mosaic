@@ -5,6 +5,14 @@
 
 import SwiftUI
 
+/// The container every settings page is built on: a vertical scroll view
+/// holding a stack of `SettingsSection`s separated by the section gap.
+///
+/// It also owns the page inset — the shared top and horizontal padding, plus
+/// the trailing clearance the overlay scroll indicator needs — so pages supply
+/// sections and nothing else. Inset chrome that isn't part of a page (see
+/// `SettingsDestination`'s setup card) mirrors the same values to stay flush
+/// with the page below it.
 public struct SettingsPage<Content: View>: View {
 
     // MARK: - Fields
@@ -24,14 +32,15 @@ public struct SettingsPage<Content: View>: View {
             VStack(alignment: .leading, spacing: Platform.spacing(.xlarge)) {
                 content
             }
-            .padding(.horizontal, 4)  // Prevent trailing scroll from obscuring
+            // .padding(.trailing, .settingsScrollClearance)  // Prevent trailing scroll from obscuring
+            .mosaicPadding(.horizontal, .large)
+            .mosaicPadding(.top, .large)
         }
-        .scrollView(.vertical, source: .fixed)
+        .mosaicScrollView(.vertical, source: .fixed)
         #if os(tvOS)
             .scrollClipDisabled()
         #endif
         #if os(iOS)
-            .padding(.top, .large)
             .clipShape(.rect)
         #endif
     }

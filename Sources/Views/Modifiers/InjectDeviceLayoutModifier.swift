@@ -16,9 +16,9 @@ public extension View {
     /// Injects a computed `AppLayout` value into the environment based on device idiom
     /// and rendered geometry. Apply once at the app root so all descendant views can read
     /// `@Environment(\.appLayout)` without touching raw size class values.
-    func injectDeviceLayoutEnvironment() -> some View {
+    func mosaicInjectDeviceLayoutEnvironment() -> some View {
         #if os(iOS)
-            modifier(DeviceLayoutEnvironmentModifier())
+            modifier(MosaicDeviceLayoutEnvironmentModifier())
         #else
             self
         #endif
@@ -26,7 +26,7 @@ public extension View {
 }
 
 #if os(iOS)
-    private struct DeviceLayoutEnvironmentModifier: ViewModifier {
+    private struct MosaicDeviceLayoutEnvironmentModifier: ViewModifier {
 
         @Environment(\.horizontalSizeClass) private var hSizeClass
 

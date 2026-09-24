@@ -310,7 +310,7 @@ public extension View {
     /// ``AdaptiveFlowLayout``. Priority 1 is the highest — items with
     /// higher numbers are hidden first when space is limited. Items
     /// without a priority (or priority 0) are never hidden.
-    func appVisibilityPriority(_ priority: Int) -> some View {
+    func mosaicVisibilityPriority(_ priority: Int) -> some View {
         layoutValue(key: VisibilityPriority.self, value: priority)
     }
 
@@ -319,7 +319,7 @@ public extension View {
     /// least this much width (after flexible expansion), the item is
     /// hidden entirely. Unlike `visibilityPriority`, this is checked
     /// after expansion — the ideal size stays small for measurement.
-    func appMinimumUsefulWidth(_ width: CGFloat) -> some View {
+    func mosaicMinimumUsefulWidth(_ width: CGFloat) -> some View {
         layoutValue(key: MinimumUsefulWidth.self, value: width)
     }
 }
