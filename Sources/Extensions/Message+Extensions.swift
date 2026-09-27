@@ -7,7 +7,7 @@ import Foundation
 import Motley
 import SwiftUI
 
-extension Message.Kind {
+public extension Message.Kind {
 
     @MainActor
     var symbolTint: Color {
