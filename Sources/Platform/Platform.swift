@@ -6,12 +6,3 @@
 import SwiftUI
 
 public enum Platform {}
-
-public extension View {
-
-    #if os(iOS)
-    func mosaicFocusSection() -> some View {
-        self
-    }
-    #endif
-}

@@ -4,5 +4,5 @@
 //
 
 public enum MosaicInfo {
-    public static let version = "0.9.14"
+    public static let version = "0.9.15"
 }
