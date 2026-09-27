@@ -110,10 +110,12 @@ public struct SettingsRowButton: View {
         // A settings row is flat content inside its card on iOS/macOS — the iOS
         // InsetGrouped look. tvOS alone keeps the prominent capsule (and its
         // white-on-focus inversion) as the focus-engine navigation chrome.
-        #if os(tvOS) || os(macOS)
+        #if os(tvOS)
             .mosaicButtonStyle(.neutral(.prominent))
         #elseif os(iOS)
             .buttonStyle(.plain)
+        #elseif os(macOS)
+            .buttonStyle(.bordered)
         #endif
         .frame(minHeight: Self.minRowHeight)
     }
