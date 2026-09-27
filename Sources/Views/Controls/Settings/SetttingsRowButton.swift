@@ -112,6 +112,8 @@ public struct SettingsRowButton: View {
         // white-on-focus inversion) as the focus-engine navigation chrome.
         #if os(tvOS)
             .mosaicButtonStyle(.neutral(.prominent))
+        #elseif os(macOS)
+            .buttonStyle(.bordered)
         #else
             .buttonStyle(.plain)
         #endif
@@ -132,5 +134,17 @@ public struct SettingsRowButton: View {
         #else
             66
         #endif
+    }
+}
+
+#Preview {
+    VStack {
+        SettingsRowButton(
+            "Review Setup",
+            symbol: .wrench_and_screwdriver_fill,
+            chevron: true,
+            action: { }
+        )
+        .padding()
     }
 }
