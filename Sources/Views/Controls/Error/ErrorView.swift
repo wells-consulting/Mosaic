@@ -64,15 +64,15 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
 
     public init(
         title: String?,
-        notice: Message,
+        message: Message,
         actions: [Action],
         onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil,
         onAction: @escaping (Action) -> Void,
     ) {
-        self.title = title ?? notice.title ?? notice.kind.title
-        self.summary = notice.summary
-        self.details = notice.details
+        self.title = title ?? message.title ?? message.kind.title
+        self.summary = message.summary
+        self.details = message.details
         self.diagnostics = nil
         self.rawDiagnostics = nil
         self.actions = Array(actions.prefix(3))
@@ -251,13 +251,13 @@ extension ErrorView where Action == ErrorDismissAction {
 
     /// Creates an error view with a single "OK" button from a Notice.
     public init(
-        notice: Message,
+        message: Message,
         buttonText: String = "OK",
         onButtonTapped: @escaping () -> Void,
     ) {
-        self.title = notice.title ?? notice.kind.title
-        self.summary = notice.summary
-        self.details = notice.details
+        self.title = message.title ?? message.kind.title
+        self.summary = message.summary
+        self.details = message.details
         self.diagnostics = nil
         self.rawDiagnostics = nil
         self.actions = [.ok]

@@ -6,7 +6,7 @@
 import SwiftUI
 
 public extension ButtonStyle where Self == MosaicGridButtonStyle {
-    static var mosaicGridButton: MosaicGridButtonStyle {
+    static var mosaicGrid: MosaicGridButtonStyle {
         .init()
     }
 }

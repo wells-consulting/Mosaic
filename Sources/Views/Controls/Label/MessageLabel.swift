@@ -15,19 +15,12 @@ public struct MessageLabel: View {
 
     public init(_ message: Message) {
         self.text = message.summary
-        switch message.kind {
-        case .text:
+        if message.kind == .text {
             self.symbol = nil
             self.symbolTint = nil
-        case .info:
+        } else {
             self.symbol = message.kind.symbol
-            self.symbolTint = Color.secondary
-        case .notice:
-            self.symbol = message.kind.symbol
-            self.symbolTint = PaletteStore.shared.current.warningLabel
-        case .error:
-            self.symbol = message.kind.symbol
-            self.symbolTint = PaletteStore.shared.current.errorLabel
+            self.symbolTint = message.kind.symbolTint
         }
     }
 

@@ -64,7 +64,7 @@ public struct OverlayButton: View {
                 .animation(.easeOut(duration: 0.15), value: focused)
             #endif
         }
-        .buttonStyle(.mosaicGridButton)
+        .buttonStyle(.mosaicGrid)
         .accessibilityLabel(label)
         #if os(tvOS)
             .focused($focused)

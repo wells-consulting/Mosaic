@@ -67,7 +67,7 @@ public struct SymbolLabel: View {
         self.init(
             LocalizedStringKey(message.summary),
             symbol: message.kind.symbol,
-            symbolPalette: symbolPalette,
+            symbolPalette: symbolPalette ?? (message.kind.symbolTint, message.kind.symbolTint),
             details: message.details,
             badge: badge,
             addChevron: addChevron,

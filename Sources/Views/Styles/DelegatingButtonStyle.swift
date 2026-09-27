@@ -45,12 +45,10 @@ public extension View {
             case .neutral(.regular), .cancel, .close:
                 buttonStyle(.bordered)
             case .neutral(.prominent), .confirm, .destructive, .tinted:
-                buttonStyle(MosaicProminenceButtonStyle(appearance: appearance))
+                buttonStyle(.mosaic(appearance))
             }
         #else
-            buttonStyle(
-                MosaicProminenceButtonStyle(appearance: appearance)
-            )
+            buttonStyle(.mosaic(appearance))
         #endif
     }
 
@@ -182,14 +180,24 @@ private struct NeutralCapsuleBackground: View {
 /// visible texture and depth independent of what's behind them — on a
 /// flat dark background, a glass material has nothing to blur and reads
 /// as a flat opaque fill.
-private struct MosaicProminenceButtonStyle: ButtonStyle {
+public extension ButtonStyle where Self == MosaicProminenceButtonStyle {
+    static func mosaic(_ appearance: ButtonAppearance = .neutral(.regular)) -> MosaicProminenceButtonStyle {
+        MosaicProminenceButtonStyle(appearance: appearance)
+    }
+}
+
+public struct MosaicProminenceButtonStyle: ButtonStyle {
+
+    public init(appearance: ButtonAppearance = .neutral(.regular)) {
+        self.appearance = appearance
+    }
 
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.isFocused) private var isFocused
 
     var appearance: ButtonAppearance
 
-    func makeBody(configuration: Configuration) -> some View {
+    public func makeBody(configuration: Configuration) -> some View {
 
         // foregroundStyle is applied per-branch below rather than here, so that
         // the tvOS neutral case can switch to dark text on the white focused background.

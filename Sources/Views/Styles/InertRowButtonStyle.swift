@@ -10,7 +10,7 @@ public extension View {
     /// focus for scrolling but are not actionable. No-op on other platforms.
     func mosaicInertRowButtonStyle() -> some View {
         #if os(tvOS)
-            buttonStyle(MosaicInertRowButtonStyle())
+            buttonStyle(.mosaicInertRow)
         #else
             self
         #endif
@@ -18,15 +18,23 @@ public extension View {
 }
 
 #if os(tvOS)
+    public extension ButtonStyle where Self == MosaicInertRowButtonStyle {
+        static var mosaicInertRow: MosaicInertRowButtonStyle {
+            .init()
+        }
+    }
+
     /// A tvOS button style for informational rows that need focus for scrolling
     /// but are not actionable. Shows a subtle border on focus instead of the
     /// system's raised-pill effect, visually distinguishing read-only content
     /// from interactive buttons.
-    private struct MosaicInertRowButtonStyle: ButtonStyle {
+    public struct MosaicInertRowButtonStyle: ButtonStyle {
+
+        public init() {}
 
         @Environment(\.isFocused) private var isFocused
 
-        func makeBody(configuration: Configuration) -> some View {
+        public func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
