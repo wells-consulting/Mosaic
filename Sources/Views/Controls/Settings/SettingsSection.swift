@@ -51,7 +51,7 @@ public struct SettingsSection<Content: View>: View {
     // MARK: - Body
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: Platform.spacing(.settingsMenu)) {
+        VStack(alignment: .leading, spacing: 0) {
             if let title {
                 SettingsSectionLabel(title)
                     .mosaicPadding(.bottom, .settingsSectionBottom)
@@ -59,7 +59,30 @@ public struct SettingsSection<Content: View>: View {
                 SettingsSectionLabel(verbatim: verbatimTitle)
                     .mosaicPadding(.bottom, .settingsSectionBottom)
             }
-            content
+            #if os(macOS)
+                List {
+                    content
+                }
+                .listStyle(.sidebar)
+                .listRowSeparator(.automatic)
+            #else
+                content
+            #endif
         }
     }
 }
+
+#if DEBUG
+    #Preview("Native") {
+        VStack(alignment: .leading, spacing: 0) {
+            SettingsSection("Section Title") {
+                SettingsMenu {
+                    SettingsRowButton("Home", symbol: .house) {}
+                    SettingsRowButton("Maintenance", symbol: .wrench_and_screwdriver) {}
+                }
+            }
+            .mosaicSettingsContentInsetPadding()
+        }
+        .padding(32)
+    }
+#endif

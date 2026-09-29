@@ -29,17 +29,6 @@ public extension View {
     func mosaicButtonStyle(
         _ appearance: ButtonAppearance = .neutral(.regular),
     ) -> some View {
-        switch ChromeStore.shared.current {
-        case .native:
-            nativeButtonStyle(appearance)
-        case .mosaic:
-            customButtonStyle(appearance)
-        }
-    }
-
-    @ViewBuilder
-    @MainActor
-    private func customButtonStyle(_ appearance: ButtonAppearance) -> some View {
         #if os(macOS)
             switch appearance {
             case .neutral(.regular), .cancel, .close:
@@ -50,20 +39,6 @@ public extension View {
         #else
             buttonStyle(.mosaic(appearance))
         #endif
-    }
-
-    @ViewBuilder
-    @MainActor
-    private func nativeButtonStyle(_ appearance: ButtonAppearance) -> some View {
-        switch appearance {
-        case .neutral(.regular), .cancel, .close:
-            buttonStyle(.bordered)
-        case .neutral(.prominent), .confirm, .destructive:
-            buttonStyle(.borderedProminent)
-        case let .tinted(color):
-            buttonStyle(.borderedProminent)
-                .tint(color)
-        }
     }
 }
 

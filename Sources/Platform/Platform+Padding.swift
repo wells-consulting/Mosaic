@@ -154,6 +154,8 @@ public extension View {
     func mosaicSettingsContentInsetPadding() -> some View {
         #if os(iOS)
             modifier(SettingsContentInsetPaddingModifier())
+        #elseif os(macOS)
+            mosaicPadding(.horizontal, .small)
         #else
             self
         #endif

@@ -115,7 +115,7 @@ public struct SettingsRowButton: View {
         #elseif os(iOS)
             .buttonStyle(.plain)
         #elseif os(macOS)
-            .buttonStyle(.bordered)
+            .buttonStyle(.plain)
         #endif
         .frame(minHeight: Self.minRowHeight)
     }
@@ -130,7 +130,7 @@ public struct SettingsRowButton: View {
         #if os(iOS)
             44
         #elseif os(macOS)
-            ChromeStore.shared.current == .native ? 32 : 44
+            44
         #else
             66
         #endif
@@ -143,7 +143,7 @@ public struct SettingsRowButton: View {
             "Review Setup",
             symbol: .wrench_and_screwdriver_fill,
             chevron: true,
-            action: { }
+            action: {}
         )
         .padding()
     }

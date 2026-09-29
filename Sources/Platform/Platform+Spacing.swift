@@ -87,10 +87,7 @@ extension Platform {
                 #if os(tvOS)
                     16
                 #elseif os(macOS)
-                    // macOS rows carry their own hairline divider, so the gap is
-                    // tight — System Settings packs rows and lets the separator
-                    // do the visual work. iOS/tvOS keep the airier track.
-                    6
+                    0
                 #else
                     12
                 #endif
