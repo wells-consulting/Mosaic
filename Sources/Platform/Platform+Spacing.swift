@@ -88,7 +88,7 @@ extension Platform {
                     16
                 #elseif os(macOS)
                     0
-                #else
+                #elseif os(iOS)
                     12
                 #endif
             case .swimlaneCard:

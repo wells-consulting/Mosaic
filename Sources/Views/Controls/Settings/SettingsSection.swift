@@ -51,7 +51,7 @@ public struct SettingsSection<Content: View>: View {
     // MARK: - Body
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: Platform.spacing(.settingsMenu)) {
             if let title {
                 SettingsSectionLabel(title)
                     .mosaicPadding(.bottom, .settingsSectionBottom)
@@ -81,8 +81,10 @@ public struct SettingsSection<Content: View>: View {
                     SettingsRowButton("Maintenance", symbol: .wrench_and_screwdriver) {}
                 }
             }
+            .buttonStyle(.mosaic(.neutral(.prominent)))
             .mosaicSettingsContentInsetPadding()
         }
         .padding(32)
+        .preferredColorScheme(.dark)
     }
 #endif

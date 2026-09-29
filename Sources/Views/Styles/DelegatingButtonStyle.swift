@@ -190,7 +190,7 @@ public struct MosaicProminenceButtonStyle: ButtonStyle {
                 // System Settings' filled buttons are generous; a 36pt floor
                 // keeps ours from shrinking to the ~22pt native bordered height.
                 .frame(minHeight: 36)
-            #else
+            #elseif os(tvOS)
                 .frame(minHeight: 66)
             #endif
             // Defensive: if a call site's label is an HStack containing a
@@ -250,18 +250,18 @@ public struct MosaicProminenceButtonStyle: ButtonStyle {
     #Preview {
         VStack(spacing: 12) {
             Button("Neutral (Regular)") {}
-                .mosaicButtonStyle()
+                .buttonStyle(.mosaic())
             Button("Neutral (Prominent)") {}
-                .mosaicButtonStyle(.neutral(.prominent))
+                .buttonStyle(.mosaic(.neutral(.prominent)))
             Button("Confirm") {}
-                .mosaicButtonStyle(.confirm)
+                .buttonStyle(.mosaic(.confirm))
             Button("Destructive") {}
-                .mosaicButtonStyle(.destructive)
+                .buttonStyle(.mosaic(.destructive))
             Button("Attention") {}
-                .mosaicButtonStyle(.tinted(PaletteStore.shared.current.accentTint))
+                .buttonStyle(.mosaic(.tinted(PaletteStore.shared.current.accentTint)))
         }
         .padding(.horizontal, 40)
-        .colorScheme(.dark)
+        .preferredColorScheme(.dark)
         .frame(width: 500, height: 450)
         .mosaicVignetteBackground()
     }
