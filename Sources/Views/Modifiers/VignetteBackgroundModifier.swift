@@ -19,7 +19,7 @@ public extension View {
     func mosaicVignetteNavigationBackground() -> some View {
         #if os(iOS)
             mosaicVignetteContainerBackground(for: .navigation)
-        #else
+        #elseif os(macOS)
             mosaicVignetteBackground()
                 // iOS's `containerBackground(for: .navigation)` already makes
                 // every List/Form in the stack transparent automatically;
@@ -28,6 +28,8 @@ public extension View {
                 // background straight over the plain `.background` above,
                 // hiding the vignette behind every page but the root.
                 .scrollContentBackground(.hidden)
+        #elseif os(tvOS)
+            self
         #endif
     }
 
