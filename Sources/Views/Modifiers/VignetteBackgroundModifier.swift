@@ -13,11 +13,21 @@ public extension View {
         modifier(VignetteBackgroundModifier())
     }
 
+    /// Vignette behind navigation chrome: the container background on iOS,
+    /// a plain background everywhere else (macOS has no container
+    /// chrome to paint behind; the sidebar keeps its native material).
     func mosaicVignetteNavigationBackground() -> some View {
         #if os(iOS)
             mosaicVignetteContainerBackground(for: .navigation)
         #else
-            self
+            mosaicVignetteBackground()
+                // iOS's `containerBackground(for: .navigation)` already makes
+                // every List/Form in the stack transparent automatically;
+                // macOS has no such mechanism, so without this, a pushed
+                // destination's own List/Form paints its opaque system
+                // background straight over the plain `.background` above,
+                // hiding the vignette behind every page but the root.
+                .scrollContentBackground(.hidden)
         #endif
     }
 

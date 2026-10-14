@@ -64,19 +64,9 @@ private struct NeutralPalette: Palette {
         dark: Color(red: 0.24, green: 0.24, blue: 0.27)
     )
 
-    let cardThumbnailBorder = Color(
-        light: Color(red: 0.82, green: 0.82, blue: 0.85),
-        dark: Color(red: 0.20, green: 0.20, blue: 0.23)
-    )
-    
     let rowBackground = Color(
         light: Color(red: 0.96, green: 0.96, blue: 0.97),
         dark: Color(red: 0.10, green: 0.10, blue: 0.12)
-    )
-
-    let overlayNormal = Color(
-        light: Color(red: 0.00, green: 0.00, blue: 0.00).opacity(0.80),
-        dark: Color(red: 1.00, green: 1.00, blue: 1.00).opacity(0.12)
     )
 
     let neutralRegularTop = Color(

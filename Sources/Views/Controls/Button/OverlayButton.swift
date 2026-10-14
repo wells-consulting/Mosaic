@@ -9,6 +9,24 @@ import SwiftUI
 // On tvOS: focus-engine highlighting + scale spring.
 // On iOS: native button press highlight is sufficient.
 
+extension ColorToken {
+    /// Fill behind a focused `OverlayButton` on tvOS. Owned by this control,
+    /// not the base palette: apps fill it per scheme via `extras`, and the
+    /// accessor below keeps the historical default for schemes that don't.
+    public static let overlayNormal = ColorToken("mosaic.overlayNormal")
+}
+
+public extension Palette {
+    /// Focus fill for `OverlayButton`. Falls back to a translucent
+    /// opposite-of-background fill, so palettes without extras render.
+    var overlayNormal: Color {
+        color(.overlayNormal) ?? Color(
+            light: Color.white.opacity(0.80),
+            dark: Color.black.opacity(0.80)
+        )
+    }
+}
+
 /// Icon + label button used in player overlay controls and detail view action bars.
 ///
 /// On tvOS, gains a focus-engine highlight with a scale spring. On iOS the

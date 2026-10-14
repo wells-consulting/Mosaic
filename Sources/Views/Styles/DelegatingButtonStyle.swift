@@ -28,17 +28,9 @@ public extension View {
     @MainActor
     func mosaicButtonStyle(
         _ appearance: ButtonAppearance = .neutral(.regular),
+        density: ButtonDensity = .large,
     ) -> some View {
-        #if os(macOS)
-            switch appearance {
-            case .neutral(.regular), .cancel, .close:
-                buttonStyle(.bordered)
-            case .neutral(.prominent), .confirm, .destructive, .tinted:
-                buttonStyle(.mosaic(appearance))
-            }
-        #else
-            buttonStyle(.mosaic(appearance))
-        #endif
+        buttonStyle(.mosaic(appearance, density: density))
     }
 }
 
@@ -77,6 +69,7 @@ private struct GrainOverlay: View {
 private struct NeutralCapsuleBackground: View {
 
     var prominence: ButtonAppearance.Prominence
+    var density: ButtonDensity
     #if os(tvOS)
         // When focused on tvOS the button inverts to a white fill (dark → light).
         var isFocused: Bool = false
@@ -105,12 +98,17 @@ private struct NeutralCapsuleBackground: View {
             prominence == .prominent
             ? (palette.neutralProminentTop, palette.neutralProminentBottom)
             : (palette.neutralRegularTop, palette.neutralRegularBottom)
-        let grainOpacity = prominence == .prominent ? 0.13 : 0.07
+        let grainOpacity: Double = switch density {
+        case .large:
+            prominence == .prominent ? 0.13 : 0.07
+        case .compact:
+            0
+        }
         let highlightOpacity = prominence == .prominent ? 0.20 : 0.18
 
         ZStack {
             LinearGradient(colors: [top, bottom], startPoint: .top, endPoint: .bottom)
-            if !reduceTransparency {
+            if !reduceTransparency, grainOpacity > 0 {
                 GrainOverlay(opacity: grainOpacity)
             }
         }
@@ -156,43 +154,39 @@ private struct NeutralCapsuleBackground: View {
 /// flat dark background, a glass material has nothing to blur and reads
 /// as a flat opaque fill.
 public extension ButtonStyle where Self == MosaicProminenceButtonStyle {
-    static func mosaic(_ appearance: ButtonAppearance = .neutral(.regular)) -> MosaicProminenceButtonStyle {
-        MosaicProminenceButtonStyle(appearance: appearance)
+    static func mosaic(
+        _ appearance: ButtonAppearance = .neutral(.regular),
+        density: ButtonDensity = .large,
+    ) -> MosaicProminenceButtonStyle {
+        MosaicProminenceButtonStyle(appearance: appearance, density: density)
     }
 }
 
 public struct MosaicProminenceButtonStyle: ButtonStyle {
 
-    public init(appearance: ButtonAppearance = .neutral(.regular)) {
+    public init(
+        appearance: ButtonAppearance = .neutral(.regular),
+        density: ButtonDensity = .large,
+    ) {
         self.appearance = appearance
+        self.density = density
     }
 
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.isFocused) private var isFocused
 
     var appearance: ButtonAppearance
+    var density: ButtonDensity
 
     public func makeBody(configuration: Configuration) -> some View {
 
         // foregroundStyle is applied per-branch below rather than here, so that
         // the tvOS neutral case can switch to dark text on the white focused background.
         let labelBase = configuration.label
-            .padding(.horizontal, 20)
-            // HIG minimum tappable area is 44x44pt; this is a floor,
-            // not a fixed height, so a Dynamic Type-scaled label can
-            // still grow the button taller. macOS uses a much shorter
-            // floor — pointer-driven controls don't need a touch-sized
-            // target, and a 66pt (tvOS-tuned) capsule reads as oversized
-            // next to native mac controls.
-            #if os(iOS)
-                .frame(minHeight: 44)
-            #elseif os(macOS)
-                // System Settings' filled buttons are generous; a 36pt floor
-                // keeps ours from shrinking to the ~22pt native bordered height.
-                .frame(minHeight: 36)
-            #elseif os(tvOS)
-                .frame(minHeight: 66)
-            #endif
+            .padding(.horizontal, density.horizontalPadding)
+            // Floor, not fixed height, so a Dynamic Type-scaled label can
+            // still grow the button taller.
+            .frame(minHeight: density.minHeight)
             // Defensive: if a call site's label is an HStack containing a
             // Spacer (e.g. an icon-left/chevron-right row layout), the
             // Spacer draws no content, so without an explicit content
@@ -213,7 +207,7 @@ public struct MosaicProminenceButtonStyle: ButtonStyle {
                             : AnyShapeStyle(appearance.labelColor(disabled: !isEnabled))
                     )
                     .background(
-                        NeutralCapsuleBackground(prominence: prominence, isFocused: isFocused)
+                        NeutralCapsuleBackground(prominence: prominence, density: density, isFocused: isFocused)
                     )
                     .opacity(configuration.isPressed ? 0.75 : 1.0)
                     .scaleEffect(isFocused ? 1.05 : 1.0)
@@ -222,7 +216,7 @@ public struct MosaicProminenceButtonStyle: ButtonStyle {
             #else
                 labelBase
                     .foregroundStyle(appearance.labelColor(disabled: !isEnabled))
-                    .background(NeutralCapsuleBackground(prominence: prominence))
+                    .background(NeutralCapsuleBackground(prominence: prominence, density: density))
                     .opacity(configuration.isPressed ? 0.75 : 1.0)
                     .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
             #endif
@@ -259,6 +253,10 @@ public struct MosaicProminenceButtonStyle: ButtonStyle {
                 .buttonStyle(.mosaic(.destructive))
             Button("Attention") {}
                 .buttonStyle(.mosaic(.tinted(PaletteStore.shared.current.accentTint)))
+            Button("Neutral (Compact)") {}
+                .buttonStyle(.mosaic(.neutral(.regular), density: .compact))
+            Button("Prominent (Compact)") {}
+                .buttonStyle(.mosaic(.neutral(.prominent), density: .compact))
         }
         .padding(.horizontal, 40)
         .preferredColorScheme(.dark)

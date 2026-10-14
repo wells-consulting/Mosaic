@@ -13,8 +13,12 @@ public struct MessageLabel: View {
     private let symbol: SFSymbol?
     private let symbolTint: Color?
 
-    public init(_ message: Message) {
-        self.text = message.summary
+    public init(_ message: Message, prefixTitle: Bool = false) {
+        self.text = if prefixTitle, let title = message.title {
+            "\(title) – \(message.summary)"
+        } else {
+            message.summary
+        }
         if message.kind == .text {
             self.symbol = nil
             self.symbolTint = nil

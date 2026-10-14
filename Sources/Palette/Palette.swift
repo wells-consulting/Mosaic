@@ -35,14 +35,8 @@ public protocol Palette: Sendable {
     /// Hairline border around cards and panels.
     var cardBorder: Color { get }
 
-    /// Border around media thumbnails in grids.
-    var cardThumbnailBorder: Color { get }
-
     /// Background of rows in lists and forms.
     var rowBackground: Color { get }
-
-    /// Fill behind overlay controls such as buttons and badges.
-    var overlayNormal: Color { get }
 
     // MARK: - Neutral button surfaces
 
@@ -92,8 +86,31 @@ public protocol Palette: Sendable {
 
     /// Start → end colors of linear progress bars.
     var progress: [Color] { get }
+
+    // MARK: - App-defined extras
+
+    /// Per-app color slots beyond the frozen base roles above. Apps declare
+    /// their own `ColorToken`s and fill them per scheme; readers use
+    /// `color(_:)` with a fallback so schemes predating a token keep
+    /// rendering. Defaults to empty — apps without extras compile untouched.
+    var app: [ColorToken: Color] { get }
+
+    /// Resolves `token` against `app`, or nil when this scheme defines no
+    /// value for it. Prefer a typed accessor per token family with a fallback
+    /// over calling this directly.
+    func color(_ token: ColorToken) -> Color?
 }
 
-extension Palette {
+public extension Palette {
     var tabBarTint: Color { accentTint }
+    var glassRegularTint: Color { .white.opacity(0.08) }
+    var glassProminentTint: Color { neutralProminentBottom }
+}
+
+public extension Palette {
+    var app: [ColorToken: Color] { [:] }
+
+    func color(_ token: ColorToken) -> Color? {
+        app[token]
+    }
 }
