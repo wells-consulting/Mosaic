@@ -14,7 +14,7 @@ import Foundation
 ///
 /// Injected at the app root by `.injectDeviceLayout()`. The default environment value is
 /// `.padWide`, which is a safe fallback for tvOS and macOS.
-public enum DeviceLayout {
+public enum DeviceLayout: Sendable {
 
     /// Phone with a taller-than-wide content area.
     case phoneTall
