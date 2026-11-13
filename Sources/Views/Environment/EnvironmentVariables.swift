@@ -11,6 +11,10 @@ public extension EnvironmentValues {
     /// by `.appInjectLayout()`. Use this instead of raw `horizontalSizeClass`/`verticalSizeClass`.
     @Entry var layout: DeviceLayout = .padWide
 
+    /// The room the nearest `.mosaicMeasuresContainerLayout()` container
+    /// measured, for decisions that depend on one container and not the device.
+    @Entry var containerLayout: ContainerLayout = .fallback
+
     /// Controls whether image cards fit or fill their square cell
     @Entry var imageContentMode: ContentMode = .fit
 
