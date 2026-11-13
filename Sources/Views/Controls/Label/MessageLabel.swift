@@ -35,6 +35,7 @@ public struct MessageLabel: View {
                     .foregroundStyle(symbolTint)
             }
             Text(text)
+                .mosaicEnableTextSelection()
         }
         .imageScale(.medium)
     }

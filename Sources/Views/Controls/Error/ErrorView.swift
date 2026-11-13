@@ -134,6 +134,7 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
             Text(title)
                 .font(.headline)
                 .foregroundStyle(.primary)
+                .mosaicEnableTextSelection()
             Spacer()
         }
         .mosaicPadding(.medium)
@@ -148,11 +149,13 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
         VStack(alignment: .leading, spacing: Platform.spacing(.xsmall)) {
             Text(summary)
                 .multilineTextAlignment(.leading)
+                .mosaicEnableTextSelection()
             if let details {
                 Text(details)
                     .multilineTextAlignment(.leading)
                     .mosaicFont(.caption)
                     .foregroundStyle(.secondary)
+                    .mosaicEnableTextSelection()
             }
         }
     }
@@ -171,15 +174,13 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
                     .padding(.bottom, 4)
                 Text(diagnostics)
                     .mosaicFont(.caption)
+                    .mosaicEnableTextSelection()
                     #if os(tvOS)
                         .foregroundStyle(.secondary)
                     #else
                         .foregroundStyle(.primary)
                     #endif
                     .multilineTextAlignment(.leading)
-                    #if !os(tvOS)
-                        .textSelection(.enabled)
-                    #endif
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 20)

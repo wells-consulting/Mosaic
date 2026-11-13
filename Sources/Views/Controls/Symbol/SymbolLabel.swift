@@ -126,6 +126,7 @@ public struct SymbolLabel: View {
         if let details {
             Text(details)
                 .foregroundStyle(.secondary)
+                .mosaicEnableTextSelection()
         }
     }
 

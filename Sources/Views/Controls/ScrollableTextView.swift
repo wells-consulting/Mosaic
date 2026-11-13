@@ -103,6 +103,7 @@ public struct ScrollableTextView: View {
                         .font(.body)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.leading)
+                        .mosaicEnableTextSelection()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                 }

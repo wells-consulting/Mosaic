@@ -26,6 +26,7 @@ public struct MutedSymbolLabel: View {
             Image(symbol)
                 .foregroundStyle(.secondary)
             Text(title)
+                .mosaicEnableTextSelection()
         }
     }
 }

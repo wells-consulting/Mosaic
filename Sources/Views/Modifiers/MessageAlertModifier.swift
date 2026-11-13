@@ -30,11 +30,14 @@ private struct MosaicMessageAlertModifier: ViewModifier {
                     switch message.kind {
                     case .info:
                         Text(message.summary)
+                            .mosaicEnableTextSelection()
                     default:
                         if let symbol = message.kind.symbol {
                             Label(message.summary, symbol: symbol)
+                                .mosaicEnableTextSelection()
                         } else {
                             Text(message.summary)
+                                .mosaicEnableTextSelection()
                         }
                     }
                 } else {

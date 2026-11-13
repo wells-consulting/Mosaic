@@ -86,6 +86,7 @@ public struct ExpandableTextView: View {
             .foregroundStyle(.primary)
             .lineLimit(2)
             .multilineTextAlignment(.leading)
+            .mosaicEnableTextSelection()
             .background(
                 GeometryReader { geo in
                     Color.clear.preference(
@@ -105,6 +106,7 @@ public struct ExpandableTextView: View {
                 .foregroundStyle(.primary)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
+                .mosaicEnableTextSelection()
                 .background(
                     GeometryReader { geo in
                         Color.clear.preference(
