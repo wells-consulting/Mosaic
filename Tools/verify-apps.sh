@@ -41,6 +41,11 @@ verify() {
         >"$OUT/$name.log" 2>&1; then
         local summary
         summary="$(grep -oE "Test run with [0-9]+ tests" "$OUT/$name.log" | tail -1)"
+        if [ -z "$summary" ]; then
+            local count
+            count="$(grep -c "passed on '" "$OUT/$name.log")"
+            summary="$count tests"
+        fi
         echo "ok${summary:+ ($summary)}"
     else
         echo "FAILED — see $OUT/$name.log"
