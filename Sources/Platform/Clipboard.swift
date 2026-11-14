@@ -13,7 +13,6 @@ import Foundation
 ///
 /// macOS only for now: the rest hide their Copy affordance. Mosaic has no
 /// no-UIKit rule, so iOS could use `UIPasteboard` here later.
-// TODO: Add iOS with `UIPasteboard`.
 public enum Clipboard {
 
     public static var isAvailable: Bool {
