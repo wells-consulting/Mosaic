@@ -10,12 +10,16 @@
     ///
     /// In menu-bar-only mode it's hidden while no window is open, and shown
     /// while one is, so the window gets the menu bar and ⌘-Tab like any other
-    /// app's.
+    /// app's. Which windows count is the caller's call: an app with a settings
+    /// window that shouldn't bring the icon back passes `counts`.
     @MainActor
     public enum DockIcon {
 
-        public static func update(hidesDockIcon: Bool) {
-            let hasWindow = NSApp.windows.contains { $0.isVisible && $0.canBecomeMain }
+        public static func update(
+            hidesDockIcon: Bool,
+            counts: @MainActor (NSWindow) -> Bool = { $0.canBecomeMain },
+        ) {
+            let hasWindow = NSApp.windows.contains { $0.isVisible && counts($0) }
             let policy = policy(hidesDockIcon: hidesDockIcon, hasWindow: hasWindow)
 
             guard NSApp.activationPolicy() != policy else {
@@ -34,6 +38,20 @@
             hasWindow: Bool,
         ) -> NSApplication.ActivationPolicy {
             hidesDockIcon && !hasWindow ? .accessory : .regular
+        }
+
+        /// A `counts` for `update(hidesDockIcon:counts:)` that takes the windows
+        /// of one scene.
+        ///
+        /// SwiftUI sets a window's identifier from the scene's id and adds a
+        /// suffix of its own, so this matches the start rather than the whole
+        /// thing.
+        public nonisolated static func counts(
+            identifierPrefix prefix: String,
+        ) -> @MainActor (NSWindow) -> Bool {
+            { window in
+                window.identifier?.rawValue.hasPrefix(prefix) == true
+            }
         }
 
         /// Hiding the Dock icon while we're the active app makes macOS pick
