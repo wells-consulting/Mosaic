@@ -11,10 +11,10 @@
 /// `Palette/color(_:)` — no Mosaic edit, no other app touched:
 ///
 ///     extension ColorToken {
-///         static let solarEnergy = ColorToken("the app.solarEnergy")
+///         static let solarEnergy = ColorToken("example.solarEnergy")
 ///     }
 ///
-/// Ids are namespaced per app (`"app.*"`, `"app.*"`) so two apps
+/// Ids are namespaced per app (`"one.*"`, `"two.*"`) so two apps
 /// sharing Mosaic can never collide.
 public struct ColorToken: Hashable, Sendable {
 

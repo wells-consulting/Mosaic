@@ -78,10 +78,14 @@
 
         @ObservationIgnored private let control: any LoginItemControlling
 
-        @ObservationIgnored private let log = Timber(subsystem: "Mosaic", category: "LoginItem")
+        @ObservationIgnored private let log: Timber
 
-        public init(control: any LoginItemControlling = MainAppLoginItem()) {
+        public init(
+            control: any LoginItemControlling = MainAppLoginItem(),
+            log: Timber = Timber(subsystem: "Mosaic", category: "LoginItem"),
+        ) {
             self.control = control
+            self.log = log
             self.status = control.status
         }
 

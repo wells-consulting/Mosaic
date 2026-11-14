@@ -1,5 +1,5 @@
 //
-// the app – Your Stash, beautifuly rendered
+// Mosaic – Michael's SwiftUI Toolkit
 // Copyright 2025-2026 Wells Consulting. All rights reserved.
 //
 

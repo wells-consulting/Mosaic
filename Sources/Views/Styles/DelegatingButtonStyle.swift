@@ -22,7 +22,7 @@ public extension View {
     /// styles — quiet roles to `.bordered`, emphasis roles to
     /// `.borderedProminent` with the tint applied for `.tinted`. System
     /// Settings' filled buttons are exactly that, so native chrome reads more
-    /// native than the custom analog. the app selects `.native` for macOS; see
+    /// native than the custom analog. An app selects `.native` for macOS; see
     /// ``AppChromeStore``.
     @ViewBuilder
     @MainActor

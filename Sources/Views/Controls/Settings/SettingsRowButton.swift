@@ -30,6 +30,18 @@ public struct SettingsRowButton: View {
         }
     }
 
+    /// How much room a row takes.
+    public enum Density: Sendable {
+
+        /// The height a row has always been, on the floor the platform's own
+        /// settings rows use.
+        case regular
+
+        /// No floor, and an inset around the label so a flat row reads like a
+        /// list row rather than a button. The whole label is tappable.
+        case compact
+    }
+
     /// Row detail text that adapts to the horizontal size class on iOS.
     public enum AdaptiveText {
 
@@ -72,6 +84,7 @@ public struct SettingsRowButton: View {
     private let chevron: Bool
     private let value: AdaptiveText?
     private let status: Status?
+    private let density: Density
     private let alignment: Alignment
     private let action: () -> Void
 
@@ -85,6 +98,7 @@ public struct SettingsRowButton: View {
         value: AdaptiveText? = nil,
         status: Status? = nil,
         chevron: Bool = true,
+        density: Density = .regular,
         alignment: Alignment = .center,
         action: @escaping () -> Void
     ) {
@@ -95,6 +109,7 @@ public struct SettingsRowButton: View {
         self.chevron = chevron
         self.value = value
         self.status = status
+        self.density = density
         self.alignment = alignment
         self.action = action
     }
@@ -107,6 +122,7 @@ public struct SettingsRowButton: View {
         value: AdaptiveText? = nil,
         status: Status? = nil,
         chevron: Bool = true,
+        density: Density = .regular,
         alignment: Alignment = .center,
         action: @escaping () -> Void
     ) {
@@ -118,6 +134,7 @@ public struct SettingsRowButton: View {
             value: value,
             status: status,
             chevron: chevron,
+            density: density,
             alignment: alignment,
             action: action
         )
@@ -129,13 +146,24 @@ public struct SettingsRowButton: View {
         Button {
             action()
         } label: {
-            if let status {
-                statusLabel(status)
+            if density == .compact {
+                label
+                    .padding(8)
+                    .contentShape(.rect)
             } else {
-                plainLabel
+                label
             }
         }
-        .frame(minHeight: Self.minRowHeight)
+        .frame(minHeight: density == .compact ? 0 : Self.minRowHeight)
+    }
+
+    @ViewBuilder
+    private var label: some View {
+        if let status {
+            statusLabel(status)
+        } else {
+            plainLabel
+        }
     }
 
     /// The row as it has always looked: one line, with the detail trailing.
