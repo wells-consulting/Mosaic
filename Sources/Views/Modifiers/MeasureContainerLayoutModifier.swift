@@ -23,9 +23,7 @@ public extension View {
 
 private struct MosaicContainerLayoutModifier: ViewModifier {
 
-    #if !os(watchOS)
-        @Environment(\.verticalSizeClass) private var verticalSizeClass
-    #endif
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     @State private var size: CGSize = .zero
 
@@ -49,13 +47,8 @@ private struct MosaicContainerLayoutModifier: ViewModifier {
         )
     }
 
-    /// The watch has no vertical size class, and its screen is always tall.
     private var heightClass: ContainerLayout.HeightClass {
-        #if os(watchOS)
-            .regular
-        #else
-            verticalSizeClass == .compact ? .compact : .regular
-        #endif
+        verticalSizeClass == .compact ? .compact : .regular
     }
 
     /// A Mac always has a pointer. An iPad's trackpad can't be seen from here,

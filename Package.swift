@@ -7,7 +7,6 @@ let package = Package(
     name: "Mosaic",
     platforms: [
         .iOS(.v26),
-        .watchOS(.v26),
         .tvOS(.v26),
         .macOS(.v26),
     ],
