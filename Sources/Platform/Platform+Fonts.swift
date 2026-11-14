@@ -14,6 +14,8 @@ public enum PlatformFont {
     case footnote
     case headline
     case largeTitle
+    case note
+    case prose
     case settingsFootnote
     case settingsIntro
     case subheadline
@@ -85,6 +87,27 @@ public extension View {
                 font(.largeTitle)
             #else
                 font(.largeTitle)
+            #endif
+        case .note:
+            // One line under a control: what a number covers, when it was
+            // read, what a switch does. macOS resolves footnote, caption and
+            // caption2 all to 10 pt, under the HIG's 11 pt for secondary text,
+            // so a note reads callout (12 pt) there instead.
+            #if os(macOS)
+                font(.callout)
+            #else
+                font(.caption)
+            #endif
+        case .prose:
+            // Sentences and paragraphs: a story, a card's explanation, a
+            // caveat. Every TextStyle is about a quarter smaller on macOS
+            // (body is 13 pt against iOS's 17), so prose set in callout or
+            // smaller is hard to read on a Mac. Prose gets body there, and
+            // keeps callout where the system already sizes it for reading.
+            #if os(macOS)
+                font(.body)
+            #else
+                font(.callout)
             #endif
         case .settingsIntro:
             // Intro paragraphs on settings pages. macOS System Settings reads
