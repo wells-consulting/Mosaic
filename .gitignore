@@ -1,8 +1,35 @@
+# macOS
 .DS_Store
-/.build
-xcuserdata/
-.swiftpm/configuration/registries.json
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
-.swp
+._*
+__MACOSX/
 
-Package.resolved
+# Editors
+*.swp
+*.swo
+
+# Xcode, per user
+xcuserdata/
+DerivedData/
+build/
+DeveloperOverrides.xcconfig
+
+# Swift Package Manager
+.build/
+.swiftpm/configuration/registries.json
+.swiftpm/configuration/mirrors.json
+.swiftpm/xcode/package.xcworkspace/
+/Package.resolved
+
+# Python in Scripts and Tools
+__pycache__/
+
+# Credentials
+.netrc
+
+# Agent tool state; the skill links are committed
+!.claude/
+.claude/*
+!.claude/skills/
+
+# Local scratch space, never shared
+/Sandbox/

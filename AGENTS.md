@@ -1,72 +1,54 @@
-# Agent guide for Swift
+# Agent guide for Mosaic
 
-This repository contains an Xcode package written with Swift.
+Mosaic is the shared SwiftUI toolkit: the controls, cards, palette and platform
+fallbacks that make the app and the app look like the same app. Both link it
+by version, so one app compiling proves nothing about the other.
 
+Read [VOICE.md](VOICE.md) before you write a comment, a doc comment, a name, a
+log message, UI text or a commit message. If this file and VOICE.md disagree,
+VOICE.md wins. Text a control shows also follows the app that shows it.
 
-## Role
+`mosaic-change` in `.agents/skills/` is the procedure: building both apps
+against this checkout, and how to tag and re-pin it. This file is the rules.
 
-You are an expert **Senior iOS Engineer**, specializing modern Swift.
+## The package
 
+- `Views/Controls` — buttons, cards, banners, progress, settings rows, fields.
+- `Views/Styles` — button styles and appearances, progress and text field
+  styles.
+- `Views/Modifiers` — focus, glass, swimlane, scroll and navigation modifiers.
+- `Views/Layout` — flow layout and the adaptive grids.
+- `Views/Environment` — the values a control reads from its app.
+- `Palette` — `ColorToken`, `Palette` and `PaletteStore`.
+- `Models` — `ContainerLayout` and `DeviceLayout`.
+- `Platform/macOS` — dock icon, folder picker, login item.
+- `Extensions` — the `View+...`, `Color+...` and `SFSymbol+...` helpers.
 
-## General
+## Requirements
 
-- When making changes, do them as efficiently as possible with the least amount of feedback.
-- When writing something intended for human consumption, (comment, commit message, reply to prompt) use as few words as possible. Pick every word meticulously to reduce the volume to a strict minimum. Be down to the point. Less is more.
-- An assistant's commit ends with `Assistance provided by <agent and model>.`, never a `Co-Authored-By` or "Generated with" line. `git config core.hooksPath .githooks` turns on the check.
-- Avoid superlatives and praise. Stop telling me I am absolutely right. Give me the cold hard truth.
-- Reduce code indentation. Leverage guards, early return, and continue.
-- Use enums instead of booleans for function parameters.
-- Let the reader of the code breathe. Add empty lines between logical blocks of code.
-- Add a small, to the point, comment to explain *what* the block does and *why*. Use examples when possible. Propose ASCII drawings to explain complete systems.
-- Don't touch blocks of code unrelated to the feature you implement. e.g. Don't add comments to a block of code if you did not create it or modify it. As much as possible try to minimize the number of changed lines when implementing a feature.
-- Never add pure globally scoped functions or variables. Global state, if necessary, should be scoped to an enum such as `enum Global { static func unfortunateGlobalFunc() }`.
+- Swift 6.4 tools, Swift 6 language mode, strict concurrency.
+- iOS 26, tvOS 26, macOS 26, matching the apps.
+- Dependencies: Motley and `SwiftLintPlugins`, nothing else.
 
+## Rules
 
-## Core instructions
+- A symbol comes from Motley's `SFSymbol`. Never a `systemName:` string; add a
+  case to Motley instead.
+- No `try?`. Catch and log, or return `nil`.
+- No global functions or variables. Scope them to an enum.
+- SwiftUI first. UIKit and AppKit only where a platform has no SwiftUI
+  equivalent, behind `#if os(...)`.
+- A `#Preview` that uses a fixture sits inside `#if DEBUG`, or an archive fails
+  while previews still compile.
+- The public API is shared by two apps, so a rename or a removed default is a
+  breaking change in both. Add a default rather than changing one.
 
-- Platform OS will be iOS, tvOS, or macOS each at version 26.0 or later.
+## Build and test
 
+```sh
+swift test
+Tools/verify-apps.sh    # builds the app and the app against this checkout
+```
 
-## Swift instructions
-
-- Swift 6.2 or later, using modern Swift concurrency. Always choose async/await APIs over closure-based variants whenever they exist.
-- Assume strict Swift concurrency rules are being applied.
-- Prefer Swift-native alternatives to Foundation methods where they exist, such as using `replacing("hello", with: "world")` with strings rather than `replacingOccurrences(of: "hello", with: "world")`.
-- Prefer modern Foundation API, for example `URL.documentsDirectory` to find the app's documents directory, and `appending(path:)` to append strings to a URL.
-- Never use C-style number formatting such as `Text(String(format: "%.2f", abs(myNumber)))`; always use `Text(abs(change), format: .number.precision(.fractionLength(2)))` instead.
-- Prefer static member lookup to struct instances where possible, such as `.circle` rather than `Circle()`, and `.borderedProminent` rather than `BorderedProminentButtonStyle()`.
-- Never use old-style Grand Central Dispatch concurrency such as `DispatchQueue.main.async()`. If behavior like this is needed, always use modern Swift concurrency.
-- Filtering text based on user-input must be done using `localizedStandardContains()` as opposed to `contains()`.
-- Avoid force unwraps and force `try` unless it is unrecoverable.
-- Avoid use of `try?`. Catch exceptions, log errors, then return `nil` instead.
-- Never use legacy `Formatter` subclasses such as `DateFormatter`, `NumberFormatter`, or `MeasurementFormatter`. Always use the modern `FormatStyle` API instead. For example, to format a date, use `myDate.formatted(date: .abbreviated, time: .shortened)`. To parse a date from a string, use `Date(inputString, strategy: .iso8601)`. For numbers, use `myNumber.formatted(.number)` or custom format styles.
-
-
-## Project structure
-
-- Use a consistent project structure, with folder layout determined by app features.
-- Follow strict naming conventions for types, properties, methods, and data models.
-- Break different types up into different Swift files rather than placing multiple structs, classes, or enums into a single file.
-- Write unit tests for core application logic.
-- Add brief code comments and documentation comments as needed.
-
-
-## SwiftLint
-
-This project uses SwiftLint. Follow the rules defined in `.swiftlint.yml`.
-
-
-## Xcode MCP
-
-If the Xcode MCP is configured, prefer its tools over generic alternatives when working on this project:
-
-- `DocumentationSearch` — verify API availability and correct usage before writing code
-- `BuildProject` — build the project after making changes to confirm compilation succeeds
-- `GetBuildLog` — inspect build errors and warnings
-- `XcodeListNavigatorIssues` — check for issues visible in the Xcode Issue Navigator
-- `ExecuteSnippet` — test a code snippet in the context of a source file
-- `XcodeRead`, `XcodeWrite`, `XcodeUpdate` — prefer these over generic file tools when working with Xcode project files
-
-## Skills
-
-The repo has one skill of its own, `mosaic-change`, in `.agents/skills/` — the neutral path, which OpenCode reads. Claude Code reads `.claude/skills/` instead, and `.claude` is gitignored here, so `~/Sources/Skills/Tools/link-claude.sh` links one to the other on each machine. Edit the real file, and keep its frontmatter to `name` and `description`: anything else belongs to one agent and the other ignores it.
+`.swift-format` is the formatting source of truth, and SwiftLint runs as a
+build plugin, so a warning is a failure.
