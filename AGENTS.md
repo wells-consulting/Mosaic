@@ -41,7 +41,7 @@ against this checkout, and how to tag and re-pin it. This file is the rules.
 - A `#Preview` that uses a fixture sits inside `#if DEBUG`, or an archive fails
   while previews still compile.
 - The public API is shared by two apps, so a rename or a removed default is a
-  breaking change in both. Add a default rather than changing one.
+  breaking change in both. Add a default instead of changing one.
 
 ## Build and test
 
