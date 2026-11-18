@@ -73,6 +73,7 @@ public struct SettingsRowButton: View {
     #endif
 
     @Environment(\.containerLayout) private var containerLayout
+    @Environment(\.layout) private var layout
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     // MARK: - Fields
@@ -86,6 +87,7 @@ public struct SettingsRowButton: View {
     private let status: Status?
     private let density: Density
     private let alignment: Alignment
+    private let keepsSymbol: Bool
     private let action: () -> Void
 
     // MARK: - Initializers
@@ -100,6 +102,7 @@ public struct SettingsRowButton: View {
         chevron: Bool = true,
         density: Density = .regular,
         alignment: Alignment = .center,
+        keepsSymbol: Bool = false,
         action: @escaping () -> Void
     ) {
         self.text = text
@@ -111,6 +114,7 @@ public struct SettingsRowButton: View {
         self.status = status
         self.density = density
         self.alignment = alignment
+        self.keepsSymbol = keepsSymbol
         self.action = action
     }
 
@@ -124,6 +128,7 @@ public struct SettingsRowButton: View {
         chevron: Bool = true,
         density: Density = .regular,
         alignment: Alignment = .center,
+        keepsSymbol: Bool = false,
         action: @escaping () -> Void
     ) {
         self.init(
@@ -136,8 +141,16 @@ public struct SettingsRowButton: View {
             chevron: chevron,
             density: density,
             alignment: alignment,
+            keepsSymbol: keepsSymbol,
             action: action
         )
+    }
+
+    /// The icon is a nice-to-have, and on a narrow screen (iPhone portrait, a
+    /// narrow iPad split view) the room is worth more to the title and value.
+    /// `keepsSymbol` is for a row whose icon carries meaning of its own.
+    private var shownSymbol: SFSymbol? {
+        layout.widthConstrained && !keepsSymbol ? nil : symbol
     }
 
     // MARK: - Body
@@ -170,7 +183,7 @@ public struct SettingsRowButton: View {
     private var plainLabel: some View {
         SymbolLabel(
             text,
-            symbol: symbol,
+            symbol: shownSymbol,
             symbolPalette: (.secondary, .secondary.opacity(0.75)),
             details: detailString,
             badge: badgeString,
@@ -208,7 +221,7 @@ public struct SettingsRowButton: View {
 
     @ViewBuilder
     private var titleView: some View {
-        if let symbol {
+        if let symbol = shownSymbol {
             Label(text, symbol: symbol)
         } else {
             Text(text)
