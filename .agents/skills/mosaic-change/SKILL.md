@@ -13,10 +13,10 @@ Mosaic is linked by **the app** and **the app**. One app compiling proves nothin
 
 ```sh
 swift test
-Tools/verify-apps.sh
+Scripts/verify-apps.sh
 ```
 
-`Tools/verify-apps.sh` expects both checkouts beside `~/Sources/Mosaic`, builds each against this package in its own derived data under the temporary directory, and keeps a log per step. Run it before a release, not just the package tests.
+`Scripts/verify-apps.sh` expects both checkouts beside `~/Sources/Mosaic`, builds each against this package in its own derived data under the temporary directory, and keeps a log per step. Run it before a release, not just the package tests.
 
 ## 2. Rules that bite
 
@@ -54,7 +54,7 @@ Never edit a package checkout under DerivedData; the next resolve throws it away
 
 - [ ] No `try?`, no SF Symbol strings, no global free functions
 - [ ] `swift test` passes and lint is clean
-- [ ] `Tools/verify-apps.sh` passes before a release
+- [ ] `Scripts/verify-apps.sh` passes before a release
 - [ ] An assistant's commit ends `Assistance provided by <agent and model>.`, with no `Co-Authored-By`
 - [ ] Tagged and pushed
 - [ ] the app and the app pins raised, `Package.resolved` committed with each

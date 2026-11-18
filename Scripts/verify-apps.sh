@@ -6,7 +6,7 @@
 # Builds and tests every app that links this package. One app compiling doesn't
 # prove the other still does, and this package is consumed by more than one.
 #
-#   Tools/verify-apps.sh
+#   Scripts/verify-apps.sh
 #
 # The app checkouts are expected beside this one. Each builds in its own derived
 # data under the system's temporary directory, so it never contends with Xcode's,
