@@ -47,6 +47,7 @@ against this checkout, and how to tag and re-pin it. This file is the rules.
 
 ```sh
 swift test
+Scripts/format.sh    # swift format
 Scripts/verify-apps.sh  # builds the app and the app against this checkout
 ```
 
