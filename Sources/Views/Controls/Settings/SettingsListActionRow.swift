@@ -12,14 +12,13 @@
 
         // MARK: - Tone
 
-        /// How the title reads. A destructive action is red, as in System
-        /// Settings, so a row that removes something can't be mistaken for one
-        /// that opens a page. Prominent is the accent color, for the one action
-        /// a page exists to run.
+        /// How the title reads. Prominent is the accent color, for the one
+        /// action a page exists to run. There's no red tone: the apps don't put
+        /// warning colors on text, and the confirmation dialog is what stops a
+        /// destructive action anyway.
         public enum Tone: Sendable {
             case normal
             case prominent
-            case destructive
         }
 
         // MARK: - Fields
@@ -109,7 +108,6 @@
             switch tone {
             case .normal: .primary
             case .prominent: PaletteStore.shared.current.accentLabel
-            case .destructive: PaletteStore.shared.current.errorLabel
             }
         }
     }
