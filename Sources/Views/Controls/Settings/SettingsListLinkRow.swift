@@ -30,6 +30,13 @@
             self.detail = detail
         }
 
+        /// For a name that isn't a localization key: a server type, a person.
+        public init(verbatim title: String, value: Value, detail: String? = nil) {
+            self.title = LocalizedStringKey(title)
+            self.value = value
+            self.detail = detail
+        }
+
         // MARK: - Body
 
         public var body: some View {

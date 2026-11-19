@@ -25,20 +25,42 @@
         private let title: LocalizedStringKey
         private let detail: String?
         private let tone: Tone
+        private let showsChevron: Bool
         private let action: () -> Void
 
         // MARK: - Initializer
 
+        /// - Parameter showsChevron: The row opens something, even though it
+        ///   isn't a navigation push (a sheet, a picker).
         public init(
             _ title: LocalizedStringKey,
             detail: String? = nil,
             tone: Tone = .normal,
+            showsChevron: Bool = false,
             action: @escaping () -> Void,
         ) {
             self.title = title
             self.detail = detail
             self.tone = tone
+            self.showsChevron = showsChevron
             self.action = action
+        }
+
+        /// For a name that isn't a localization key: a product, a license.
+        public init(
+            verbatim title: String,
+            detail: String? = nil,
+            tone: Tone = .normal,
+            showsChevron: Bool = false,
+            action: @escaping () -> Void,
+        ) {
+            self.init(
+                LocalizedStringKey(title),
+                detail: detail,
+                tone: tone,
+                showsChevron: showsChevron,
+                action: action,
+            )
         }
 
         // MARK: - Body
@@ -53,6 +75,11 @@
                         Text(detail)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
+                    }
+                    if showsChevron {
+                        Image(.chevron_right)
+                            .imageScale(.small)
+                            .foregroundStyle(.tertiary)
                     }
                 }
                 .contentShape(.rect)
