@@ -7,12 +7,14 @@
 
     import SwiftUI
 
-    /// A setting with a handful of choices, as one list row.
+    /// A setting with a handful of choices, as one list row: the title, then
+    /// the choices as a segmented control under it.
     ///
-    /// Closed, the row reads like every other row: title on the left, current
-    /// choice trailing. Tapping it opens the choices inside the row rather than
-    /// behind a menu, because a menu would be the only row on the page that
-    /// behaves that way.
+    /// This is the shape System Settings gives its Appearance row. The
+    /// alternative — a row that opens its choices where it sits — reads as a
+    /// drop-down menu, which iOS settings don't have.
+    ///
+    /// Keep `label` to a word or two: a segment truncates faster than a row.
     public struct SettingsListChoiceRow<Value: Hashable>: View {
 
         // MARK: - Fields
@@ -20,100 +22,51 @@
         private let title: LocalizedStringKey
         private let options: [Value]
         private let label: (Value) -> String
-        private let fullLabel: (Value) -> String
         private let reason: String?
         @Binding private var selection: Value
-
-        // MARK: - State
-
-        @State private var isExpanded = false
 
         // MARK: - Initializer
 
         /// - Parameters:
-        ///   - label: The choice in the closed row. A word or two.
-        ///   - fullLabel: The choice in the open list, where there's room for
-        ///     a whole phrase ("Countdown before next").
-        ///   - reason: Why the row can't be changed, trailing instead of the
-        ///     choice ("Offline").
+        ///   - label: The choice on its segment ("Off", "Once", "Loop").
+        ///   - reason: Why the row can't be changed, trailing on the title line
+        ///     ("Offline").
         public init(
             _ title: LocalizedStringKey,
             options: [Value],
             selection: Binding<Value>,
             label: @escaping (Value) -> String,
-            fullLabel: @escaping (Value) -> String,
             reason: String? = nil,
         ) {
             self.title = title
             self.options = options
             self._selection = selection
             self.label = label
-            self.fullLabel = fullLabel
             self.reason = reason
         }
 
         // MARK: - Body
 
         public var body: some View {
-            VStack(spacing: 0) {
-                closedRow
-                if isExpanded {
-                    choices
-                }
-            }
-            .listRowBackground(PaletteStore.shared.current.cardFill)
-            .listRowSeparatorTint(PaletteStore.shared.current.cardBorder)
-        }
-
-        // MARK: - Subviews
-
-        private var closedRow: some View {
-            Button {
-                withAnimation(.snappy) { isExpanded.toggle() }
-            } label: {
+            VStack(alignment: .leading, spacing: Platform.spacing(.small)) {
                 HStack(spacing: Platform.spacing(.small)) {
                     Text(title)
                     Spacer(minLength: 12)
-                    Text(reason ?? label(selection))
-                        .foregroundStyle(.secondary)
-                    // A row that can't open has nothing to say the chevron for
-                    if reason == nil {
-                        Image(.chevron_down)
-                            .imageScale(.small)
-                            .foregroundStyle(.tertiary)
-                            .rotationEffect(.degrees(isExpanded ? 180 : 0))
+                    if let reason {
+                        Text(reason)
+                            .foregroundStyle(.secondary)
                     }
                 }
-                .frame(minHeight: 22)
-                .contentShape(.rect)
-            }
-            .buttonStyle(.plain)
-        }
-
-        private var choices: some View {
-            VStack(spacing: 0) {
-                Divider()
-                ForEach(options, id: \.self) { option in
-                    Button {
-                        withAnimation(.snappy) {
-                            selection = option
-                            isExpanded = false
-                        }
-                    } label: {
-                        HStack {
-                            Text(fullLabel(option))
-                            Spacer()
-                            if option == selection {
-                                Image(.checkmark)
-                                    .foregroundStyle(PaletteStore.shared.current.accentLabel)
-                            }
-                        }
-                        .frame(minHeight: 40)
-                        .contentShape(.rect)
+                Picker(title, selection: $selection) {
+                    ForEach(options, id: \.self) { option in
+                        Text(label(option)).tag(option)
                     }
-                    .buttonStyle(.plain)
                 }
+                .pickerStyle(.segmented)
+                .labelsHidden()
             }
+            .listRowBackground(PaletteStore.shared.current.cardFill)
+            .listRowSeparatorTint(PaletteStore.shared.current.cardBorder)
         }
     }
 
