@@ -25,23 +25,29 @@
         private let title: LocalizedStringKey
         private let detail: String?
         private let tone: Tone
+        private let isSelected: Bool
         private let showsChevron: Bool
         private let action: () -> Void
 
         // MARK: - Initializer
 
-        /// - Parameter showsChevron: The row opens something, even though it
-        ///   isn't a navigation push (a sheet, a picker).
+        /// - Parameters:
+        ///   - isSelected: On a page where the row picks one of a list, the
+        ///     current pick, with a checkmark trailing.
+        ///   - showsChevron: The row opens something, even though it isn't a
+        ///     navigation push (a sheet, a picker).
         public init(
             _ title: LocalizedStringKey,
             detail: String? = nil,
             tone: Tone = .normal,
+            isSelected: Bool = false,
             showsChevron: Bool = false,
             action: @escaping () -> Void,
         ) {
             self.title = title
             self.detail = detail
             self.tone = tone
+            self.isSelected = isSelected
             self.showsChevron = showsChevron
             self.action = action
         }
@@ -51,6 +57,7 @@
             verbatim title: String,
             detail: String? = nil,
             tone: Tone = .normal,
+            isSelected: Bool = false,
             showsChevron: Bool = false,
             action: @escaping () -> Void,
         ) {
@@ -58,6 +65,7 @@
                 LocalizedStringKey(title),
                 detail: detail,
                 tone: tone,
+                isSelected: isSelected,
                 showsChevron: showsChevron,
                 action: action,
             )
@@ -75,6 +83,10 @@
                         Text(detail)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
+                    }
+                    if isSelected {
+                        Image(.checkmark)
+                            .foregroundStyle(PaletteStore.shared.current.accentLabel)
                     }
                     if showsChevron {
                         Image(.chevron_right)
