@@ -9,6 +9,11 @@ import SwiftUI
 
 public extension Message.Kind {
 
+    /// The symbol a message shows beside its text. A `.text` message has none.
+    var labelSymbol: SFSymbol? {
+        self == .text ? nil : symbol
+    }
+
     @MainActor
     var symbolTint: Color {
         switch self {

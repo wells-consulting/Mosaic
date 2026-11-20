@@ -6,6 +6,11 @@
 import Motley
 import SwiftUI
 
+@available(
+    *,
+    deprecated,
+    message: "Use SymbolLabel with tint: .monochrome(.secondary) and layout: .inline."
+)
 public struct MutedSymbolLabel: View {
 
     let title: LocalizedStringKey
@@ -22,11 +27,11 @@ public struct MutedSymbolLabel: View {
     }
 
     public var body: some View {
-        HStack(spacing: Platform.spacing(.small)) {
-            Image(symbol)
-                .foregroundStyle(.secondary)
-            Text(title)
-                .mosaicEnableTextSelection()
-        }
+        SymbolLabel(
+            title,
+            symbol: symbol,
+            tint: .monochrome(.secondary),
+            layout: .inline,
+        )
     }
 }

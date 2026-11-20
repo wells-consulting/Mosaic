@@ -6,12 +6,23 @@
 import Motley
 import SwiftUI
 
-/// This standard view ensures the icon in a menu item label occupies a consistent width
+/// A symbol and its text, with the icon tinted separately from the words.
+/// `.column` gives the icon the same width in every row; `.inline` sits it
+/// next to the text, for a status line.
 public struct SymbolLabel: View {
+
+    /// Where the symbol sits beside the text.
+    public enum Layout: Hashable, Sendable {
+        /// The icon takes a fixed column, so labels stack with their text lined up.
+        case column
+        /// The icon sits at its own width, close to the text.
+        case inline
+    }
 
     private let textView: Text
     let symbol: SFSymbol?
     let tint: SymbolTint
+    let layout: Layout
     let imageScale: Image.Scale
     let details: String?
     let badgeText: String?
@@ -21,6 +32,7 @@ public struct SymbolLabel: View {
         _ text: LocalizedStringKey,
         symbol: SFSymbol? = nil,
         tint: SymbolTint = .palette(.primary, .secondary),
+        layout: Layout = .column,
         details: String? = nil,
         badge: String? = nil,
         addChevron: Bool = false,
@@ -29,6 +41,7 @@ public struct SymbolLabel: View {
         self.textView = Text(text)
         self.symbol = symbol
         self.tint = tint
+        self.layout = layout
         self.details = details
         self.badgeText = badge
         self.includeChevron = addChevron
@@ -40,6 +53,7 @@ public struct SymbolLabel: View {
         verbatim: String,
         symbol: SFSymbol? = nil,
         tint: SymbolTint = .palette(.primary, .secondary),
+        layout: Layout = .column,
         details: String? = nil,
         badge: String? = nil,
         addChevron: Bool = false,
@@ -49,6 +63,7 @@ public struct SymbolLabel: View {
             LocalizedStringKey(verbatim),
             symbol: symbol,
             tint: tint,
+            layout: layout,
             details: details,
             badge: badge,
             addChevron: addChevron,
@@ -56,18 +71,20 @@ public struct SymbolLabel: View {
         )
     }
 
-    /// Creates a menu label with verbatim (non-localizable) text.
+    /// Creates a label for a message.
     public init(
         _ message: Message,
         tint: SymbolTint? = nil,
+        layout: Layout = .column,
         badge: String? = nil,
         addChevron: Bool = false,
         imageScale: Image.Scale = .medium,
     ) {
         self.init(
             LocalizedStringKey(message.summary),
-            symbol: message.kind.symbol,
+            symbol: message.kind.labelSymbol,
             tint: tint ?? .monochrome(message.kind.symbolTint),
+            layout: layout,
             details: message.details,
             badge: badge,
             addChevron: addChevron,
@@ -88,9 +105,14 @@ public struct SymbolLabel: View {
     }
 
     public var body: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: layout == .inline ? Platform.spacing(.small) : 0) {
             symbolImage
-            textView
+            if layout == .inline {
+                textView
+                    .mosaicEnableTextSelection()
+            } else {
+                textView
+            }
             badge
             if details != nil || includeChevron {
                 Spacer(minLength: 0)
@@ -111,13 +133,21 @@ public struct SymbolLabel: View {
     @ViewBuilder
     private var symbolImage: some View {
         if let symbol {
-            shownTint.apply(to: Image(symbol).imageScale(imageScale))
-                .frame(width: iconWidth, alignment: .center)
-                #if os(tvOS)
-                    .padding(.trailing, 12)
-                #endif
-                .accessibilityHidden(true)
+            if layout == .column {
+                icon(symbol)
+                    .frame(width: iconWidth, alignment: .center)
+                    #if os(tvOS)
+                        .padding(.trailing, 12)
+                    #endif
+            } else {
+                icon(symbol)
+            }
         }
+    }
+
+    private func icon(_ symbol: SFSymbol) -> some View {
+        shownTint.apply(to: Image(symbol).imageScale(imageScale))
+            .accessibilityHidden(true)
     }
 
     @ViewBuilder
@@ -177,5 +207,22 @@ public struct SymbolLabel: View {
             SymbolLabel("Multicolor", symbol: .gear, tint: .multicolor)
         }
         .frame(width: 400)
+    }
+
+    #Preview("Inline") {
+        VStack(alignment: .leading, spacing: Platform.spacing(.small)) {
+            SymbolLabel(
+                "Analyze Library",
+                symbol: .list_bullet_rectangle,
+                tint: .monochrome(.secondary),
+                layout: .inline,
+            )
+            SymbolLabel(
+                "Delete",
+                symbol: .trash,
+                tint: .monochrome(.red),
+                layout: .inline,
+            )
+        }
     }
 #endif
