@@ -184,7 +184,7 @@ public struct SettingsRowButton: View {
         SymbolLabel(
             text,
             symbol: shownSymbol,
-            symbolPalette: (.secondary, .secondary.opacity(0.75)),
+            tint: .palette(.secondary, .secondary.opacity(0.75)),
             details: detailString,
             badge: badgeString,
             addChevron: chevron,

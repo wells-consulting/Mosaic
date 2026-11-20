@@ -11,7 +11,7 @@ public struct SymbolLabel: View {
 
     private let textView: Text
     let symbol: SFSymbol?
-    let symbolPalette: (Color, Color)
+    let tint: SymbolTint
     let imageScale: Image.Scale
     let details: String?
     let badgeText: String?
@@ -20,7 +20,7 @@ public struct SymbolLabel: View {
     public init(
         _ text: LocalizedStringKey,
         symbol: SFSymbol? = nil,
-        symbolPalette: (Color, Color)? = nil,
+        tint: SymbolTint = .palette(.primary, .secondary),
         details: String? = nil,
         badge: String? = nil,
         addChevron: Bool = false,
@@ -28,7 +28,7 @@ public struct SymbolLabel: View {
     ) {
         self.textView = Text(text)
         self.symbol = symbol
-        self.symbolPalette = symbolPalette ?? (.primary, .secondary)
+        self.tint = tint
         self.details = details
         self.badgeText = badge
         self.includeChevron = addChevron
@@ -39,7 +39,7 @@ public struct SymbolLabel: View {
     public init(
         verbatim: String,
         symbol: SFSymbol? = nil,
-        symbolPalette: (Color, Color)? = nil,
+        tint: SymbolTint = .palette(.primary, .secondary),
         details: String? = nil,
         badge: String? = nil,
         addChevron: Bool = false,
@@ -48,7 +48,7 @@ public struct SymbolLabel: View {
         self.init(
             LocalizedStringKey(verbatim),
             symbol: symbol,
-            symbolPalette: symbolPalette,
+            tint: tint,
             details: details,
             badge: badge,
             addChevron: addChevron,
@@ -59,7 +59,7 @@ public struct SymbolLabel: View {
     /// Creates a menu label with verbatim (non-localizable) text.
     public init(
         _ message: Message,
-        symbolPalette: (Color, Color)? = nil,
+        tint: SymbolTint? = nil,
         badge: String? = nil,
         addChevron: Bool = false,
         imageScale: Image.Scale = .medium,
@@ -67,7 +67,7 @@ public struct SymbolLabel: View {
         self.init(
             LocalizedStringKey(message.summary),
             symbol: message.kind.symbol,
-            symbolPalette: symbolPalette ?? (message.kind.symbolTint, message.kind.symbolTint),
+            tint: tint ?? .monochrome(message.kind.symbolTint),
             details: message.details,
             badge: badge,
             addChevron: addChevron,
@@ -100,19 +100,18 @@ public struct SymbolLabel: View {
         }
     }
 
+    /// On tvOS focus the row's highlight is white, so the symbol goes black.
+    private var shownTint: SymbolTint {
+        #if os(tvOS)
+            if isFocused { return tint.focused }
+        #endif
+        return tint
+    }
+
     @ViewBuilder
     private var symbolImage: some View {
         if let symbol {
-            let (paletteFirst, paletteSecond): (Color, Color) = {
-                #if os(tvOS)
-                    if isFocused { return (.black, .black.opacity(0.6)) }
-                #endif
-                return symbolPalette
-            }()
-            Image(symbol)
-                .imageScale(imageScale)
-                .symbolRenderingMode(.palette)
-                .foregroundStyle(paletteFirst, paletteSecond)
+            shownTint.apply(to: Image(symbol).imageScale(imageScale))
                 .frame(width: iconWidth, alignment: .center)
                 #if os(tvOS)
                     .padding(.trailing, 12)
@@ -168,5 +167,15 @@ public struct SymbolLabel: View {
             )
         }
         .frame(width: 800)
+    }
+
+    #Preview("Tints") {
+        VStack(alignment: .leading) {
+            SymbolLabel("Monochrome", symbol: .gear, tint: .monochrome(.accentColor))
+            SymbolLabel("Hierarchical", symbol: .gear, tint: .hierarchical(.accentColor))
+            SymbolLabel("Palette", symbol: .gear, tint: .palette(.accentColor, .orange))
+            SymbolLabel("Multicolor", symbol: .gear, tint: .multicolor)
+        }
+        .frame(width: 400)
     }
 #endif
