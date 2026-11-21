@@ -49,8 +49,9 @@
             // a list the row is the button, so go back to the platform default.
             .buttonStyle(.automatic)
             .tint(PaletteStore.shared.current.accentLabel)
-            .frame(maxWidth: 600)
-            .frame(maxWidth: .infinity)
+            // Insetting the content, not framing the list, keeps the scroll
+            // edge effect under the navigation bar full width
+            .modifier(SettingsColumnModifier())
         }
     }
 

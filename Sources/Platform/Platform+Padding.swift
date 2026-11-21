@@ -198,17 +198,9 @@ public extension View {
     /// screen edge. On iPad constrains content to 600pt and centers it.
     private struct SettingsContentInsetPaddingModifier: ViewModifier {
 
-        @Environment(\.layout) private var layout
-
         func body(content: Content) -> some View {
-            if layout.widthConstrained {
-                content
-                    .mosaicPadding(.horizontal, .large)
-            } else {
-                content
-                    .frame(maxWidth: 600)
-                    .frame(maxWidth: .infinity)
-            }
+            content
+                .modifier(SettingsColumnModifier())
         }
     }
 #endif

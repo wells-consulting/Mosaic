@@ -26,5 +26,10 @@ public extension EnvironmentValues {
         /// Read by `appGlassButton()` and `appGlassMenuStyle()` to skip their own per-control
         /// glass surface so the parent's pill is the only glass layer visible.
         @Entry var insideButtonGroup: Bool = false
+
+        /// True inside a settings page that already insets its content to the
+        /// settings column. Read by `SettingsColumnModifier` so nested pages
+        /// don't inset twice.
+        @Entry var insideSettingsColumn: Bool = false
     #endif
 }
