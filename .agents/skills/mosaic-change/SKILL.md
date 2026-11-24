@@ -33,8 +33,8 @@ Scripts/verify-apps.sh
 
 ## 4. Release, because the apps pin a version
 
-1. Commit in the repo's style: `v1.6.0 – Gives the settings row a synopsis`. An assistant's body ends with `Assistance provided by <agent and model>.`, never a `Co-Authored-By` or "Generated with" line.
-2. Tag, then push branch and tag by name (`--follow-tags` skips lightweight tags):
+1. Commit in the repo's style: `v1.6.0 – Gives the settings row a synopsis`. An assistant's body ends with `Assisted-by: AI (<model>)`, never a `Co-Authored-By` or "Generated with" line.
+2. Tag it with `git tag -a v1.6.0 -m "v1.6.0"`, then push branch and tag by name:
 
    ```sh
    git push github main
@@ -55,6 +55,6 @@ Never edit a package checkout under DerivedData; the next resolve throws it away
 - [ ] No `try?`, no SF Symbol strings, no global free functions
 - [ ] `swift test` passes and lint is clean
 - [ ] `Scripts/verify-apps.sh` passes before a release
-- [ ] An assistant's commit ends `Assistance provided by <agent and model>.`, with no `Co-Authored-By`
+- [ ] An assistant's commit ends `Assisted-by: AI (<model>)`, with no `Co-Authored-By`
 - [ ] Tagged and pushed
 - [ ] the app and the app pins raised, `Package.resolved` committed with each
