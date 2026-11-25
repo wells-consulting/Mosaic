@@ -33,7 +33,7 @@ Scripts/verify-apps.sh
 
 ## 4. Release, because the apps pin a version
 
-1. Commit in the repo's style: `v1.6.0 – Gives the settings row a synopsis`. An assistant's body ends with `Assisted-by: AI (<model>)`, never a `Co-Authored-By` or "Generated with" line.
+1. Set `MosaicInfo.version` to the release number, then commit in the repo's style: `v1.6.0 – Gives the settings row a synopsis`. An assistant's body ends with `Assisted-by: AI (<model>)`, never a `Co-Authored-By` or "Generated with" line.
 2. Tag it with `git tag -a v1.6.0 -m "v1.6.0"`, then push branch and tag by name:
 
    ```sh
@@ -54,6 +54,8 @@ Never edit a package checkout under DerivedData; the next resolve throws it away
 
 - [ ] No `try?`, no SF Symbol strings, no global free functions
 - [ ] `swift test` passes and lint is clean
+- [ ] `MosaicInfo.version` matches the tag
+- [ ] `Scripts/docs.sh` builds the guides without a warning from this repo
 - [ ] `Scripts/verify-apps.sh` passes before a release
 - [ ] An assistant's commit ends `Assisted-by: AI (<model>)`, with no `Co-Authored-By`
 - [ ] Tagged and pushed
