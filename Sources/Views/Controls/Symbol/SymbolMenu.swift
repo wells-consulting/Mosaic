@@ -19,6 +19,11 @@ public struct SymbolMenu<Content: View>: View {
     let tint: Color?
     let content: () -> Content
 
+    /// - Parameters:
+    ///   - symbol: The trigger icon.
+    ///   - label: The text VoiceOver reads. Required.
+    ///   - tint: An optional color for the trigger, for a changed state.
+    ///   - content: The menu's items.
     public init(
         _ symbol: SFSymbol,
         label: String,

@@ -39,6 +39,7 @@ public struct SymbolTint: Hashable, Sendable {
         Self(.palette(first, second, nil))
     }
 
+    /// One color per layer, for the symbols that draw three.
     public static func palette(_ first: Color, _ second: Color, _ third: Color) -> Self {
         Self(.palette(first, second, third))
     }

@@ -14,6 +14,10 @@ public struct MessageLabel: View {
     private let symbol: SFSymbol?
     private let tint: Color
 
+    /// - Parameters:
+    ///   - message: The message to show.
+    ///   - prefixTitle: Whether to put the message's title before its summary,
+    ///     separated by a dash.
     public init(_ message: Message, prefixTitle: Bool = false) {
         self.text =
             if prefixTitle, let title = message.title {

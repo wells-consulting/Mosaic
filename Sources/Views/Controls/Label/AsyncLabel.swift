@@ -14,6 +14,10 @@ public struct AsyncLabel: View {
     let symbol: SFSymbol
     let loading: Bool
 
+    /// - Parameters:
+    ///   - title: The label text.
+    ///   - symbol: The icon shown when the work is idle.
+    ///   - loading: Whether to show the spinner instead of the icon.
     public init(_ title: String, symbol: SFSymbol, loading: Bool) {
         self.title = title
         self.symbol = symbol

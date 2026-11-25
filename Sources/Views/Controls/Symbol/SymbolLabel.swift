@@ -28,6 +28,15 @@ public struct SymbolLabel: View {
     let badgeText: String?
     let includeChevron: Bool
 
+    /// - Parameters:
+    ///   - text: The label text.
+    ///   - symbol: The icon before the text.
+    ///   - tint: How the icon's layers are colored.
+    ///   - layout: Whether the icon takes a column or sits inline.
+    ///   - details: A second line under the text.
+    ///   - badge: A short value after the text.
+    ///   - addChevron: Whether to add a trailing chevron.
+    ///   - imageScale: The icon's scale.
     public init(
         _ text: LocalizedStringKey,
         symbol: SFSymbol? = nil,
@@ -48,7 +57,18 @@ public struct SymbolLabel: View {
         self.imageScale = imageScale
     }
 
-    /// Creates a menu label with verbatim (non-localizable) text.
+    /// Creates a label with verbatim (non-localizable) text, such as a file
+    /// name.
+    ///
+    /// - Parameters:
+    ///   - verbatim: The text to show as written.
+    ///   - symbol: The icon before the text.
+    ///   - tint: How the icon's layers are colored.
+    ///   - layout: Whether the icon takes a column or sits inline.
+    ///   - details: A second line under the text.
+    ///   - badge: A short value after the text.
+    ///   - addChevron: Whether to add a trailing chevron.
+    ///   - imageScale: The icon's scale.
     public init(
         verbatim: String,
         symbol: SFSymbol? = nil,
@@ -71,7 +91,16 @@ public struct SymbolLabel: View {
         )
     }
 
-    /// Creates a label for a message.
+    /// Creates a label for a message, using the message's summary, symbol and
+    /// tint.
+    ///
+    /// - Parameters:
+    ///   - message: The message to show.
+    ///   - tint: An override for the message kind's tint.
+    ///   - layout: Whether the icon takes a column or sits inline.
+    ///   - badge: A short value after the text.
+    ///   - addChevron: Whether to add a trailing chevron.
+    ///   - imageScale: The icon's scale.
     public init(
         _ message: Message,
         tint: SymbolTint? = nil,

@@ -20,6 +20,11 @@ public struct SymbolButton: View {
     let accessibilityLabel: String
     let action: () -> Void
 
+    /// - Parameters:
+    ///   - symbol: The icon to draw.
+    ///   - role: An optional button role, such as `.destructive`.
+    ///   - accessibilityLabel: The text VoiceOver reads. Required.
+    ///   - action: What the button runs when pressed.
     public init(
         _ symbol: SFSymbol,
         role: ButtonRole? = nil,
