@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+/// A vertical menu of settings rows with the platform's menu gap.
 public struct SettingsMenu<Content: View>: View {
 
     // MARK: - Fields
@@ -13,6 +14,7 @@ public struct SettingsMenu<Content: View>: View {
 
     // MARK: - Initializer
 
+    /// - Parameter content: The menu's rows.
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }

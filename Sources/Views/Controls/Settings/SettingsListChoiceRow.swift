@@ -28,7 +28,11 @@
         // MARK: - Initializer
 
         /// - Parameters:
-        ///   - label: The choice on its segment ("Off", "Once", "Loop").
+        ///   - title: The row's title.
+        ///   - options: The choices.
+        ///   - selection: The current choice.
+        ///   - label: The text for a choice on its segment ("Off", "Once",
+        ///     "Loop").
         ///   - reason: Why the row can't be changed, trailing on the title line
         ///     ("Offline").
         public init(

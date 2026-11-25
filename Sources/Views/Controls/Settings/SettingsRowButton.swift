@@ -6,6 +6,8 @@
 import Motley
 import SwiftUI
 
+/// A settings row that reads as a button: an icon, a title, an optional
+/// synopsis, a badge, a value and a status.
 public struct SettingsRowButton: View {
 
     // MARK: - Status
@@ -45,7 +47,10 @@ public struct SettingsRowButton: View {
     /// Row detail text that adapts to the horizontal size class on iOS.
     public enum AdaptiveText {
 
+        /// One string at every width.
         case fixed(String?)
+
+        /// Two strings, choosing the abbreviated one when room is tight.
         case adjustable(full: String?, abbreviated: String?)
 
         var text: String? {
@@ -92,6 +97,19 @@ public struct SettingsRowButton: View {
 
     // MARK: - Initializers
 
+    /// - Parameters:
+    ///   - text: The row's title.
+    ///   - symbol: An icon before the title.
+    ///   - synopsis: A second line under the title.
+    ///   - badge: A short value beside the title.
+    ///   - value: The row's current value, trailing.
+    ///   - status: A detail, a state or a warning after the title.
+    ///   - chevron: Whether to show a trailing chevron.
+    ///   - density: How much room the row takes.
+    ///   - alignment: How the label sits in the row.
+    ///   - keepsSymbol: Keep the icon on a narrow screen, where it would
+    ///     otherwise be dropped.
+    ///   - action: What the row runs when tapped.
     public init(
         _ text: LocalizedStringKey,
         symbol: SFSymbol? = nil,
@@ -118,6 +136,19 @@ public struct SettingsRowButton: View {
         self.action = action
     }
 
+    /// - Parameters:
+    ///   - label: The row's title, as written.
+    ///   - symbol: An icon before the title.
+    ///   - synopsis: A second line under the title.
+    ///   - badge: A short value beside the title.
+    ///   - value: The row's current value, trailing.
+    ///   - status: A detail, a state or a warning after the title.
+    ///   - chevron: Whether to show a trailing chevron.
+    ///   - density: How much room the row takes.
+    ///   - alignment: How the label sits in the row.
+    ///   - keepsSymbol: Keep the icon on a narrow screen, where it would
+    ///     otherwise be dropped.
+    ///   - action: What the row runs when tapped.
     public init(
         verbatim label: String,
         symbol: SFSymbol? = nil,

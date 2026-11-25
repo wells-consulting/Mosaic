@@ -22,6 +22,7 @@
         // MARK: - Initializer
 
         /// - Parameters:
+        ///   - title: The row's title.
         ///   - value: Where the row goes.
         ///   - detail: The row's current state, trailing ("Not connected").
         public init(_ title: LocalizedStringKey, value: Value, detail: String? = nil) {
@@ -31,6 +32,11 @@
         }
 
         /// For a name that isn't a localization key: a server type, a person.
+        ///
+        /// - Parameters:
+        ///   - title: The row's title, as written.
+        ///   - value: Where the row goes.
+        ///   - detail: The row's current state, trailing.
         public init(verbatim title: String, value: Value, detail: String? = nil) {
             self.title = LocalizedStringKey(title)
             self.value = value

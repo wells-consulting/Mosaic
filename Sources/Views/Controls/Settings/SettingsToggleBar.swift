@@ -6,6 +6,8 @@
 import Motley
 import SwiftUI
 
+/// A whole card that switches on and off, with a checkmark at the trailing
+/// edge.
 public struct SettingsToggleBar: View {
 
     private let title: String
@@ -14,6 +16,11 @@ public struct SettingsToggleBar: View {
 
     @Binding private var selected: Bool
 
+    /// - Parameters:
+    ///   - title: The card's title.
+    ///   - details: A second line under the title.
+    ///   - symbol: An icon before the title.
+    ///   - selected: Whether the card is on.
     public init(
         title: String,
         details: String? = nil,

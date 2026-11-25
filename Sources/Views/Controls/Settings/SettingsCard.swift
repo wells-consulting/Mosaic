@@ -34,6 +34,10 @@ public struct SettingsCard<Content: View>: View {
 
     // MARK: - Initializer
 
+    /// - Parameters:
+    ///   - interactive: Whether the card wraps a tappable row. Interactive
+    ///     cards get a glass background on iOS.
+    ///   - content: The card's content.
     public init(interactive: Bool = false, @ViewBuilder content: () -> Content) {
         self.interactive = interactive
         self.content = content()

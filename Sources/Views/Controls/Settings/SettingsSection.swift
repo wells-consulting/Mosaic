@@ -30,18 +30,25 @@ public struct SettingsSection<Content: View>: View {
 
     // MARK: - Initializer
 
+    /// A section with no heading.
     public init(@ViewBuilder content: () -> Content) {
         self.title = nil
         self.verbatimTitle = nil
         self.content = content()
     }
 
+    /// - Parameters:
+    ///   - title: The section heading.
+    ///   - content: The rows in the section.
     public init(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) {
         self.title = title
         self.verbatimTitle = nil
         self.content = content()
     }
 
+    /// - Parameters:
+    ///   - title: The section heading, as written.
+    ///   - content: The rows in the section.
     public init(verbatim title: String, @ViewBuilder content: () -> Content) {
         self.title = nil
         self.verbatimTitle = title

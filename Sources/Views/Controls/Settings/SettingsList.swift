@@ -31,6 +31,7 @@
 
         // MARK: - Initializer
 
+        /// - Parameter content: The list's sections and rows.
         public init(@ViewBuilder content: () -> Content) {
             self.content = content()
         }

@@ -17,7 +17,11 @@
         /// warning colors on text, and the confirmation dialog is what stops a
         /// destructive action anyway.
         public enum Tone: Sendable {
+
+            /// The ordinary title color.
             case normal
+
+            /// The accent color, for the one action a page exists to run.
             case prominent
         }
 
@@ -33,10 +37,14 @@
         // MARK: - Initializer
 
         /// - Parameters:
+        ///   - title: The row's title.
+        ///   - detail: The row's current state, trailing.
+        ///   - tone: How the title reads.
         ///   - isSelected: On a page where the row picks one of a list, the
         ///     current pick, with a checkmark trailing.
         ///   - showsChevron: The row opens something, even though it isn't a
         ///     navigation push (a sheet, a picker).
+        ///   - action: What the row runs when tapped.
         public init(
             _ title: LocalizedStringKey,
             detail: String? = nil,
@@ -54,6 +62,14 @@
         }
 
         /// For a name that isn't a localization key: a product, a license.
+        ///
+        /// - Parameters:
+        ///   - title: The row's title, as written.
+        ///   - detail: The row's current state, trailing.
+        ///   - tone: How the title reads.
+        ///   - isSelected: The current pick, with a checkmark trailing.
+        ///   - showsChevron: Whether the row opens something.
+        ///   - action: What the row runs when tapped.
         public init(
             verbatim title: String,
             detail: String? = nil,

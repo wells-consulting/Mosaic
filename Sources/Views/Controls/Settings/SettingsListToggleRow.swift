@@ -18,8 +18,11 @@
 
         // MARK: - Initializer
 
-        /// - Parameter note: A second line under the title, for the reason the
-        ///   switch can't move ("Turn off App Lock to change this.").
+        /// - Parameters:
+        ///   - title: The row's title.
+        ///   - isOn: Whether the switch is on.
+        ///   - note: A second line under the title, for the reason the switch
+        ///     can't move ("Turn off App Lock to change this.").
         public init(_ title: LocalizedStringKey, isOn: Binding<Bool>, note: String? = nil) {
             self.title = title
             self.note = note

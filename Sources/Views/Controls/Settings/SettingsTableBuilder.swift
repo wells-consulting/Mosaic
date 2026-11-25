@@ -6,24 +6,35 @@
 import Motley
 import SwiftUI
 
+/// Builds a card of label and value rows, for a small table of facts.
 public final class SettingsTableBuilder {
 
+    /// One row in the table.
     public enum TableRow: Hashable {
+
+        /// A label and its value.
         case textLabel(String, String)
+
+        /// An icon, a label and a value.
         case symbolLabel(String, String, SFSymbol)
+
+        /// A line of text on its own.
         case text(String)
     }
 
     private var rows: [TableRow]
 
+    /// Creates an empty table.
     public init() {
         self.rows = []
     }
 
+    /// Adds a line of text on its own.
     public func addRow(_ text: String) {
         rows.append(.text(text))
     }
 
+    /// Adds a label and a value, with an optional icon before the label.
     public func addRow(_ text: String, _ value: String, symbol: SFSymbol? = nil) {
         if let symbol {
             rows.append(.symbolLabel(text, value, symbol))
@@ -32,6 +43,9 @@ public final class SettingsTableBuilder {
         }
     }
 
+    /// Renders the rows in a card.
+    ///
+    /// - Parameter spacing: The gap between rows. Defaults to 16 points.
     @MainActor
     public func build(spacing: CGFloat = 16) -> some View {
         SettingsCard {

@@ -5,14 +5,17 @@
 
 import SwiftUI
 
+/// A small uppercase heading above a group of settings rows.
 public struct SettingsSectionLabel: View {
 
     private let label: Text
 
+    /// - Parameter title: The heading text.
     public init(_ title: LocalizedStringKey) {
         self.label = Text(title)
     }
 
+    /// - Parameter title: The heading text, as written.
     public init(verbatim title: String) {
         self.label = Text(verbatim: title)
     }
