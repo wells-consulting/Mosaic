@@ -11,9 +11,15 @@ import SwiftUI
 /// Used on scene cards and scene detail views to show playback progress.
 public struct ProgressBar: View {
 
+    /// How far the bar is filled, from `0` to `1`.
     public let progress: Double
+
+    /// The gradient stops for the filled part.
     public let colors: [Color]
 
+    /// - Parameters:
+    ///   - progress: How far the bar is filled, from `0` to `1`.
+    ///   - colors: The gradient stops for the filled part.
     public init(progress: Double, colors: [Color]) {
         self.colors = colors
         self.progress = progress

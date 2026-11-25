@@ -26,6 +26,10 @@ public struct CardPanel<Content: View>: View {
     private let emphasis: Emphasis
     private let content: Content
 
+    /// - Parameters:
+    ///   - padding: The inset inside the card. Defaults to `.medium`.
+    ///   - emphasis: How the border reads. Defaults to `.normal`.
+    ///   - content: The card's content.
     public init(
         padding: Platform.PaddingSize = .medium,
         emphasis: Emphasis = .normal,

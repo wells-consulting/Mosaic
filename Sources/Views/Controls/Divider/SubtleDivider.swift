@@ -9,6 +9,8 @@ import SwiftUI
 /// (Settings, Insights, Diagnostics). The system `Divider` is too prominent;
 /// dropping it to 15% opacity matches the design language used app-wide.
 public struct SubtleDivider: View {
+
+    /// Creates the divider.
     public init() {}
     public var body: some View {
         Divider()

@@ -17,6 +17,9 @@ public struct PlatformGroupBox<Content: View>: View {
     private let title: LocalizedStringKey?
     private let content: Content
 
+    /// - Parameters:
+    ///   - title: An optional heading above the group.
+    ///   - content: The grouped content.
     public init(
         _ title: LocalizedStringKey? = nil,
         @ViewBuilder content: () -> Content,

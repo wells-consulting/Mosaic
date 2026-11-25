@@ -6,6 +6,11 @@
 import Motley
 import SwiftUI
 
+/// A tinted glass banner with an icon, a title, a subtitle and optional
+/// trailing content.
+///
+/// The three factories, `success`, `warning` and `error`, cover the usual
+/// cases and leave the trailing content empty.
 public struct BannerView<Content: View>: View {
 
     #if os(iOS)
@@ -22,6 +27,12 @@ public struct BannerView<Content: View>: View {
 
     // MARK: - Initializer
 
+    /// - Parameters:
+    ///   - tint: The color behind the glass.
+    ///   - title: The bold first line.
+    ///   - subtitle: The second line.
+    ///   - leadingSymbol: An icon before the text.
+    ///   - trailingContent: A control or status after the text.
     public init(
         tint: Color,
         title: String,
@@ -107,6 +118,13 @@ public struct BannerView<Content: View>: View {
 
     // MARK: - Factory
 
+    /// A green banner for a completed job.
+    ///
+    /// - Parameters:
+    ///   - symbol: The icon. Defaults to `.success`.
+    ///   - title: The bold first line.
+    ///   - message: The second line.
+    ///   - tint: The color behind the glass. Defaults to green.
     public static func success(
         symbol: SFSymbol = .success,
         title: String,
@@ -121,6 +139,13 @@ public struct BannerView<Content: View>: View {
         )
     }
 
+    /// An orange banner for a caution.
+    ///
+    /// - Parameters:
+    ///   - symbol: The icon. Defaults to `.warning`.
+    ///   - title: The bold first line.
+    ///   - message: The second line.
+    ///   - tint: The color behind the glass. Defaults to orange.
     public static func warning(
         symbol: SFSymbol = .warning,
         title: String,
@@ -135,6 +160,13 @@ public struct BannerView<Content: View>: View {
         )
     }
 
+    /// A red banner for a failure.
+    ///
+    /// - Parameters:
+    ///   - symbol: The icon. Defaults to `.error`.
+    ///   - title: The bold first line.
+    ///   - message: The second line.
+    ///   - tint: The color behind the glass. Defaults to red.
     public static func error(
         symbol: SFSymbol = .error,
         title: String,

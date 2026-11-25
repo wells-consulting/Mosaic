@@ -20,6 +20,10 @@ public struct PlatformDisclosureGroup<Label: View, Content: View>: View {
 
     // MARK: - Initializers
 
+    /// - Parameters:
+    ///   - isExpanded: Whether the content is open.
+    ///   - content: The content below the label.
+    ///   - label: The always-visible label.
     public init(
         isExpanded: Binding<Bool>,
         @ViewBuilder content: () -> Content,
@@ -30,6 +34,11 @@ public struct PlatformDisclosureGroup<Label: View, Content: View>: View {
         self.label = label()
     }
 
+    /// - Parameters:
+    ///   - content: The content below the label.
+    ///   - label: The always-visible label.
+    ///
+    /// The group keeps its own expanded state.
     public init(
         @ViewBuilder content: () -> Content,
         @ViewBuilder label: () -> Label
@@ -39,6 +48,9 @@ public struct PlatformDisclosureGroup<Label: View, Content: View>: View {
         self.label = label()
     }
 
+    /// - Parameters:
+    ///   - title: The label text.
+    ///   - content: The content below the label.
     public init(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) where Label == Text {
         self.expanded = nil
         self.content = content()

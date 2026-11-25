@@ -15,6 +15,9 @@ public struct MetadataPill: View {
     let text: String
     let symbol: SFSymbol
 
+    /// - Parameters:
+    ///   - text: The value to show.
+    ///   - symbol: The icon before it.
     public init(text: String, symbol: SFSymbol) {
         self.text = text
         self.symbol = symbol

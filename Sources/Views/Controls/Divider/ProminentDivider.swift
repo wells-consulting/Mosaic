@@ -7,6 +7,8 @@ import SwiftUI
 
 /// A more prominent divider (horizontal or vertical) than the standard Divider().
 public struct ProminentDivider: View {
+
+    /// Creates the divider.
     public init() {}
 
     public var body: some View {
