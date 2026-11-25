@@ -31,6 +31,11 @@ public struct ScrollableTextView: View {
 
     // MARK: - Initializer
 
+    /// - Parameters:
+    ///   - text: The text to show.
+    ///   - title: The title in the bar.
+    ///   - navigationBackground: The background for the bar on iOS. macOS
+    ///     ignores it.
     public init(text: String, title: String? = nil, navigationBackground: AnyShapeStyle? = nil) {
         self.title = title
         self.text = text

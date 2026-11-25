@@ -20,6 +20,7 @@ public struct RawDiagnosticsSheet: View {
 
     // MARK: - Initializer
 
+    /// - Parameter text: The diagnostic text to show.
     public init(text: String) {
         self.text = text
     }

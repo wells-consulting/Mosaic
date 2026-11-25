@@ -26,6 +26,11 @@ public struct ExpandableTextView: View {
 
     // MARK: - Initializer
 
+    /// - Parameters:
+    ///   - text: The text to show.
+    ///   - font: The font for the text.
+    ///   - navigationBackground: The background for the expanded view's
+    ///     navigation bar.
     public init(_ text: String, font: Font, navigationBackground: AnyShapeStyle? = nil) {
         self.text = text
         self.font = font

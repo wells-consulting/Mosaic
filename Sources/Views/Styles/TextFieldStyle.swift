@@ -20,6 +20,7 @@ public extension View {
     }
 }
 
+/// The pill-shaped filled text field behind `.mosaicRoundedTextFieldStyle()`.
 @MainActor
 public struct MosaicRoundedTextFieldStyle: TextFieldStyle {
 

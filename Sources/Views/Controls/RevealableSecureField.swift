@@ -20,6 +20,9 @@ public struct RevealableSecureField: View {
 
     // MARK: - Initializer
 
+    /// - Parameters:
+    ///   - label: The field's placeholder.
+    ///   - text: The text being edited.
     public init(_ label: String, text: Binding<String>) {
         self.label = label
         self._text = text

@@ -39,6 +39,14 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
 
     // MARK: - Initializers
 
+    /// - Parameters:
+    ///   - error: The error to describe.
+    ///   - title: The heading.
+    ///   - options: How much of the error to describe.
+    ///   - actions: The actions to offer. The first three are used.
+    ///   - onAppear: Runs when the view appears.
+    ///   - onDisappear: Runs when the view goes away.
+    ///   - onAction: Runs with the action the person picked.
     public init(
         error: any Error,
         title: String,
@@ -62,6 +70,13 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
         self.rawDiagnostics = formatted != nil ? raw : nil
     }
 
+    /// - Parameters:
+    ///   - title: The heading. When nil, the message's title or kind is used.
+    ///   - message: The message to show.
+    ///   - actions: The actions to offer. The first three are used.
+    ///   - onAppear: Runs when the view appears.
+    ///   - onDisappear: Runs when the view goes away.
+    ///   - onAction: Runs with the action the person picked.
     public init(
         title: String?,
         message: Message,
@@ -81,6 +96,14 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
         self.onAction = onAction
     }
 
+    /// - Parameters:
+    ///   - title: The heading.
+    ///   - summary: The one-line explanation.
+    ///   - actions: The actions to offer. The first three are used.
+    ///   - onAppear: Runs when the view appears.
+    ///   - onDisappear: Runs when the view goes away.
+    ///   - onAction: Runs with the action the person picked.
+    ///   - details: A longer explanation under the summary.
     public init(
         title: String,
         summary: String,

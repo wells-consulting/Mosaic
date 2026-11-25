@@ -5,6 +5,8 @@
 
 import SwiftUI
 
+/// A titled group of form fields, separated from the next section by a pair of
+/// hairlines.
 public struct FormSection<Content: View>: View {
 
     // MARK: - Fields
@@ -14,6 +16,9 @@ public struct FormSection<Content: View>: View {
 
     // MARK: - Initializer
 
+    /// - Parameters:
+    ///   - title: The section heading.
+    ///   - content: The fields in the section.
     public init(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) {
         self.title = title
         self.content = content()
