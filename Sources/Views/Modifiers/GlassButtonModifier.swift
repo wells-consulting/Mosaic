@@ -12,7 +12,7 @@ public extension View {
     /// styles are already appropriate.
     ///
     /// Uses `.large` control size (~50pt) on all iOS form factors so standalone
-    /// button pills carry the same internal padding as `mosaicGlassMenuContent()` menus.
+    /// button pills use the same internal padding as `mosaicGlassMenuContent()` menus.
     func mosaicGlassButtonStyle() -> some View {
         #if os(iOS)
             modifier(AdaptiveButtonStyleModifier())

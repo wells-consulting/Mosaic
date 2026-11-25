@@ -6,8 +6,8 @@
 import Motley
 import SwiftUI
 
-/// A settings row that reads as a button: an icon, a title, an optional
-/// synopsis, a badge, a value and a status.
+/// A settings row drawn as a button: an icon, a title, an optional synopsis,
+/// a badge, a value and a status.
 public struct SettingsRowButton: View {
 
     // MARK: - Status
@@ -179,7 +179,7 @@ public struct SettingsRowButton: View {
 
     /// The icon is a nice-to-have, and on a narrow screen (iPhone portrait, a
     /// narrow iPad split view) the room is worth more to the title and value.
-    /// `keepsSymbol` is for a row whose icon carries meaning of its own.
+    /// `keepsSymbol` is for a row whose icon matters.
     private var shownSymbol: SFSymbol? {
         layout.widthConstrained && !keepsSymbol ? nil : symbol
     }

@@ -1,6 +1,6 @@
 # Layout
 
-Two answers decide most layouts: what device this is, and how much room one
+Two values decide most layouts: what device this is, and how much room one
 container has.
 
 ## The device
@@ -39,12 +39,12 @@ properties are usually enough:
 - `heightConstrained`: a wide phone.
 
 On macOS and tvOS the modifier does nothing. The environment falls back to
-`.padWide`, which is the right answer for both.
+`.padWide`, which is the right choice for both.
 
 ## One container
 
 ``ContainerLayout`` measures one container. A sidebar and a full window get
-different answers, which is the point. Put it on a container root:
+different results, which is the point. Put it on a container root:
 
 ```swift
 HStack {
@@ -55,7 +55,7 @@ HStack {
 ```
 
 Read it below with `@Environment(\.containerLayout)`. A view that installs the
-modifier cannot read its own result, so use ``ContainerLayoutReader``:
+modifier cannot read the result, so use ``ContainerLayoutReader``:
 
 ```swift
 ContainerLayoutReader { layout in

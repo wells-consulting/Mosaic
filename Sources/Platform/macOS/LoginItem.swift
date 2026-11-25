@@ -24,7 +24,7 @@
     /// registering a real login item.
     public protocol LoginItemControlling: Sendable {
 
-        /// The system's current answer.
+        /// The system's current status.
         var status: LoginItemStatus { get }
 
         /// Registers the login item.
@@ -44,7 +44,7 @@
         /// Creates the login item for the main app.
         public init() {}
 
-        /// The system's current answer for the main app.
+        /// The system's current status for the main app.
         public var status: LoginItemStatus {
             switch SMAppService.mainApp.status {
             case .enabled:
@@ -83,7 +83,7 @@
     @Observable
     public final class LoginItemState {
 
-        /// The system's current answer, refreshed after every change.
+        /// The system's current status, refreshed after every change.
         public private(set) var status: LoginItemStatus
 
         @ObservationIgnored private let control: any LoginItemControlling
@@ -103,7 +103,7 @@
         }
 
         /// True when the system says the app opens at login. A login item that
-        /// is waiting for approval reads as off.
+        /// is waiting for approval counts as off.
         public var opensAtLogin: Bool { status == .enabled }
 
         /// Registers or unregisters, then reads the status back: the system,

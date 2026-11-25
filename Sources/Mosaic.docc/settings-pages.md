@@ -1,8 +1,7 @@
 # Settings Pages
 
 A settings page has two shapes. iOS uses a list of system rows. tvOS and macOS
-use a page of sections and focusable rows. Mosaic gives each shape its own
-types.
+use a page of sections and focusable rows. Mosaic gives each shape a type.
 
 ## Pick a shape
 
@@ -88,7 +87,7 @@ status. `Status.warning` paints the value in the warning color. `Density.compact
 drops the minimum height and insets the label, for a flat list of rows.
 
 On a narrow screen the icon is dropped before the title is squeezed. Pass
-`keepsSymbol: true` only when the icon carries meaning of its own.
+`keepsSymbol: true` only when the icon matters.
 
 ## Cards and tables
 

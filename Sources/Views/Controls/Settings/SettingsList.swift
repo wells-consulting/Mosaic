@@ -43,7 +43,7 @@
                 content
             }
             .listStyle(.insetGrouped)
-            // The page draws its own background; a list background would cover it
+            // The page draws the background; a list background would cover it
             .scrollContentBackground(.hidden)
             .environment(\.defaultMinListRowHeight, 44)
             // Hosts may have applied a custom button style to the page. Inside

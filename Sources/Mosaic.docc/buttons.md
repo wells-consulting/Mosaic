@@ -53,7 +53,7 @@ Button("Play") { play() }
 ```
 
 ``MosaicGridButtonStyle`` is the borderless style for a grid cell. It draws no
-background or padding, so the cell's own content supplies the shape.
+background or padding, so the cell content supplies the shape.
 
 ## A group of controls
 
@@ -68,7 +68,7 @@ ButtonGroup {
 
 The children opt out of their own glass automatically, so only the parent's pill
 is visible. `spacing` takes `.standard` or `.none`. The group is iOS only; tvOS
-uses its own focus treatment.
+uses the system focus treatment.
 
 ## Overlay buttons
 

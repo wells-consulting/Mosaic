@@ -7,7 +7,7 @@ import SwiftUI
 
 /// A semantic place in the type scale.
 ///
-/// The system text styles answer most calls. The named cases below are for
+/// The system text styles cover most calls. The named cases below are for
 /// text with a job, where the right size depends on the platform.
 public enum PlatformFont {
 

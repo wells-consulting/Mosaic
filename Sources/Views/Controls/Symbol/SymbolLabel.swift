@@ -15,7 +15,7 @@ public struct SymbolLabel: View {
     public enum Layout: Hashable, Sendable {
         /// The icon takes a fixed column, so labels stack with their text lined up.
         case column
-        /// The icon sits at its own width, close to the text.
+        /// The icon takes the width it needs, close to the text.
         case inline
     }
 

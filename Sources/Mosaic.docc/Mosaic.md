@@ -12,7 +12,7 @@ views that read a token.
 
 `DeviceLayout` describes the device once at the app root. `ContainerLayout`
 measures one container, for views that need the room they actually have.
-`AdaptiveColumnsGrid` and the flow layouts use those answers.
+`AdaptiveColumnsGrid` and the flow layouts use those values.
 
 The platform differences are built in. A control picks its spacing, type and
 corner radius from `Platform`. The tvOS focus and macOS helpers live behind

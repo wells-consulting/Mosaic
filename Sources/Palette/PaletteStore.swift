@@ -25,11 +25,11 @@ public final class PaletteStore {
     public var current: any Palette = NeutralPalette()
 
     /// The id of the pristine placeholder shipped by this store, before the
-    /// hosting app installs its own palette.
+    /// hosting app installs a palette.
     private static let placeholderPaletteID = NeutralPalette().id
 
     /// True while `palette` is still the store's placeholder, i.e. the hosting
-    /// app hasn't installed its own palette yet.
+    /// app hasn't installed a palette yet.
     private var isUsingPlaceholderPalette: Bool {
         current.id == Self.placeholderPaletteID
     }
@@ -46,7 +46,7 @@ public final class PaletteStore {
     private init() {}
 }
 
-/// Neutral grayscale stand-in used only when an app has not installed its own
+/// Neutral grayscale stand-in used only when an app has not installed a
 /// palette. Guarantees first-frame content renders; it is not a product design.
 private struct NeutralPalette: Palette {
 

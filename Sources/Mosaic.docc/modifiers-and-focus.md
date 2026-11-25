@@ -72,7 +72,7 @@ card
 
 The overlay dims the unselected cards and puts a checkmark on the selected one.
 When `isActive` is false it does nothing. ``MosaicSelectionIndicator`` is the
-indicator on its own, for a view that manages its own layout.
+indicator alone, for a view that manages the layout itself.
 
 ## Navigation and messages
 

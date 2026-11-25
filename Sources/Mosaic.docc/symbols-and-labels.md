@@ -38,8 +38,8 @@ The `layout` decides where the icon sits:
 
 - `.column` gives the icon a fixed width, so labels stack with their text lined
   up. This is the default.
-- `.inline` lets the icon take its own width, for a status line beside other
-  text.
+- `.inline` lets the icon take the width it needs, for a status line beside
+  other text.
 
 `details` is a second line under the title. `badge` is a short value after the
 title. `addChevron` adds the trailing chevron for a row that opens something.

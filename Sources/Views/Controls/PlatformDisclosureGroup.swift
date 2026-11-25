@@ -38,7 +38,7 @@ public struct PlatformDisclosureGroup<Label: View, Content: View>: View {
     ///   - content: The content below the label.
     ///   - label: The always-visible label.
     ///
-    /// The group keeps its own expanded state.
+    /// The group keeps its expanded state.
     public init(
         @ViewBuilder content: () -> Content,
         @ViewBuilder label: () -> Label

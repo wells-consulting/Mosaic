@@ -18,7 +18,7 @@ public final class SettingsTableBuilder {
         /// An icon, a label and a value.
         case symbolLabel(String, String, SFSymbol)
 
-        /// A line of text on its own.
+        /// A line of text by itself.
         case text(String)
     }
 
@@ -29,7 +29,7 @@ public final class SettingsTableBuilder {
         self.rows = []
     }
 
-    /// Adds a line of text on its own.
+    /// Adds a line of text by itself.
     public func addRow(_ text: String) {
         rows.append(.text(text))
     }

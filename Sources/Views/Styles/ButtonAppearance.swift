@@ -8,7 +8,7 @@ import SwiftUI
 /// Semantic role for `prominenceButtonStyle(_:)`.
 public enum ButtonAppearance {
 
-    /// How much weight a neutral button carries.
+    /// How much weight a neutral button has.
     public enum Prominence {
 
         /// The quieter tier, for most buttons.

@@ -16,8 +16,8 @@ ExpandableTextView(
 ```
 
 The expanded text opens in a full-screen ``ScrollableTextView`` on iOS and tvOS
-and in a sheet on macOS. ``ScrollableTextView`` can also stand on its own when
-the whole view is long text.
+and in a sheet on macOS. ``ScrollableTextView`` can also stand alone when the
+whole view is long text.
 
 ## Form sections
 
@@ -57,7 +57,7 @@ enum LoadAction: String, Hashable {
 
 ErrorView(
     title: "Couldn’t load the library",
-    summary: "The server didn’t answer.",
+    summary: "The server didn’t respond.",
     actions: [.retry, .dismiss],
     onAction: { action in
         switch action {

@@ -13,7 +13,7 @@ public extension ButtonStyle where Self == MosaicGridButtonStyle {
 }
 
 /// A borderless button style for grid cells. It adds no background or padding,
-/// so the cell's own content draws the shape.
+/// so the cell content draws the shape.
 public struct MosaicGridButtonStyle: ButtonStyle {
 
     /// Creates the grid button style.

@@ -142,7 +142,7 @@ public extension View {
     /// 16pt on a phone.
     ///
     /// Put it on the content, not on a `TabView`. Padding the `TabView` itself
-    /// would inset its bar. A tvOS view adds its own horizontal padding.
+    /// would inset its bar. A tvOS view adds horizontal padding.
     func mosaicContentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
         #if os(iOS) || os(macOS)
             modifier(ContentInsetPaddingModifier(edges: edges))

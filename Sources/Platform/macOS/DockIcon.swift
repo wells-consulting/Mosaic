@@ -56,7 +56,7 @@
         /// of one scene.
         ///
         /// SwiftUI sets a window's identifier from the scene's id and adds a
-        /// suffix of its own, so this matches the start rather than the whole
+        /// suffix, so this matches the start and not the whole
         /// thing.
         public nonisolated static func counts(
             identifierPrefix prefix: String,

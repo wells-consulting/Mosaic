@@ -57,7 +57,7 @@ palette can add.
 ## Give the controls a layout
 
 `.mosaicInjectDeviceLayoutEnvironment()` reads the device and the rendered
-geometry once at the root and puts the answer in `@Environment(\.layout)`. On
+geometry once at the root and puts the result in `@Environment(\.layout)`. On
 macOS and tvOS it does nothing, because the default is already right. Views
 that need one container instead of the whole device use
 `.mosaicMeasuresContainerLayout()`.

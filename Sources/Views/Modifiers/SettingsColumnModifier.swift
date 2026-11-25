@@ -11,7 +11,7 @@
     /// width less a 16pt margin on iPhone.
     ///
     /// The inset goes into the safe area, not onto the frame. A scroll view
-    /// draws the navigation bar's scroll edge effect across its own width, so
+    /// draws the navigation bar's scroll edge effect across the full width, so
     /// a page framed to 600pt showed a 600pt band under a full-width bar. Safe
     /// area padding leaves the scroll view full width and insets only what it
     /// scrolls; a page with no scroll view is inset the same way.

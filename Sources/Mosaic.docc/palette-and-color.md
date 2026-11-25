@@ -85,7 +85,7 @@ PaletteStore.shared.setDefaultIfUnset(Daylight())
 
 ## Add app colors
 
-The shared roles cover chrome. An app with its own meanings, such as a battery
+The shared roles cover chrome. An app with extra meanings, such as a battery
 level or a genre, adds tokens without changing the protocol:
 
 ```swift
@@ -111,8 +111,8 @@ extension Palette {
 }
 ```
 
-Give each app its own prefix. `"one.*"` and `"two.*"` keep two apps that share
-Mosaic from colliding.
+Give each app a different prefix. `"one.*"` and `"two.*"` keep two apps that
+share Mosaic from colliding.
 
 ## Where to go next
 

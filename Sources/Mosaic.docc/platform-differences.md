@@ -1,7 +1,7 @@
 # Platform Differences
 
 Mosaic builds for iOS 26, tvOS 26 and macOS 26. Most of the shared API is the
-same everywhere. These are the places where a platform has its own answer.
+same everywhere. These are the places where a platform differs.
 
 ## The scales
 
@@ -25,7 +25,7 @@ watched from across the room. macOS follows the iOS values.
 Corner radius is the same on every platform: 8, 12, 16 or 20 points.
 
 The type scale is semantic. `.body`, `.headline` and the other standard styles
-use the system's own metrics. The named styles, such as `.note`, `.prose` and
+use the system metrics. The named styles, such as `.note`, `.prose` and
 `.settingsIntro`, pick a larger size on macOS because the system text styles
 are smaller there.
 
@@ -66,7 +66,7 @@ A Mac has services the other platforms do not:
 - `DockIcon` shows or hides the Dock icon for a menu-bar-only mode.
 - `FolderPicker` picks a folder.
 - `MainAppLoginItem` and `LoginItemState` drive "Open at login".
-  `LoginItemControlling` is the seam a test can use instead.
+  `LoginItemControlling` is the protocol a test can use instead.
 - `Clipboard` is available on macOS only. On iOS and tvOS the copy affordance is
   hidden.
 

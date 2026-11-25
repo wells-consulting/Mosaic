@@ -30,7 +30,7 @@ public extension View {
         func body(content: Content) -> some View {
             if insideButtonGroup {
                 // Parent `GlassButtonGroup` provides the shared pill — render the menu
-                // label inline without its own glass surface or extra padding.
+                // label inline without a glass surface or extra padding.
                 content
             } else {
                 // Standalone menu: same chrome dimensions as `GlassButtonGroup` AND

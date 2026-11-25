@@ -24,7 +24,7 @@ import SwiftUI
 /// `spacing` controls the gap between controls. `.standard` matches the system
 /// toolbar density. `.none` packs the controls against each other.
 ///
-/// No-op on tvOS, which uses its own focus treatments.
+/// No-op on tvOS, which uses the system focus treatments.
 public struct ButtonGroup<Content: View>: View {
 
     #if os(iOS)
@@ -34,7 +34,7 @@ public struct ButtonGroup<Content: View>: View {
     /// The gap between controls in the pill.
     public enum ContentSpacing {
 
-        /// No gap. Use for controls that read as one unit.
+        /// No gap. Use for controls that work as one unit.
         case none
 
         /// The system toolbar gap.
