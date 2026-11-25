@@ -65,10 +65,11 @@
             let ownPID = ProcessInfo.processInfo.processIdentifier
 
             // On-screen windows are only the current desktop's, front to back.
-            let windows = CGWindowListCopyWindowInfo(
-                [.optionOnScreenOnly, .excludeDesktopElements],
-                kCGNullWindowID,
-            ) as? [[String: Any]] ?? []
+            let windows =
+                CGWindowListCopyWindowInfo(
+                    [.optionOnScreenOnly, .excludeDesktopElements],
+                    kCGNullWindowID,
+                ) as? [[String: Any]] ?? []
 
             let front = windows.lazy
                 .filter { ($0[kCGWindowLayer as String] as? Int) == 0 }
@@ -77,7 +78,8 @@
                 .compactMap { NSRunningApplication(processIdentifier: $0) }
                 .first { $0.activationPolicy == .regular }
 
-            let next = front
+            let next =
+                front
                 ?? NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.finder").first
 
             guard let next else {

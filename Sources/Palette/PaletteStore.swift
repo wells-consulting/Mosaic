@@ -8,11 +8,10 @@ import SwiftUI
 
 /// Holds the app's active color `Palette`, published as a shared singleton.
 ///
-/// Reads of `palette` during SwiftUI `body` evaluation register with Observation
+/// Reads of `current` during SwiftUI `body` evaluation register with Observation
 /// tracking, so assigning a new palette invalidates every view that read a token.
-/// Tokens therefore resolve statically — `Theme.cardFill` reads
-/// `PaletteStore.shared.palette.cardFill` — and stay reactive without an
-/// environment injection path.
+/// Tokens therefore resolve statically. `PaletteStore.shared.current.cardFill`
+/// stays reactive without an environment injection path.
 @MainActor
 @Observable
 public final class PaletteStore {

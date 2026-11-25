@@ -7,7 +7,7 @@ import SwiftUI
 
 /// A layout that arranges its children horizontally, wrapping to the
 /// next line when the available width is exceeded. Children marked
-/// with `.appFlowFlexible()` expand to fill remaining row space.
+/// with `.mosaicFlowFlexible()` expand to fill remaining row space.
 public struct FlowLayout: Layout {
 
     var horizontalSpacing: CGFloat

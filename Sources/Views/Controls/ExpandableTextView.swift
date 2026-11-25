@@ -62,7 +62,7 @@ public struct ExpandableTextView: View {
             #if os(macOS)
                 .sheet(isPresented: $showFullText) {
                     ScrollableTextView(text: text, navigationBackground: navigationBackground)
-                        .frame(minWidth: 400, idealWidth: 480, minHeight: 300, idealHeight: 420)
+                    .frame(minWidth: 400, idealWidth: 480, minHeight: 300, idealHeight: 420)
                 }
             #else
                 .fullScreenCover(isPresented: $showFullText) {

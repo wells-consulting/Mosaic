@@ -15,15 +15,19 @@ public extension Color {
     /// resolves against the host trait environment and redraws on appearance change.
     init(light: Color, dark: Color) {
         #if canImport(UIKit)
-            self.init(uiColor: UIColor { traits in
-                traits.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
-            })
+            self.init(
+                uiColor: UIColor { traits in
+                    traits.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
+                }
+            )
         #elseif canImport(AppKit)
-            self.init(nsColor: NSColor(name: nil) { appearance in
-                appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
-                    ? NSColor(dark)
-                    : NSColor(light)
-            })
+            self.init(
+                nsColor: NSColor(name: nil) { appearance in
+                    appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+                        ? NSColor(dark)
+                        : NSColor(light)
+                }
+            )
         #endif
     }
 

@@ -119,7 +119,7 @@ public struct ScrollableTextView: View {
                     .containerBackground(for: .navigation) {
                         if let navigationBackground {
                             Rectangle().fill(navigationBackground)
-                                .transaction { $0.animation = nil }
+                            .transaction { $0.animation = nil }
                         }
                     }
                 #endif
@@ -167,7 +167,7 @@ public struct ScrollableTextView: View {
                     equalTo: scrollView.contentLayoutGuide.trailingAnchor
                 ),
                 label.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-                label.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
+                label.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             ])
 
             return scrollView

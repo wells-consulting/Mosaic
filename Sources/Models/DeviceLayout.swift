@@ -12,7 +12,7 @@ import Foundation
 /// classes with orientation: case names describe the rendered content area's shape
 /// (tall vs. wide), not the physical device orientation.
 ///
-/// Injected at the app root by `.injectDeviceLayout()`. The default environment value is
+/// Injected at the app root by `.mosaicInjectDeviceLayoutEnvironment()`. The default environment value is
 /// `.padWide`, which is a safe fallback for tvOS and macOS.
 public enum DeviceLayout: Sendable {
 

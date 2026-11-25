@@ -11,19 +11,20 @@ import SwiftUI
 
 extension ColorToken {
     /// Fill behind a focused `OverlayButton` on tvOS. Owned by this control,
-    /// not the base palette: apps fill it per scheme via `extras`, and the
-    /// accessor below keeps the historical default for schemes that don't.
+    /// not the base palette: apps fill it per scheme through `Palette.app`, and
+    /// the accessor below keeps the historical default for schemes that don't.
     public static let overlayNormal = ColorToken("mosaic.overlayNormal")
 }
 
 public extension Palette {
     /// Focus fill for `OverlayButton`. Falls back to a translucent
-    /// opposite-of-background fill, so palettes without extras render.
+    /// opposite-of-background fill, so palettes without an overlay fill render.
     var overlayNormal: Color {
-        color(.overlayNormal) ?? Color(
-            light: Color.white.opacity(0.80),
-            dark: Color.black.opacity(0.80)
-        )
+        color(.overlayNormal)
+            ?? Color(
+                light: Color.white.opacity(0.80),
+                dark: Color.black.opacity(0.80)
+            )
     }
 }
 

@@ -9,8 +9,8 @@ extension Platform {
 
     // MARK: Semantic
 
-    /// Semantic padding scale. Use `Theme.padding(.medium)` for CGFloat contexts
-    /// (spacing: parameters, calculated values) and `.appPadding(.medium)` for
+    /// Semantic padding scale. Use `Platform.padding(.medium)` for CGFloat contexts
+    /// (spacing: parameters, calculated values) and `.mosaicPadding(.medium)` for
     /// SwiftUI `.padding()` call sites.
     ///
     /// Values are platform-aware — tvOS uses larger spacing for comfortable
@@ -179,7 +179,7 @@ public extension View {
 // MARK: - Private modifiers
 
 #if os(iOS) || os(macOS)
-    /// Applies `Theme.contentInsetPadding` (32pt) on iPad and a narrower 16pt on iPhone,
+    /// Applies a 32pt content inset on iPad and a narrower 16pt on iPhone,
     /// so the same call site reads correctly on both form factors.
     private struct ContentInsetPaddingModifier: ViewModifier {
 

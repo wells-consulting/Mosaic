@@ -8,13 +8,15 @@ import SwiftUI
 extension View {
 
     /// Applies a pill-shaped capsule background to a display row,
-    /// matching the shape, height, and fill of `.appTextField()`.
+    /// matching the shape, height, and fill of `.mosaicRoundedTextFieldStyle()`.
     /// No-op on tvOS.
     public func mosaicFormRowBackground(
         _ neutralColor: Color,
         interactive: Bool,
-        nonInteractiveColor: Color = .init(light: Color.primary.opacity(0.05),
-                                           dark: Color.white.opacity(0.10))
+        nonInteractiveColor: Color = .init(
+            light: Color.primary.opacity(0.05),
+            dark: Color.white.opacity(0.10)
+        )
     ) -> some View {
         #if os(iOS)
             modifier(

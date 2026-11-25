@@ -10,7 +10,7 @@ import SwiftUI
 ///
 /// Centralises icon-only menu styling: `accessibilityLabel` is required here
 /// so it cannot be accidentally omitted. Platform-level visual treatment
-/// (glass pill effect, padding) is applied internally via `appGlassMenuStyle()`.
+/// (glass pill effect, padding) is applied internally via `mosaicGlassMenuContent()`.
 /// `tint` tints the trigger image to signal a non-default active state.
 public struct SymbolMenu<Content: View>: View {
 

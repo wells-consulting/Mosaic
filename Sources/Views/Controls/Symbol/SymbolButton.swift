@@ -12,7 +12,7 @@ import SwiftUI
 /// so it cannot be accidentally omitted, and `tint` covers the common case of
 /// a state-driven foreground color (e.g. a filled vs. outline heart icon).
 /// Platform-level visual treatment (glass effect, control size) is applied by
-/// the containing layout — `appGlassButton()` on `HeaderBar`, for example.
+/// the containing layout, inside a toolbar for example.
 public struct SymbolButton: View {
 
     let symbol: SFSymbol

@@ -11,13 +11,13 @@ import SwiftUI
 /// matching the grouped-control treatment the system applies to `ToolbarItemGroup` on iOS 26.
 ///
 /// Use this anywhere a small cluster of controls should read as one capsule:
-/// - `HeaderBar`'s actions / sort / status slots
+/// - A header's actions, sort and status slots
 /// - Image viewer / video player on-screen overlays where the system toolbar is hidden
 /// - Any custom inline control row
 ///
 /// Children opt out of their own per-control glass automatically via the
 /// `isInsideButtonGroup` environment value — drop `SymbolButton`, a `Menu` styled with
-/// `appGlassMenuStyle()`, or any `appGlassButton()` caller directly inside `content` and they
+/// `mosaicGlassMenuContent()`, or any `mosaicGlassButtonStyle()` caller directly inside `content` and they
 /// render as plain icons / labels inside the pill.
 ///
 /// `spacing` controls inter-control gaps (matches Images/system toolbar density):
@@ -84,9 +84,9 @@ public struct ButtonGroup<Content: View>: View {
                 content()
             }
             // Render any raw `Button` inside the group as borderless so we don't
-            // get a nested glass surface inside the pill. `SymbolButton` + `appButtonStyle`
-            // already pick this up via the env; this covers callers that pass plain
-            // `Button`s directly (e.g. `SelectionHeaderBar`).
+            // get a nested glass surface inside the pill. `SymbolButton` + `mosaicButtonStyle`
+            // already pick this up through the environment; this covers callers that pass plain
+            // `Button`s directly, for example in a header.
             .buttonStyle(.borderless)
             // Match Apple's toolbar convention: body-size text and symbols. No
             // `imageScale` boost — SF Symbols inherit the body font height so the
@@ -98,7 +98,7 @@ public struct ButtonGroup<Content: View>: View {
             .environment(\.insideButtonGroup, true)
             // 12pt horizontal + 14pt vertical mirrors Apple's `.glass(...).controlSize(.large)`
             // button chrome so a grouped pill is the same height as a standalone
-            // `appGlassButton()` button (~44pt total). Standalone menus use the same
+            // `mosaicGlassButtonStyle()` button (~44pt total). Standalone menus use the same
             // 14pt vertical via `AdaptiveMenuStyleModifier` for visual parity.
             .mosaicPadding(.horizontal, .large)
             .padding(.vertical, 12)

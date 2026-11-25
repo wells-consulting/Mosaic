@@ -7,23 +7,17 @@ import SwiftUI
 
 public extension View {
 
-    /// Bridges the semantic button roles onto a button style.
+    /// Bridges the semantic button roles onto the shared button style.
     ///
-    /// Under `AppChrome.custom` (the default) macOS stays native for the quiet
-    /// roles: `.neutral(.regular)`, `.cancel`, and `.close` map to the bordered
-    /// style. The emphasis roles (`.neutral(.prominent)`, `.confirm`,
-    /// `.destructive`, `.tinted`) render through the shared glass capsule
-    /// instead of `.borderedProminent`'s solid fill — System Settings' filled
-    /// buttons read as a translucent glass surface, and the shared path gives
-    /// that dark-modable look on macOS too. iOS/tvOS always use the custom
-    /// capsule shape.
+    /// A neutral role draws the gradient capsule with grain and a shadow. Its
+    /// prominence picks the lighter or darker tier. The other roles draw a
+    /// glass capsule tinted by the role: cancel uses the warning tint, close
+    /// the regular neutral fill, confirm the prominent neutral fill,
+    /// destructive the error tint, and tinted the color you pass. A button's
+    /// own `.destructive` role wins over the appearance.
     ///
-    /// Under `AppChrome.native` every role collapses onto the platform's own
-    /// styles — quiet roles to `.bordered`, emphasis roles to
-    /// `.borderedProminent` with the tint applied for `.tinted`. System
-    /// Settings' filled buttons are exactly that, so native chrome reads more
-    /// native than the custom analog. An app selects `.native` for macOS; see
-    /// ``AppChromeStore``.
+    /// On tvOS a focused neutral button turns white with dark text and scales
+    /// up. The other platforms keep the same fill.
     @ViewBuilder
     @MainActor
     func mosaicButtonStyle(
@@ -98,12 +92,13 @@ private struct NeutralCapsuleBackground: View {
             prominence == .prominent
             ? (palette.neutralProminentTop, palette.neutralProminentBottom)
             : (palette.neutralRegularTop, palette.neutralRegularBottom)
-        let grainOpacity: Double = switch density {
-        case .large:
-            prominence == .prominent ? 0.13 : 0.07
-        case .compact:
-            0
-        }
+        let grainOpacity: Double =
+            switch density {
+            case .large:
+                prominence == .prominent ? 0.13 : 0.07
+            case .compact:
+                0
+            }
         let highlightOpacity = prominence == .prominent ? 0.20 : 0.18
 
         ZStack {

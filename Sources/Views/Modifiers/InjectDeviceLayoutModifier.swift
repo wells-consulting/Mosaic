@@ -13,9 +13,9 @@ import SwiftUI
 
 public extension View {
 
-    /// Injects a computed `AppLayout` value into the environment based on device idiom
+    /// Injects a computed `DeviceLayout` value into the environment based on device idiom
     /// and rendered geometry. Apply once at the app root so all descendant views can read
-    /// `@Environment(\.appLayout)` without touching raw size class values.
+    /// `@Environment(\.layout)` without touching raw size class values.
     func mosaicInjectDeviceLayoutEnvironment() -> some View {
         #if os(iOS)
             modifier(MosaicDeviceLayoutEnvironmentModifier())

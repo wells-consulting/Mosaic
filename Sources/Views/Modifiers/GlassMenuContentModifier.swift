@@ -8,7 +8,7 @@ import SwiftUI
 public extension View {
 
     /// Applies `.glassEffect(.clear.interactive())` on iOS for `Menu` views.
-    /// Use this instead of `appGlassButton()` on `Menu`s, because
+    /// Use this instead of `mosaicGlassButtonStyle()` on `Menu`s, because
     /// `.buttonStyle(.glass(.clear))` crashes at runtime when cascaded to a
     /// `Menu`'s internal trigger button. Use this on the `content`, not the
     /// menu itself. Otherwise the content tap area does not receive the
@@ -34,7 +34,7 @@ public extension View {
                 content
             } else {
                 // Standalone menu: same chrome dimensions as `GlassButtonGroup` AND
-                // `appGlassButton()`'s `.glass(...).controlSize(.large)` button so all
+                // `mosaicGlassButtonStyle()`'s `.glass(...).controlSize(.large)` button so all
                 // three converge on ~44pt height with the same tint.
                 content
                     .padding(.vertical, 16)

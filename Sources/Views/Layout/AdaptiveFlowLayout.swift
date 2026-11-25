@@ -10,8 +10,8 @@ import SwiftUI
 /// priority (lowest priority first). If hiding all collapsible items
 /// still can't fit on one line, remaining items wrap to additional rows.
 ///
-/// Use `.appVisibilityPriority(_:)` to mark items as collapsible and
-/// `.appFlowFlexible()` to let items expand into remaining row space.
+/// Use `.mosaicVisibilityPriority(_:)` to mark items as collapsible and
+/// `.mosaicFlowFlexible()` to let items expand into remaining row space.
 public struct AdaptiveFlowLayout: Layout {
 
     var horizontalSpacing: CGFloat

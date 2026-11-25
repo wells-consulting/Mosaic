@@ -87,12 +87,12 @@ public protocol Palette: Sendable {
     /// Start → end colors of linear progress bars.
     var progress: [Color] { get }
 
-    // MARK: - App-defined extras
+    // MARK: - App-defined colors
 
     /// Per-app color slots beyond the frozen base roles above. Apps declare
     /// their own `ColorToken`s and fill them per scheme; readers use
     /// `color(_:)` with a fallback so schemes predating a token keep
-    /// rendering. Defaults to empty — apps without extras compile untouched.
+    /// rendering. Defaults to empty, so apps without app colors compile untouched.
     var app: [ColorToken: Color] { get }
 
     /// Resolves `token` against `app`, or nil when this scheme defines no

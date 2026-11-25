@@ -203,7 +203,7 @@ public struct ErrorView<Action: RawRepresentable & Hashable>: View where Action.
                     .mosaicFont(.caption)
             }
         }
-        // pad-audit: keep — uses Theme.spacing scale (different from Theme.padding)
+        // pad-audit: keep, uses the Platform.spacing scale (different from Platform.padding)
         .padding(.top, Platform.spacing(.large))
     }
 
