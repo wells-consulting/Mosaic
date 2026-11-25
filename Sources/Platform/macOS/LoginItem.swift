@@ -24,12 +24,16 @@
     /// registering a real login item.
     public protocol LoginItemControlling: Sendable {
 
+        /// The system's current answer.
         var status: LoginItemStatus { get }
 
+        /// Registers the login item.
         func register() throws
 
+        /// Removes the login item.
         func unregister() throws
 
+        /// Opens System Settings on the Login Items pane.
         func openSystemSettings()
     }
 
