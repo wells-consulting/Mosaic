@@ -12,8 +12,9 @@ import Foundation
 /// classes with orientation: case names describe the rendered content area's shape
 /// (tall vs. wide), not the physical device orientation.
 ///
-/// Injected at the app root by `.mosaicInjectDeviceLayoutEnvironment()`. The default environment value is
-/// `.padWide`, which is a safe fallback for tvOS and macOS.
+/// Injected at the app root by `.mosaicInjectDeviceLayoutEnvironment()`. The
+/// default environment value is `.padWide`, which is a safe fallback for tvOS
+/// and macOS.
 public enum DeviceLayout: Sendable {
 
     /// Phone with a taller-than-wide content area.
@@ -33,10 +34,12 @@ public enum DeviceLayout: Sendable {
 
     // MARK: - Convenience
 
+    /// True for a phone in either orientation.
     public var isPhone: Bool {
         self == .phoneTall || self == .phoneWide
     }
 
+    /// True for an iPad at full width or in a split view.
     public var isPad: Bool {
         self == .padTall || self == .padWide || self == .padCompact
     }
