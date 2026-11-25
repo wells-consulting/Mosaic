@@ -15,6 +15,12 @@
     @MainActor
     public enum DockIcon {
 
+        /// Shows or hides the Dock icon for the current window set.
+        ///
+        /// - Parameters:
+        ///   - hidesDockIcon: Whether the app wants a menu-bar-only mode.
+        ///   - counts: Which windows should bring the icon back. The default
+        ///     counts every window that can become main.
         public static func update(
             hidesDockIcon: Bool,
             counts: @MainActor (NSWindow) -> Bool = { $0.canBecomeMain },
@@ -33,6 +39,12 @@
             NSApp.setActivationPolicy(policy)
         }
 
+        /// Returns the activation policy for a menu-bar preference and a window
+        /// count, without touching the app.
+        ///
+        /// - Parameters:
+        ///   - hidesDockIcon: Whether the app wants a menu-bar-only mode.
+        ///   - hasWindow: Whether a window that counts is visible.
         public nonisolated static func policy(
             hidesDockIcon: Bool,
             hasWindow: Bool,

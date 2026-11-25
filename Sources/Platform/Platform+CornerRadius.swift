@@ -21,6 +21,7 @@ public extension Platform {
         case xlarge = 20
     }
 
+    /// Returns the points for a corner radius step.
     static func cornerRadius(_ size: CornerRadius) -> CGFloat {
         size.rawValue
     }

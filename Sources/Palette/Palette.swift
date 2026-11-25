@@ -57,6 +57,7 @@ public protocol Palette: Sendable {
 
     // MARK: - Tints
 
+    /// Accent fill for controls, indicators and selected rows.
     var accentTint: Color { get }
 
     /// Tint for bar chrome that sits under system-drawn labels — the tab-bar
@@ -65,18 +66,24 @@ public protocol Palette: Sendable {
     /// would shout.
     var tabBarTint: Color { get }
 
+    /// Fill for a destructive action or an error state.
     var errorTint: Color { get }
 
+    /// Fill for a caution or a pending state.
     var warningTint: Color { get }
 
+    /// Fill for a healthy or completed state.
     var successTint: Color { get }
 
     // MARK: - Labels
 
+    /// Text and symbol color for accent content.
     var accentLabel: Color { get }
 
+    /// Text and symbol color for an error.
     var errorLabel: Color { get }
 
+    /// Text and symbol color for a warning.
     var warningLabel: Color { get }
 
     // MARK: - Gradients

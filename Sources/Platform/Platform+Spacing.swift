@@ -50,12 +50,14 @@ extension Platform {
         }
     }
 
+    /// Returns the points for a spacing step.
     public static func spacing(_ size: SpacingSize) -> CGFloat {
         size.value
     }
 
     // MARK: Context
 
+    /// Spacing for a specific job, where a named step would not say enough.
     public enum SpacingContext {
 
         /// Spacing for rows in header bar
@@ -103,6 +105,7 @@ extension Platform {
         }
     }
 
+    /// Returns the points for a spacing context.
     public static func spacing(_ context: SpacingContext) -> CGFloat {
         context.value
     }

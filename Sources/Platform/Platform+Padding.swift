@@ -50,12 +50,14 @@ extension Platform {
         }
     }
 
+    /// Returns the points for a padding step.
     public static func padding(_ size: PaddingSize) -> CGFloat {
         size.value
     }
 
     // MARK: Constants
 
+    /// Padding for a specific job, where a named step would not say enough.
     public enum PaddingContext {
         /// Vertical padding from the header bar to the top of the grid.
         case headerbarToGrid
@@ -98,6 +100,7 @@ extension Platform {
         }
     }
 
+    /// Returns the points for a padding context.
     public static func padding(_ context: PaddingContext) -> CGFloat {
         context.value
     }
@@ -107,6 +110,7 @@ extension Platform {
 
 public extension View {
 
+    /// Pads the view by a step in the shared scale.
     func mosaicPadding(
         _ edges: Edge.Set = .all,
         _ size: Platform.PaddingSize,
@@ -114,6 +118,7 @@ public extension View {
         padding(edges, Platform.padding(size))
     }
 
+    /// Pads every edge by a step in the shared scale.
     func mosaicPadding(
         _ size: Platform.PaddingSize,
     ) -> some View {
@@ -125,6 +130,7 @@ public extension View {
 
 public extension View {
 
+    /// Pads the view by the value for a named context.
     func mosaicPadding(
         _ edges: Edge.Set = .all,
         _ context: Platform.PaddingContext,
@@ -132,9 +138,11 @@ public extension View {
         padding(edges, context.value)
     }
 
-    /// TabView for its outer chrome — applying padding to the TabView itself
-    /// would inset the tab bar. Individual tvOS views add their own horizontal
-    /// padding where needed.
+    /// Insets page content by the platform's content inset: 32pt on iPad and
+    /// 16pt on a phone.
+    ///
+    /// Put it on the content, not on a `TabView`. Padding the `TabView` itself
+    /// would inset its bar. A tvOS view adds its own horizontal padding.
     func mosaicContentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
         #if os(iOS) || os(macOS)
             modifier(ContentInsetPaddingModifier(edges: edges))
@@ -143,6 +151,7 @@ public extension View {
         #endif
     }
 
+    /// Adds the 60pt modal inset on tvOS. No-op elsewhere.
     func mosaicModalContentInsetPadding(_ edges: Edge.Set = .horizontal) -> some View {
         #if os(tvOS)
             padding(edges, 60)
@@ -151,6 +160,8 @@ public extension View {
         #endif
     }
 
+    /// Keeps an iOS settings page in its centered column and adds a small
+    /// horizontal inset on macOS. No-op on tvOS.
     func mosaicSettingsContentInsetPadding() -> some View {
         #if os(iOS)
             modifier(SettingsContentInsetPaddingModifier())

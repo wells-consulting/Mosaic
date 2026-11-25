@@ -15,6 +15,7 @@ import Foundation
 /// no-UIKit rule, so iOS could use `UIPasteboard` here later.
 public enum Clipboard {
 
+    /// True on a platform with a clipboard. False on iOS and tvOS.
     public static var isAvailable: Bool {
         #if os(macOS)
             true
@@ -23,6 +24,8 @@ public enum Clipboard {
         #endif
     }
 
+    /// Replaces the clipboard with `text`. Does nothing where the clipboard
+    /// is unavailable.
     public static func copy(_ text: String) {
         #if os(macOS)
             NSPasteboard.general.clearContents()

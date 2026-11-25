@@ -37,8 +37,10 @@
     /// under Login Items where the person can turn it off without the app.
     public struct MainAppLoginItem: LoginItemControlling {
 
+        /// Creates the login item for the main app.
         public init() {}
 
+        /// The system's current answer for the main app.
         public var status: LoginItemStatus {
             switch SMAppService.mainApp.status {
             case .enabled:
@@ -52,14 +54,17 @@
             }
         }
 
+        /// Registers the app as a login item.
         public func register() throws {
             try SMAppService.mainApp.register()
         }
 
+        /// Removes the app from the login items.
         public func unregister() throws {
             try SMAppService.mainApp.unregister()
         }
 
+        /// Opens System Settings on the Login Items pane.
         public func openSystemSettings() {
             SMAppService.openSystemSettingsLoginItems()
         }
@@ -74,12 +79,16 @@
     @Observable
     public final class LoginItemState {
 
+        /// The system's current answer, refreshed after every change.
         public private(set) var status: LoginItemStatus
 
         @ObservationIgnored private let control: any LoginItemControlling
 
         @ObservationIgnored private let log: Timber
 
+        /// - Parameters:
+        ///   - control: The login item to drive. Pass a fake in tests.
+        ///   - log: Where a failed register or unregister is recorded.
         public init(
             control: any LoginItemControlling = MainAppLoginItem(),
             log: Timber = Timber(subsystem: "Mosaic", category: "LoginItem"),
@@ -89,6 +98,8 @@
             self.status = control.status
         }
 
+        /// True when the system says the app opens at login. A login item that
+        /// is waiting for approval reads as off.
         public var opensAtLogin: Bool { status == .enabled }
 
         /// Registers or unregisters, then reads the status back: the system,
@@ -110,10 +121,13 @@
             refresh()
         }
 
+        /// Reads the system's status again, for when the person changed it in
+        /// System Settings.
         public func refresh() {
             status = control.status
         }
 
+        /// Opens System Settings on the Login Items pane.
         public func openSystemSettings() {
             control.openSystemSettings()
         }

@@ -18,8 +18,10 @@
 /// sharing Mosaic can never collide.
 public struct ColorToken: Hashable, Sendable {
 
+    /// The token's namespaced identifier, such as `"one.solarEnergy"`.
     public let id: String
 
+    /// Creates a token from a namespaced identifier.
     public init(_ id: String) {
         self.id = id
     }

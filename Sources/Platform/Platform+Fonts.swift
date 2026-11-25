@@ -5,7 +5,13 @@
 
 import SwiftUI
 
+/// A semantic place in the type scale.
+///
+/// The system text styles answer most calls. The named cases below are for
+/// text with a job, where the right size depends on the platform.
 public enum PlatformFont {
+
+    /// A small badge label.
     case badge
     case body
     case callout
@@ -14,9 +20,18 @@ public enum PlatformFont {
     case footnote
     case headline
     case largeTitle
+
+    /// One line under a control: what a number covers, when it was read, what
+    /// a switch does.
     case note
+
+    /// Sentences and paragraphs: a story, a card's explanation, a caveat.
     case prose
+
+    /// A helper line on a settings page.
     case settingsFootnote
+
+    /// An intro paragraph on a settings page.
     case settingsIntro
     case subheadline
     case title
@@ -177,6 +192,10 @@ public extension View {
         let compactFont: Font
         let regularFont: Font
 
+        /// - Parameters:
+        ///   - compactFont: The font for a width-constrained layout, such as an
+        ///     iPhone or a narrow split view.
+        ///   - regularFont: The font for a regular-width layout.
         public init(compactFont: Font, regularFont: Font) {
             self.compactFont = compactFont
             self.regularFont = regularFont
