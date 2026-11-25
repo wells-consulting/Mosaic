@@ -43,11 +43,26 @@ against this checkout, and how to tag and re-pin it. This file is the rules.
 - The public API is shared by two apps, so a rename or a removed default is a
   breaking change in both. Add a default instead of changing one.
 
+## Doc comments
+
+The public API is also the documentation site, so a public doc comment is
+reference material, not conversation. Add these on top of what VOICE.md says:
+
+- Summary sentence first, then a discussion paragraph only if there is a
+  gotcha: a fallback, a platform difference, a range.
+- `- Parameter`, `- Returns` and `- Throws` on methods and initializers.
+- One short example when the call is easier to show than to describe.
+- Obvious constants and enum cases stay blank.
+
+The guides live in `Sources/Mosaic.docc`. Read them before changing a control
+they describe.
+
 ## Build and test
 
 ```sh
 swift test
-Scripts/format.sh    # swift format
+Scripts/format.sh       # swift format
+Scripts/docs.sh         # builds the DocC guides for iOS and macOS
 Scripts/verify-apps.sh  # builds the app and the app against this checkout
 ```
 
