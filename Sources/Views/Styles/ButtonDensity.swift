@@ -13,7 +13,10 @@ import SwiftUI
 /// existing call site on `large`.
 public enum ButtonDensity: Sendable {
 
+    /// The roomy tier, built for media-player controls.
     case large
+
+    /// The tighter tier, for ordinary app chrome.
     case compact
 
     var horizontalPadding: CGFloat {

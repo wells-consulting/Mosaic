@@ -15,15 +15,14 @@ import SwiftUI
 /// - Image viewer / video player on-screen overlays where the system toolbar is hidden
 /// - Any custom inline control row
 ///
-/// Children opt out of their own per-control glass automatically via the
-/// `isInsideButtonGroup` environment value — drop `SymbolButton`, a `Menu` styled with
-/// `mosaicGlassMenuContent()`, or any `mosaicGlassButtonStyle()` caller directly inside `content` and they
-/// render as plain icons / labels inside the pill.
+/// Children opt out of their own per-control glass automatically through the
+/// `insideButtonGroup` environment value. Drop `SymbolButton`, a `Menu` styled
+/// with `mosaicGlassMenuContent()`, or any `mosaicGlassButtonStyle()` caller
+/// directly inside `content`, and they render as plain icons or labels inside
+/// the pill.
 ///
-/// `spacing` controls inter-control gaps (matches Images/system toolbar density):
-/// - `.medium` (default): standard cluster density, works for both icon-only and text+icon mixes
-/// - `.large`: when you want extra breathing room (rare — usually density should match the tab bar)
-/// - `.small` or `.xsmall`: tightly packed status indicators
+/// `spacing` controls the gap between controls. `.standard` matches the system
+/// toolbar density. `.none` packs the controls against each other.
 ///
 /// No-op on tvOS, which uses its own focus treatments.
 public struct ButtonGroup<Content: View>: View {
@@ -32,8 +31,13 @@ public struct ButtonGroup<Content: View>: View {
         @Environment(\.layout) private var layout
     #endif
 
+    /// The gap between controls in the pill.
     public enum ContentSpacing {
+
+        /// No gap. Use for controls that read as one unit.
         case none
+
+        /// The system toolbar gap.
         case standard
     }
 
@@ -46,6 +50,10 @@ public struct ButtonGroup<Content: View>: View {
     private let content: () -> Content
 
     #if os(iOS)
+        /// - Parameters:
+        ///   - spacing: The gap between controls. Defaults to `.standard`.
+        ///   - glass: The pill's glass. Defaults to a faint white tint.
+        ///   - content: The controls in the group.
         public init(
             spacing: ContentSpacing = .standard,
             glass: Glass? = nil,
@@ -56,6 +64,9 @@ public struct ButtonGroup<Content: View>: View {
             self.contentSpacing = spacing
         }
     #else
+        /// - Parameters:
+        ///   - spacing: The gap between controls. Defaults to `.standard`.
+        ///   - content: The controls in the group.
         public init(
             spacing: ContentSpacing = .standard,
             @ViewBuilder content: @escaping () -> Content,

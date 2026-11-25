@@ -19,6 +19,7 @@ public extension View {
 
 #if os(tvOS)
     public extension ButtonStyle where Self == MosaicInertRowButtonStyle {
+        /// An informational row that takes focus without acting.
         static var mosaicInertRow: MosaicInertRowButtonStyle {
             .init()
         }
@@ -30,6 +31,7 @@ public extension View {
     /// from interactive buttons.
     public struct MosaicInertRowButtonStyle: ButtonStyle {
 
+        /// Creates the inert row button style.
         public init() {}
 
         @Environment(\.isFocused) private var isFocused

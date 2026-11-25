@@ -47,6 +47,11 @@ public struct OverlayButton: View {
 
     // MARK: - Initializer
 
+    /// - Parameters:
+    ///   - symbol: The icon above the label.
+    ///   - label: The text below the icon.
+    ///   - tint: The symbol and text color. Defaults to white.
+    ///   - action: What the button runs when pressed.
     public init(
         symbol: SFSymbol,
         label: String,

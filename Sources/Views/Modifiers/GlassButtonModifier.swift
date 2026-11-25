@@ -48,12 +48,16 @@ public extension View {
     }
 
     public extension ButtonStyle where Self == StandaloneGlassButtonStyle {
+        /// A standalone glass pill for a toolbar or inline button.
         static var mosaicGlass: StandaloneGlassButtonStyle {
             .init()
         }
     }
 
+    /// The glass pill behind `mosaicGlassButtonStyle()`.
     public struct StandaloneGlassButtonStyle: ButtonStyle {
+
+        /// Creates the glass button style.
         public init() {}
         public func makeBody(configuration: Configuration) -> some View {
             configuration.label

@@ -149,6 +149,7 @@ private struct NeutralCapsuleBackground: View {
 /// flat dark background, a glass material has nothing to blur and reads
 /// as a flat opaque fill.
 public extension ButtonStyle where Self == MosaicProminenceButtonStyle {
+    /// A capsule button in a semantic role and density.
     static func mosaic(
         _ appearance: ButtonAppearance = .neutral(.regular),
         density: ButtonDensity = .large,
@@ -157,8 +158,15 @@ public extension ButtonStyle where Self == MosaicProminenceButtonStyle {
     }
 }
 
+/// The capsule button style behind `.mosaicButtonStyle(_:density:)`.
+///
+/// Use the view modifier unless you need the style itself, for example to
+/// apply it inside a custom control.
 public struct MosaicProminenceButtonStyle: ButtonStyle {
 
+    /// - Parameters:
+    ///   - appearance: The semantic role. Defaults to `.neutral(.regular)`.
+    ///   - density: The sizing tier. Defaults to `.large`.
     public init(
         appearance: ButtonAppearance = .neutral(.regular),
         density: ButtonDensity = .large,
