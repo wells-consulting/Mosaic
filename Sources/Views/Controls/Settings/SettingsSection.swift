@@ -12,14 +12,14 @@ import SwiftUI
 /// directly — it guarantees every section has the same visual rhythm.
 ///
 /// ```swift
-/// SettingsSection("Cache", isFirstSection: true) {
+/// SettingsSection("Cache") {
 ///     clearImageCacheButton
 ///     rebuildSearchIndexButton
 /// }
 /// ```
 ///
-/// The first section on a page should pass `isFirstSection: true` to avoid
-/// extra top spacing that separates subsequent sections from one another.
+/// The page supplies the gap between sections, so the first section needs
+/// nothing special.
 public struct SettingsSection<Content: View>: View {
 
     // MARK: - Fields
