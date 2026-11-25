@@ -16,6 +16,7 @@ public struct ContainerLayoutReader<Content: View>: View {
 
     @ViewBuilder private let content: (ContainerLayout) -> Content
 
+    /// - Parameter content: Builds the view from the measured container.
     public init(@ViewBuilder content: @escaping (ContainerLayout) -> Content) {
         self.content = content
     }

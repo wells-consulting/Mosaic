@@ -13,11 +13,15 @@ public struct FlowLayout: Layout {
     var horizontalSpacing: CGFloat
     var verticalSpacing: CGFloat
 
+    /// - Parameters:
+    ///   - horizontalSpacing: The gap between items in a row.
+    ///   - verticalSpacing: The gap between rows.
     public init(horizontalSpacing: CGFloat = 8, verticalSpacing: CGFloat = 8) {
         self.horizontalSpacing = horizontalSpacing
         self.verticalSpacing = verticalSpacing
     }
 
+    /// Returns the size the rows need for a proposal.
     public func sizeThatFits(
         proposal: ProposedViewSize,
         subviews: Subviews,
@@ -38,6 +42,8 @@ public struct FlowLayout: Layout {
         return CGSize(width: width, height: rows.size.height)
     }
 
+    /// Places the subviews in `bounds`, wrapping to a new row when the next
+    /// item does not fit.
     public func placeSubviews(
         in bounds: CGRect,
         proposal: ProposedViewSize,

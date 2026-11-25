@@ -58,6 +58,11 @@ public struct AdaptiveColumnsGrid<Content: View>: View {
 
     // MARK: - Initializer
 
+    /// - Parameters:
+    ///   - minimumColumnWidth: The narrowest a column may be. When nil, the
+    ///     grid uses the platform default.
+    ///   - spacing: The gap between columns and between rows.
+    ///   - content: The cells. They are laid out in reading order.
     public init(
         minimumColumnWidth: CGFloat? = nil,
         spacing: CGFloat = Platform.spacing(.small),

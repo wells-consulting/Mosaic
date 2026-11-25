@@ -17,11 +17,15 @@ public struct AdaptiveFlowLayout: Layout {
     var horizontalSpacing: CGFloat
     var verticalSpacing: CGFloat
 
+    /// - Parameters:
+    ///   - horizontalSpacing: The gap between items in a row.
+    ///   - verticalSpacing: The gap between rows.
     public init(horizontalSpacing: CGFloat = 8, verticalSpacing: CGFloat = 8) {
         self.horizontalSpacing = horizontalSpacing
         self.verticalSpacing = verticalSpacing
     }
 
+    /// Returns the size the rows need for a proposal.
     public func sizeThatFits(
         proposal: ProposedViewSize,
         subviews: Subviews,
@@ -40,6 +44,8 @@ public struct AdaptiveFlowLayout: Layout {
         return CGSize(width: width, height: result.size.height)
     }
 
+    /// Places the visible subviews in `bounds`. Hidden ones go off-screen so
+    /// their symbols keep their intrinsic size.
     public func placeSubviews(
         in bounds: CGRect,
         proposal: ProposedViewSize,
