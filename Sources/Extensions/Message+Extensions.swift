@@ -14,6 +14,7 @@ public extension Message.Kind {
         self == .text ? nil : symbol
     }
 
+    /// The label color for the message's kind.
     @MainActor
     var symbolTint: Color {
         switch self {
@@ -24,6 +25,7 @@ public extension Message.Kind {
         }
     }
 
+    /// The fill behind the message's kind, or clear.
     @MainActor
     var backgroundTint: Color {
         switch self {

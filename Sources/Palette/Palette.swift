@@ -109,14 +109,23 @@ public protocol Palette: Sendable {
 }
 
 public extension Palette {
+
+    /// Defaults to `accentTint`.
     var tabBarTint: Color { accentTint }
+
+    /// The tint for a regular glass surface.
     var glassRegularTint: Color { .white.opacity(0.08) }
+
+    /// The tint for a prominent glass surface.
     var glassProminentTint: Color { neutralProminentBottom }
 }
 
 public extension Palette {
+
+    /// No app colors by default.
     var app: [ColorToken: Color] { [:] }
 
+    /// Looks the token up in `app`.
     func color(_ token: ColorToken) -> Color? {
         app[token]
     }

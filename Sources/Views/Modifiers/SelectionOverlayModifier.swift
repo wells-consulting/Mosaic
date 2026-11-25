@@ -55,6 +55,11 @@ public struct MosaicSelectionIndicator: View {
     var selectedSymbol: SFSymbol = .checkmark_circle_fill
     var unselectedSymbol: SFSymbol?
 
+    /// - Parameters:
+    ///   - isSelected: Whether the card is selected.
+    ///   - selectedSymbol: The icon for a selected card.
+    ///   - unselectedSymbol: The icon for an unselected card. When nil, the
+    ///     indicator draws an empty circle.
     public init(
         isSelected: Bool,
         selectedSymbol: SFSymbol = .checkmark_circle_fill,

@@ -6,6 +6,12 @@
 import SwiftUI
 
 public extension View {
+
+    /// Puts the view on a glass panel tinted by `tint`.
+    ///
+    /// - Parameters:
+    ///   - tint: The color behind the glass. It is faded before use.
+    ///   - cornerRadius: The panel's corner radius. Defaults to 16 points.
     func mosaicGlassBackground(_ tint: Color, cornerRadius: CGFloat = 16) -> some View {
         modifier(MosaicGlassBackgroundModifer(tint: tint, cornerRadius: cornerRadius))
     }

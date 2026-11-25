@@ -26,7 +26,8 @@ public extension View {
 
 // MARK: - TVOSFocusEffect
 
-/// Controls the tvOS focus visual applied by `cardFocus(hasFocus:tvOS:)`.
+/// Controls the tvOS focus visual applied by
+/// `mosaicCardFocus(hasFocus:tvOS:scale:)`.
 public enum TVOSFocusEffect {
     /// tvOS: native `.hoverEffect(.highlight)` raised-card ring. iOS: spotlight.
     /// Use for cards where the tvOS hover lift is the preferred focus visual.
@@ -38,6 +39,7 @@ public enum TVOSFocusEffect {
 
 // MARK: - CardFocusModifier
 
+/// Applies the card focus effect for the current platform.
 public struct MosaicCardFocusModifier: ViewModifier {
 
     let hasFocus: Bool

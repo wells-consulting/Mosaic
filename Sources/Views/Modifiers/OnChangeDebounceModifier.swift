@@ -8,6 +8,12 @@ import SwiftUI
 
 public extension View {
 
+    /// Runs `perform` after `value` stops changing for `delay` seconds.
+    ///
+    /// - Parameters:
+    ///   - value: The value to watch.
+    ///   - delay: The quiet period in seconds. Defaults to 0.5.
+    ///   - action: The work to run with the settled value.
     func mosaicOnChangeDebounced<Value: Equatable>(
         of value: Value,
         delay: Double = 0.5,
@@ -17,12 +23,17 @@ public extension View {
     }
 }
 
+/// Watches a value and runs its action after the value settles.
 public struct MosaicDebouncedChangeModifier<Value: Equatable>: ViewModifier {
 
     let value: Value
     let delay: Double
     let action: (Value) -> Void
 
+    /// - Parameters:
+    ///   - value: The value to watch.
+    ///   - delay: The quiet period in seconds.
+    ///   - action: The work to run with the settled value.
     public init(
         value: Value,
         delay: Double,

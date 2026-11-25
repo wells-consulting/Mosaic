@@ -5,13 +5,27 @@
 
 import SwiftUI
 
+/// How a scroll view's content changes, which decides whether the scroll
+/// indicator helps.
 public enum ScrollContentDisposition {
+
+    /// Content that changes page by page.
     case paged
+
+    /// Content that stays put, such as a settings page.
     case fixed
 }
 
 public extension View {
 
+    /// Sets the scroll indicator for a scroll view.
+    ///
+    /// A vertical, fixed scroll view keeps the indicator on iOS. Everything
+    /// else hides it.
+    ///
+    /// - Parameters:
+    ///   - axis: The scroll axis.
+    ///   - disposition: How the content changes.
     func mosaicScrollView(
         _ axis: Axis.Set,
         source disposition: ScrollContentDisposition

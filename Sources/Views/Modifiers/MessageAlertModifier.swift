@@ -7,6 +7,11 @@ import Motley
 import SwiftUI
 
 public extension View {
+
+    /// Presents a message as an alert while the binding is not nil, then
+    /// clears it when the person taps OK.
+    ///
+    /// - Parameter message: The message to show.
     func mosaicMessageAlert(_ message: Binding<Message?>) -> some View {
         modifier(MosaicMessageAlertModifier(message: message))
     }

@@ -8,6 +8,13 @@ import SwiftUI
 /// Renders linear `ProgressView`s as a gradient-filled capsule, matching
 /// the look of the card `ProgressBar` instead of the system's flat tint.
 public extension ProgressViewStyle where Self == MosaicGradientProgressViewStyle {
+
+    /// A linear progress view filled with a gradient.
+    ///
+    /// - Parameters:
+    ///   - colors: The gradient stops. Defaults to the palette's progress
+    ///     colors.
+    ///   - trackHeight: The bar's height. Defaults to 6 points.
     static func mosaicGradient(
         _ colors: [Color] = PaletteStore.shared.current.progress,
         trackHeight: CGFloat = 6
@@ -16,6 +23,7 @@ public extension ProgressViewStyle where Self == MosaicGradientProgressViewStyle
     }
 }
 
+/// The gradient progress style behind `.progressViewStyle(.mosaicGradient())`.
 public struct MosaicGradientProgressViewStyle: ProgressViewStyle {
 
     let trackHeight: CGFloat
