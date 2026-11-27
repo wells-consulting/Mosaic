@@ -28,6 +28,7 @@ build() {
         -scheme Mosaic \
         -destination "$destination" \
         -derivedDataPath "$derived_data" \
+        -skipPackagePluginValidation \
         -quiet >"$log" 2>&1; then
         echo "FAIL  $platform docs did not build"
         grep -E "error:" "$log" | head -20

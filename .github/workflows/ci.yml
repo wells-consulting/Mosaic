@@ -16,7 +16,7 @@ concurrency:
 jobs:
   test:
     name: Test
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v5
         with:
@@ -30,7 +30,7 @@ jobs:
 
   docs:
     name: Build Documentation
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v5
         with:
@@ -40,7 +40,7 @@ jobs:
 
   platforms:
     name: Build ${{ matrix.destination }}
-    runs-on: macos-26
+    runs-on: xcode-27
     strategy:
       fail-fast: false
       matrix:
@@ -54,4 +54,5 @@ jobs:
           xcodebuild -scheme Mosaic
           -destination "generic/platform=${{ matrix.destination }}"
           -derivedDataPath "$RUNNER_TEMP/dd"
+          -skipPackagePluginValidation
           CODE_SIGNING_ALLOWED=NO -quiet build
