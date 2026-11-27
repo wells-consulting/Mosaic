@@ -1,7 +1,7 @@
 # ``Mosaic``
 
-The shared SwiftUI toolkit behind the app and the app: the controls, cards,
-palette and platform fallbacks that make the apps look like one.
+A few pieces of SwiftUI I got tired of rewriting: the controls, cards, palette
+and platform fallbacks that keep an app looking like itself.
 
 ## Overview
 

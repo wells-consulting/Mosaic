@@ -1,15 +1,15 @@
 # Agent guide for Mosaic
 
-Mosaic is the shared SwiftUI toolkit: the controls, cards, palette and platform
-fallbacks that make the app and the app look like the same app. Both link it
-by version, so one app compiling proves nothing about the other.
+Mosaic is a few pieces of SwiftUI: the controls, cards, palette and platform
+fallbacks that keep an app looking like itself. Apps link it by version, so a
+change isn't live until it's tagged.
 
 Read [VOICE.md](VOICE.md) before you write a comment, a doc comment, a name, a
 log message, UI text or a commit message. If this file and VOICE.md disagree,
 VOICE.md wins. Text a control shows also follows the app that shows it.
 
-`mosaic-change` in `.agents/skills/` is the procedure: building both apps
-against this checkout, and how to tag and re-pin it. This file is the rules.
+`mosaic-change` in `.agents/skills/` is the procedure: building it, proving it,
+and how to tag it. This file is the rules.
 
 ## The package
 
@@ -27,7 +27,7 @@ against this checkout, and how to tag and re-pin it. This file is the rules.
 ## Requirements
 
 - Swift 6.4 tools, Swift 6 language mode, strict concurrency.
-- iOS 26, tvOS 26, macOS 26, matching the apps.
+- iOS 26, tvOS 26, macOS 26.
 - Dependencies: Motley and `SwiftLintPlugins`, nothing else.
 
 ## Rules
@@ -40,8 +40,9 @@ against this checkout, and how to tag and re-pin it. This file is the rules.
   equivalent, behind `#if os(...)`.
 - A `#Preview` that uses a fixture sits inside `#if DEBUG`, or an archive fails
   while previews still compile.
-- The public API is shared by two apps, so a rename or a removed default is a
-  breaking change in both. Add a default instead of changing one.
+- The public API is shared by more than one app, so a rename or a removed
+  default is a breaking change in all of them. Add a default instead of changing
+  one.
 
 ## Doc comments
 
@@ -63,7 +64,6 @@ they describe.
 swift test
 Scripts/format.sh       # swift format
 Scripts/docs.sh         # builds the DocC guides for iOS and macOS
-Scripts/verify-apps.sh  # builds the app and the app against this checkout
 ```
 
 `.swift-format` is the formatting source of truth, and SwiftLint runs as a

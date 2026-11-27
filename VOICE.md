@@ -189,10 +189,10 @@ Name things what I'd call them out loud.
 
 ## Before and after
 
-These are from an earlier project and the app, which I cleaned up the same way. The
+These are from earlier projects, which I cleaned up the same way. The
 "before" is the generated voice.
 
-### From an earlier project
+### An HTTP client
 
 **Doc comment on the client**
 
@@ -251,7 +251,7 @@ private static let forecastCacheDuration: TimeInterval = 60 // 1 minute
 // saved JSON without hitting the network.
 ```
 
-### From the app
+### A repository
 
 **Why something isn't private**
 

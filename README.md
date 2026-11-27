@@ -1,7 +1,7 @@
 # Mosaic
 
-The shared SwiftUI toolkit behind the app and the app: the controls, cards,
-palette and platform fallbacks that make the apps look like one.
+A few pieces of SwiftUI I got tired of rewriting: the controls, cards, palette
+and platform fallbacks that keep an app looking like itself.
 
 The package builds for iOS 26, tvOS 26 and macOS 26. It has one dependency,
 [Motley](https://github.com/wells-consulting/Motley), for the symbol names and
@@ -104,10 +104,7 @@ The DocC guides ship with the package. Open the package in Xcode and choose
 ```sh
 swift test
 Scripts/docs.sh       # builds the DocC guides for iOS and macOS
-Scripts/verify-apps.sh  # builds the app and the app against this checkout
 ```
-
-`Scripts/verify-apps.sh` expects both app checkouts beside this one.
 
 ## License
 
