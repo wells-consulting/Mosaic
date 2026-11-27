@@ -106,6 +106,10 @@ swift test
 Scripts/build-docs.sh       # builds the DocC guides for iOS and macOS
 ```
 
+## AI disclosure
+
+Some of this code was written with AI agents. [AI-DISCLOSURE.md](AI-DISCLOSURE.md) covers what that means here.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

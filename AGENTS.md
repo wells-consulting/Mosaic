@@ -58,6 +58,10 @@ reference material, not conversation. Add these on top of what VOICE.md says:
 The guides live in `Sources/Mosaic.docc`. Read them before changing a control
 they describe.
 
+## Disclosure
+
+`AI-DISCLOSURE.md` is the same file in every package I publish. If you change it, change it in all of them.
+
 ## Build and test
 
 ```sh
