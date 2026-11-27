@@ -7,7 +7,7 @@
 # run. Warnings from Motley are ignored until its documentation release is
 # clean; at that point this script can pass --warnings-as-errors instead.
 #
-#   Scripts/docs.sh
+#   Scripts/build-docs.sh
 
 set -u
 

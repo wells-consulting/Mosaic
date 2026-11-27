@@ -11,7 +11,7 @@ description: Use when changing Mosaic, the few pieces of SwiftUI here: adding or
 
 ```sh
 swift test
-Scripts/docs.sh
+Scripts/build-docs.sh
 ```
 
 Mosaic builds for iOS, tvOS and macOS, and a control that compiles on one can still fail on another. CI builds the package for all three; run the docs script when you touch a doc comment or a guide. Do both before a release, not just the package tests.
@@ -52,7 +52,7 @@ Never edit a package checkout under DerivedData; the next resolve throws it away
 - [ ] No `try?`, no SF Symbol strings, no global free functions
 - [ ] `swift test` passes and lint is clean
 - [ ] `MosaicInfo.version` matches the tag
-- [ ] `Scripts/docs.sh` builds the guides without a warning from this repo
+- [ ] `Scripts/build-docs.sh` builds the guides without a warning from this repo
 - [ ] An assistant's commit ends `Assisted-by: AI (<model>)`, with no `Co-Authored-By`
 - [ ] Tagged and pushed
 - [ ] Pins raised in the apps that link it, if they need the change

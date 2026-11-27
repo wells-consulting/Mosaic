@@ -36,7 +36,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Build
-        run: Scripts/docs.sh
+        run: Scripts/build-docs.sh
 
   platforms:
     name: Build ${{ matrix.destination }}

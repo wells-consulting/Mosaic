@@ -103,7 +103,7 @@ The DocC guides ship with the package. Open the package in Xcode and choose
 
 ```sh
 swift test
-Scripts/docs.sh       # builds the DocC guides for iOS and macOS
+Scripts/build-docs.sh       # builds the DocC guides for iOS and macOS
 ```
 
 ## License

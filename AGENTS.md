@@ -63,7 +63,7 @@ they describe.
 ```sh
 swift test
 Scripts/format.sh       # swift format
-Scripts/docs.sh         # builds the DocC guides for iOS and macOS
+Scripts/build-docs.sh         # builds the DocC guides for iOS and macOS
 ```
 
 `.swift-format` is the formatting source of truth, and SwiftLint runs as a
